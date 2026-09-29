@@ -1,0 +1,162 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[p mainexit ]
+"438 C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 438: extern volatile unsigned char TRISA __attribute__((address(0x085)));
+[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
+"482
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 482: extern volatile unsigned char TRISB __attribute__((address(0x086)));
+[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
+"150
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 150: extern volatile unsigned char PORTA __attribute__((address(0x005)));
+[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
+"194
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 194: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"156
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 156:     struct {
+[s S10 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S10 . RA0 RA1 RA2 RA3 RA4 ]
+"155
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 155: typedef union {
+[u S9 `S10 1 ]
+[n S9 . . ]
+"164
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 164: extern volatile PORTAbits_t PORTAbits __attribute__((address(0x005)));
+[v _PORTAbits `VS9 ~T0 @X0 0 e@5 ]
+"38 C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 38: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"45
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 45: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"52
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 52: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"59
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 59: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"145
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 145: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"152
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 152: __asm("PORTA equ 05h");
+[; <" PORTA equ 05h ;# ">
+"196
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 196: __asm("PORTB equ 06h");
+[; <" PORTB equ 06h ;# ">
+"258
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 258: __asm("EEDATA equ 08h");
+[; <" EEDATA equ 08h ;# ">
+"265
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 265: __asm("EEADR equ 09h");
+[; <" EEADR equ 09h ;# ">
+"272
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 272: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"292
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 292: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"370
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 370: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"440
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 440: __asm("TRISA equ 085h");
+[; <" TRISA equ 085h ;# ">
+"484
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 484: __asm("TRISB equ 086h");
+[; <" TRISB equ 086h ;# ">
+"546
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 546: __asm("EECON1 equ 088h");
+[; <" EECON1 equ 088h ;# ">
+"590
+[; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 590: __asm("EECON2 equ 089h");
+[; <" EECON2 equ 089h ;# ">
+"4 main.c
+[; ;main.c: 4:     TRISB = 0b00000000;
+[p x FOSC  =  XT ]
+"5
+[; ;main.c: 5: 
+[p x WDTE  =  OFF ]
+"6
+[; ;main.c: 6:     PORTA = 0x00;
+[p x PWRTE  =  ON ]
+"7
+[; ;main.c: 7:     PORTB = 0x00;
+[p x CP  =  OFF ]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"9
+[; ;main.c: 9:     while(1) {
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"11
+[; ;main.c: 11:             PORTB = 0b00000001;
+[e = _TRISA -> -> 30 `i `uc ]
+"13
+[; ;main.c: 13:             PORTB = 0b00000010;
+[e = _TRISB -> -> 0 `i `uc ]
+"15
+[; ;main.c: 15:             PORTB = 0b00000100;
+[e = _PORTA -> -> 0 `i `uc ]
+"16
+[; ;main.c: 16:         } else if (PORTAbits.RA4 == 1) {
+[e = _PORTB -> -> 0 `i `uc ]
+"18
+[; ;main.c: 18:         } else {
+[e :U 29 ]
+{
+"19
+[; ;main.c: 19:             PORTB = 0x00;
+[e $ ! == -> . . _PORTAbits 0 1 `i -> 1 `i 31  ]
+{
+"20
+[; ;main.c: 20:         }
+[e = _PORTB -> -> 1 `i `uc ]
+"21
+[; ;main.c: 21:     }
+}
+[e $U 32  ]
+[e :U 31 ]
+[e $ ! == -> . . _PORTAbits 0 2 `i -> 1 `i 33  ]
+{
+"22
+[; ;main.c: 22: }
+[e = _PORTB -> -> 2 `i `uc ]
+"23
+}
+[e $U 34  ]
+[e :U 33 ]
+[e $ ! == -> . . _PORTAbits 0 3 `i -> 1 `i 35  ]
+{
+"24
+[e = _PORTB -> -> 4 `i `uc ]
+"25
+}
+[e $U 36  ]
+[e :U 35 ]
+[e $ ! == -> . . _PORTAbits 0 4 `i -> 1 `i 37  ]
+{
+"26
+[e = _PORTB -> -> 8 `i `uc ]
+"27
+}
+[e $U 38  ]
+[e :U 37 ]
+{
+"28
+[e = _PORTB -> -> 0 `i `uc ]
+"29
+}
+[e :U 38 ]
+[e :U 36 ]
+[e :U 34 ]
+[e :U 32 ]
+"30
+}
+[e :U 28 ]
+[e $U 29  ]
+[e :U 30 ]
+"31
+[e :UE 27 ]
+}
