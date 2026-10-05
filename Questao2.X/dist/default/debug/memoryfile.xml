@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/default/debug\Questao2.X.debug.hex">
+    <memory name="program">
+      <units>words</units>
+      <length>1024</length>
+      <used>84</used>
+      <free>940</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>68</length>
+      <used>3</used>
+      <free>65</free>
+    </memory>
+  </executable>
+</project>

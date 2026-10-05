@@ -1,0 +1,261 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta> <reloc>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+end_init CODE 0 0 0 1 2 1
+config CONFIG 4 2007 2007 1 2 1
+$build/default/debug/questao1.o
+static_vars RAM 1 C C 3 1 1
+intCode CODE 0 0 0 1A 2 1
+verificacao_portas CODE 0 3D8 3D8 28 2 2
+config CONFIG 4 2007 2007 1 2 1
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM F-4D 1
+BANK0 F-4D 1
+CONST 1A-3D7 2
+ENTRY 1A-3D7 2
+IDLOC 2000-2003 2
+CODE 1A-3D7 2
+SFR0 0-B 1
+SFR1 80-CD 1
+COMMON 4E-4F 1
+EEDATA 2100-213F 2
+STRCODE 1A-3D7 2
+STRING 1A-3D7 2
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$build/default/debug/questao1.o
+3D8 verificacao_portas CODE >52:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3D9 verificacao_portas CODE >53:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DA verificacao_portas CODE >53:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DB verificacao_portas CODE >54:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DC verificacao_portas CODE >54:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DD verificacao_portas CODE >55:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DE verificacao_portas CODE >55:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DF verificacao_portas CODE >56:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E0 verificacao_portas CODE >57:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E1 verificacao_portas CODE >60:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E2 verificacao_portas CODE >61:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E3 verificacao_portas CODE >62:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E4 verificacao_portas CODE >63:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E5 verificacao_portas CODE >64:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E6 verificacao_portas CODE >65:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E7 verificacao_portas CODE >66:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E8 verificacao_portas CODE >67:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E9 verificacao_portas CODE >68:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EA verificacao_portas CODE >71:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EB verificacao_portas CODE >72:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EC verificacao_portas CODE >73:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3ED verificacao_portas CODE >75:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EE verificacao_portas CODE >75:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EF verificacao_portas CODE >76:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F0 verificacao_portas CODE >78:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F1 verificacao_portas CODE >78:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F2 verificacao_portas CODE >81:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F3 verificacao_portas CODE >85:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F4 verificacao_portas CODE >86:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F5 verificacao_portas CODE >87:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F6 verificacao_portas CODE >89:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F7 verificacao_portas CODE >90:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F8 verificacao_portas CODE >91:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F9 verificacao_portas CODE >92:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3FA verificacao_portas CODE >95:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3FB verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3FC verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3FD verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3FE verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3FF verificacao_portas CODE >97:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+4 intCode CODE >25:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+5 intCode CODE >25:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+6 intCode CODE >25:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+7 intCode CODE >26:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+8 intCode CODE >27:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+9 intCode CODE >28:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+A intCode CODE >32:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+B intCode CODE >33:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+C intCode CODE >34:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+D intCode CODE >34:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+E intCode CODE >36:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+F intCode CODE >37:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+10 intCode CODE >40:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+11 intCode CODE >41:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+12 intCode CODE >42:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+13 intCode CODE >43:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+14 intCode CODE >43:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+15 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+16 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+17 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+18 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+19 intCode CODE >45:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+__Hspace_0 400 0 ABS 0 - -
+__Hspace_1 F 0 ABS 0 - -
+__Hspace_2 0 0 ABS 0 - -
+__Hspace_3 0 0 ABS 0 - -
+__Hspace_4 400F 0 ABS 0 - -
+__Heeprom_data 0 0 EEDATA 3 eeprom_data -
+__Hudata_bank0 0 0 ABS 0 udata_bank0 -
+__L__absolute__ 0 0 ABS 0 __absolute__ -
+_verify_portA 7D4 0 CODE 0 verificacao_portas build/default/debug/questao1.o
+__Hstrings 0 0 ABS 0 strings -
+___sp 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+_main 7B0 0 CODE 0 verificacao_portas build/default/debug/questao1.o
+___stack_hi 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+start 0 0 CODE 0 init C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+__Hpowerup 0 0 CODE 0 powerup -
+intlevel0 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+__Hfunctab 0 0 ENTRY 0 functab -
+__Hclrtext 0 0 ABS 0 clrtext -
+__Lverificacao_portas 0 0 ABS 0 verificacao_portas -
+__Lmaintext 0 0 ABS 0 maintext -
+___stackhi 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___stacklo 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+start_initialization 7B0 0 CODE 0 verificacao_portas build/default/debug/questao1.o
+___int_sp 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+__Hbank0 0 0 ABS 0 bank0 -
+__Hbank1 0 0 BANK1 1 bank1 -
+__Hcinit 0 0 CODE 0 cinit -
+__Hedata 0 0 ABS 0 edata -
+__Hstack 0 0 STACK 2 stack -
+__Hudata 0 0 ABS 0 udata -
+__Hverificacao_portas 0 0 ABS 0 verificacao_portas -
+__Hmaintext 0 0 ABS 0 maintext -
+__Hcommon 0 0 ABS 0 common -
+__Hconfig 4010 0 CONFIG 4 config -
+__Lbank0 0 0 ABS 0 bank0 -
+__Lbank1 0 0 BANK1 1 bank1 -
+__Lcinit 0 0 CODE 0 cinit -
+__Ledata 0 0 ABS 0 edata -
+__Lstack 0 0 STACK 2 stack -
+__Ludata 0 0 ABS 0 udata -
+__Lstatic_vars 0 0 ABS 0 static_vars -
+__Habs1 0 0 ABS 0 abs1 -
+__Hcode 0 0 ABS 0 code -
+__Hdata 0 0 ABS 0 data -
+__Hheap 0 0 HEAP 7 heap -
+__Hinit 0 0 CODE 0 init -
+__Hsfr0 0 0 ABS 0 sfr0 -
+__Hsfr1 0 0 ABS 0 sfr1 -
+__Hsivt 0 0 CODE 0 sivt -
+__Htext 0 0 ABS 0 text -
+__Labs1 0 0 ABS 0 abs1 -
+__Lcode 0 0 ABS 0 code -
+__Ldata 0 0 ABS 0 data -
+__Lheap 0 0 HEAP 7 heap -
+__Linit 0 0 CODE 0 init -
+__Lsfr0 0 0 ABS 0 sfr0 -
+__Lsfr1 0 0 ABS 0 sfr1 -
+__Lsivt 0 0 CODE 0 sivt -
+__Ltext 0 0 ABS 0 text -
+__S0 400 0 ABS 0 - -
+__S1 F 0 ABS 0 - -
+__S3 0 0 ABS 0 - -
+__Lintentry 0 0 CODE 0 intentry -
+reset_vec 0 0 CODE 0 reset_vec C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+_interrupt_settings 7E6 0 CODE 0 verificacao_portas build/default/debug/questao1.o
+__Lcommon 0 0 ABS 0 common -
+__Lconfig 0 0 CONFIG 4 config -
+__LintCode 0 0 ABS 0 intCode -
+__Hstatic_vars 0 0 ABS 0 static_vars -
+__Lspace_0 0 0 ABS 0 - -
+__Lspace_1 0 0 ABS 0 - -
+__Lspace_2 0 0 ABS 0 - -
+__Lspace_3 0 0 ABS 0 - -
+__Lspace_4 0 0 ABS 0 - -
+__Lend_init 0 0 CODE 0 end_init -
+__Hintentry 0 0 CODE 0 intentry -
+__Lstrings 0 0 ABS 0 strings -
+__Hreset_vec 0 0 CODE 0 reset_vec -
+__Lpowerup 0 0 CODE 0 powerup -
+__Leeprom_data 0 0 EEDATA 3 eeprom_data -
+__Ludata_bank0 0 0 ABS 0 udata_bank0 -
+__H__absolute__ 0 0 ABS 0 __absolute__ -
+__Lreset_vec 0 0 CODE 0 reset_vec -
+___heap_hi 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___heap_lo 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+__Lfunctab 0 0 ENTRY 0 functab -
+__Lclrtext 0 0 ABS 0 clrtext -
+__Hend_init 2 0 CODE 0 end_init -
+__Hram 0 0 ABS 0 ram -
+__Lram 0 0 ABS 0 ram -
+__HintCode 0 0 ABS 0 intCode -
+___int_stack_hi 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___int_stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+static_vars 1 C C 3 1
+reset_vec 0 0 0 1 2
+verificacao_portas 0 3D8 7B0 28 2
+# %NOTES Section
+# This section contains data of all the note-psects.  The beginning of the section
+# is indicated by %NOTES. The first line indicates the name and decimal
+# byte-length of the first note-psect, e.g.
+#   $codecov_info_hdr 16
+# Each line that follows contains the byte-data of the psect in hexadecimal as a
+# space-separated list. These lines are limited to 16 bytes of data.
+%NOTES
