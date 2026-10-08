@@ -11,13 +11,18 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+$C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
 end_init CODE 0 0 0 1 2 1
 config CONFIG 4 2007 2007 1 2 1
+$dist/default/debug\Questao1.X.debug.o
+cinit CODE 0 3FC 3FC 4 2 1
+text1 CODE 0 3BF 3BF B 2 1
+maintext CODE 0 3CA 3CA C 2 1
+bssBANK0 BANK0 1 10 10 1 1 1
 $build/default/debug/questao1.o
-static_vars RAM 1 C C 3 1 1
-intCode CODE 0 0 0 1A 2 1
-verificacao_portas CODE 0 3D8 3D8 28 2 2
+static_vars RAM 1 C C 4 1 1
+intCode CODE 0 0 0 21 2 1
+verificacao_portas CODE 0 3D6 3D6 25 2 2
 config CONFIG 4 2007 2007 1 2 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
@@ -25,18 +30,22 @@ config CONFIG 4 2007 2007 1 2 1
 #    <class name> <range> <delta>
 # Addresses given in the range are in hexadecimal and units of delta.
 %UNUSED
-RAM F-4D 1
-BANK0 F-4D 1
-CONST 1A-3D7 2
-ENTRY 1A-3D7 2
+RAM 11-4D 1
+BANK0 11-4D 1
+CONST 21-3BE 2
+CONST 3FB-3FB 2
+ENTRY 21-3BE 2
+ENTRY 3FB-3FB 2
 IDLOC 2000-2003 2
-CODE 1A-3D7 2
+CODE 21-3BE 2
+CODE 3FB-3FB 2
 SFR0 0-B 1
 SFR1 80-CD 1
-COMMON 4E-4F 1
 EEDATA 2100-213F 2
-STRCODE 1A-3D7 2
-STRING 1A-3D7 2
+STRCODE 21-3BE 2
+STRCODE 3FB-3FB 2
+STRING 21-3BE 2
+STRING 3FB-3FB 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -50,69 +59,93 @@ STRING 1A-3D7 2
 # are in ascending order of addresses.
 # All other numeric values are in decimal.
 %LINETAB
+$dist/default/debug\Questao1.X.debug.o
+3FC cinit CODE >172:C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_1.s
+3FC cinit CODE >175:C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_1.s
+3FC cinit CODE >186:C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_1.s
+3FD cinit CODE >187:C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_1.s
+3FE cinit CODE >193:C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_1.s
+3FE cinit CODE >195:C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_1.s
+3FF cinit CODE >196:C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_1.s
+3BF text1 CODE >42:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3BF text1 CODE >43:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3C4 text1 CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3C6 text1 CODE >45:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3C7 text1 CODE >46:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3C9 text1 CODE >48:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3CA maintext CODE >27:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3CA maintext CODE >28:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3CB maintext CODE >29:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3CC maintext CODE >33:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3D2 maintext CODE >34:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
+3D3 maintext CODE >35:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.c
 $build/default/debug/questao1.o
-3D8 verificacao_portas CODE >52:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3D9 verificacao_portas CODE >53:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3DA verificacao_portas CODE >53:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3DB verificacao_portas CODE >54:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3DC verificacao_portas CODE >54:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3DD verificacao_portas CODE >55:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3DE verificacao_portas CODE >55:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3DF verificacao_portas CODE >56:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E0 verificacao_portas CODE >57:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E1 verificacao_portas CODE >60:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E2 verificacao_portas CODE >61:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E3 verificacao_portas CODE >62:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E4 verificacao_portas CODE >63:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E5 verificacao_portas CODE >64:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E6 verificacao_portas CODE >65:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E7 verificacao_portas CODE >66:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E8 verificacao_portas CODE >67:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3E9 verificacao_portas CODE >68:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3EA verificacao_portas CODE >71:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3EB verificacao_portas CODE >72:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3EC verificacao_portas CODE >73:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3ED verificacao_portas CODE >75:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3EE verificacao_portas CODE >75:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3EF verificacao_portas CODE >76:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F0 verificacao_portas CODE >78:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F1 verificacao_portas CODE >78:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F2 verificacao_portas CODE >81:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F3 verificacao_portas CODE >85:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F4 verificacao_portas CODE >86:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F5 verificacao_portas CODE >87:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F6 verificacao_portas CODE >89:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F7 verificacao_portas CODE >90:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F8 verificacao_portas CODE >91:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3F9 verificacao_portas CODE >92:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3FA verificacao_portas CODE >95:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3FB verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3FC verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3FD verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3FE verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-3FF verificacao_portas CODE >97:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-4 intCode CODE >25:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-5 intCode CODE >25:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-6 intCode CODE >25:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-7 intCode CODE >26:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-8 intCode CODE >27:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-9 intCode CODE >28:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-A intCode CODE >32:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-B intCode CODE >33:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-C intCode CODE >34:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-D intCode CODE >34:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-E intCode CODE >36:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-F intCode CODE >37:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-10 intCode CODE >40:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-11 intCode CODE >41:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-12 intCode CODE >42:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-13 intCode CODE >43:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-14 intCode CODE >43:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-15 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-16 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-17 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-18 intCode CODE >44:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
-19 intCode CODE >45:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3D6 verificacao_portas CODE >71:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3D7 verificacao_portas CODE >72:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3D8 verificacao_portas CODE >73:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3D9 verificacao_portas CODE >74:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DA verificacao_portas CODE >75:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DB verificacao_portas CODE >76:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DC verificacao_portas CODE >77:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DD verificacao_portas CODE >78:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DE verificacao_portas CODE >80:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3DF verificacao_portas CODE >82:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E0 verificacao_portas CODE >86:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E1 verificacao_portas CODE >86:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E2 verificacao_portas CODE >87:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E3 verificacao_portas CODE >87:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E4 verificacao_portas CODE >88:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E5 verificacao_portas CODE >92:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E6 verificacao_portas CODE >93:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E7 verificacao_portas CODE >94:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E8 verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3E9 verificacao_portas CODE >96:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EA verificacao_portas CODE >97:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EB verificacao_portas CODE >99:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EC verificacao_portas CODE >99:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3ED verificacao_portas CODE >102:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EE verificacao_portas CODE >106:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3EF verificacao_portas CODE >107:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F0 verificacao_portas CODE >108:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F1 verificacao_portas CODE >110:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F2 verificacao_portas CODE >111:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F3 verificacao_portas CODE >112:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F4 verificacao_portas CODE >113:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F5 verificacao_portas CODE >116:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F6 verificacao_portas CODE >117:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F7 verificacao_portas CODE >117:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F8 verificacao_portas CODE >117:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3F9 verificacao_portas CODE >117:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+3FA verificacao_portas CODE >118:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+4 intCode CODE >31:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+5 intCode CODE >31:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+6 intCode CODE >31:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+7 intCode CODE >32:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+8 intCode CODE >33:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+9 intCode CODE >34:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+A intCode CODE >38:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+B intCode CODE >39:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+C intCode CODE >40:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+D intCode CODE >40:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+E intCode CODE >42:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+F intCode CODE >43:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+10 intCode CODE >46:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+11 intCode CODE >47:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+12 intCode CODE >48:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+13 intCode CODE >49:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+14 intCode CODE >49:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+15 intCode CODE >51:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+16 intCode CODE >52:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+17 intCode CODE >53:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+18 intCode CODE >54:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+19 intCode CODE >54:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+1A intCode CODE >55:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+1B intCode CODE >55:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+1C intCode CODE >56:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+1D intCode CODE >56:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+1E intCode CODE >56:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+1F intCode CODE >56:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
+20 intCode CODE >57:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questao1.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -125,39 +158,47 @@ F intCode CODE >37:D:\Projetos\MPLABXProjects\IACOM\AtvArqComp\Questao1.X\questa
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
+___latbits 0 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
 __Hspace_0 400 0 ABS 0 - -
-__Hspace_1 F 0 ABS 0 - -
+__Hspace_1 11 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 400F 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hudata_bank0 0 0 ABS 0 udata_bank0 -
 __L__absolute__ 0 0 ABS 0 __absolute__ -
-_verify_portA 7D4 0 CODE 0 verificacao_portas build/default/debug/questao1.o
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-_main 7B0 0 CODE 0 verificacao_portas build/default/debug/questao1.o
-___stack_hi 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-___stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-start 0 0 CODE 0 init C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___sp 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+_main 794 0 CODE 0 maintext dist/default/debug\Questao1.X.debug.o
+btemp 4E 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
+___stack_hi 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+___stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+start 0 0 CODE 0 init C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+_portas_settings 7AC 0 CODE 0 verificacao_portas build/default/debug/questao1.o
+_verificar_sensor_S 7CA 0 CODE 0 verificacao_portas build/default/debug/questao1.o
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+_time_flag 10 0 BANK0 1 bssBANK0 dist/default/debug\Questao1.X.debug.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+wtemp0 4E 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
 __Hfunctab 0 0 ENTRY 0 functab -
 __Hclrtext 0 0 ABS 0 clrtext -
 __Lverificacao_portas 0 0 ABS 0 verificacao_portas -
 __Lmaintext 0 0 ABS 0 maintext -
-___stackhi 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-___stacklo 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-start_initialization 7B0 0 CODE 0 verificacao_portas build/default/debug/questao1.o
-___int_sp 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___stackhi 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+___stacklo 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+__verificar_sensor_C 77E 0 CODE 0 text1 dist/default/debug\Questao1.X.debug.o
+_interrupt_settings_S 7DC 0 CODE 0 verificacao_portas build/default/debug/questao1.o
+start_initialization 7F8 0 CODE 0 cinit dist/default/debug\Questao1.X.debug.o
+__pcstackBANK0 0 0 BANK0 1 cstackBANK0 dist/default/debug\Questao1.X.debug.o
+___int_sp 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 BANK1 1 bank1 -
-__Hcinit 0 0 CODE 0 cinit -
+__Hcinit 800 0 CODE 0 cinit -
 __Hedata 0 0 ABS 0 edata -
 __Hstack 0 0 STACK 2 stack -
 __Hudata 0 0 ABS 0 udata -
@@ -167,11 +208,12 @@ __Hcommon 0 0 ABS 0 common -
 __Hconfig 4010 0 CONFIG 4 config -
 __Lbank0 0 0 ABS 0 bank0 -
 __Lbank1 0 0 BANK1 1 bank1 -
-__Lcinit 0 0 CODE 0 cinit -
+__Lcinit 7F8 0 CODE 0 cinit -
 __Ledata 0 0 ABS 0 edata -
 __Lstack 0 0 STACK 2 stack -
 __Ludata 0 0 ABS 0 udata -
 __Lstatic_vars 0 0 ABS 0 static_vars -
+_PORTAbits 5 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
 __Habs1 0 0 ABS 0 abs1 -
 __Hcode 0 0 ABS 0 code -
 __Hdata 0 0 ABS 0 data -
@@ -190,12 +232,17 @@ __Lsfr0 0 0 ABS 0 sfr0 -
 __Lsfr1 0 0 ABS 0 sfr1 -
 __Lsivt 0 0 CODE 0 sivt -
 __Ltext 0 0 ABS 0 text -
+__LcstackBANK0 0 0 ABS 0 cstackBANK0 -
+__HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 __S0 400 0 ABS 0 - -
-__S1 F 0 ABS 0 - -
+__S1 11 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
+__end_of__verificar_sensor_C 794 0 CODE 0 text1 dist/default/debug\Questao1.X.debug.o
 __Lintentry 0 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-_interrupt_settings 7E6 0 CODE 0 verificacao_portas build/default/debug/questao1.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+ltemp0a 50 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
+__LbssBANK0 0 0 ABS 0 bssBANK0 -
+__pmaintext 794 0 CODE 0 maintext dist/default/debug\Questao1.X.debug.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -
 __LintCode 0 0 ABS 0 intCode -
@@ -205,25 +252,40 @@ __Lspace_1 0 0 ABS 0 - -
 __Lspace_2 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
+__HcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __Lend_init 0 0 CODE 0 end_init -
+__LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+end_of_initialization 7FC 0 CODE 0 cinit dist/default/debug\Questao1.X.debug.o
 __Hintentry 0 0 CODE 0 intentry -
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 0 0 CODE 0 reset_vec -
+__HbssBANK0 0 0 ABS 0 bssBANK0 -
+__ptext1 77E 0 CODE 0 text1 dist/default/debug\Questao1.X.debug.o
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 __Ludata_bank0 0 0 ABS 0 udata_bank0 -
 __H__absolute__ 0 0 ABS 0 __absolute__ -
 __Lreset_vec 0 0 CODE 0 reset_vec -
-___heap_hi 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-___heap_lo 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___heap_hi 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+___heap_lo 0 0 ABS 0 - C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+__end_of__initialization 7FC 0 CODE 0 cinit dist/default/debug\Questao1.X.debug.o
 __Lfunctab 0 0 ENTRY 0 functab -
 __Lclrtext 0 0 ABS 0 clrtext -
+__pcstackCOMMON 0 0 COMMON 1 cstackCOMMON dist/default/debug\Questao1.X.debug.o
+wtemp0a 4F 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
 __Hend_init 2 0 CODE 0 end_init -
+__end_of_main 7AC 0 CODE 0 maintext dist/default/debug\Questao1.X.debug.o
+_PORTB 6 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
+__initialization 7F8 0 CODE 0 cinit dist/default/debug\Questao1.X.debug.o
+btemp0 4E 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
+btemp1 4F 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
+__pbssBANK0 10 0 BANK0 1 bssBANK0 dist/default/debug\Questao1.X.debug.o
+ttemp0a 4F 0 ABS 0 - dist/default/debug\Questao1.X.debug.o
 __HintCode 0 0 ABS 0 intCode -
-___int_stack_hi 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
-___int_stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\driver_tmp_4.o
+___int_stack_hi 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+___int_stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -240,6 +302,7 @@ ___int_stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\dr
 # otherwise name will be "-".  The <space> number is in decimal.
 # <address> and <size> are in byte units as unqaulified hexadecimal
 %DABS
+- 1 4E 2
 # %SEGMENTS Section
 # This sections enumerates the segments of the program.  Each segment
 # is described on a single line as follows:
@@ -248,9 +311,13 @@ ___int_stack_lo 0 0 STACK 2 stack C:\Users\bande\AppData\Local\Temp\xcAsafw.0\dr
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-static_vars 1 C C 3 1
+cinit 0 3FC 7F8 4 2
+text1 0 3BF 77E B 2
+maintext 0 3CA 794 C 2
+static_vars 1 C C 4 1
 reset_vec 0 0 0 1 2
-verificacao_portas 0 3D8 7B0 28 2
+bssBANK0 1 10 10 1 1
+verificacao_portas 0 3D6 7AC 25 2
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section
 # is indicated by %NOTES. The first line indicates the name and decimal

@@ -6,7 +6,7 @@ Linker command line:
   --edf=D:\Program Files\Microchip\xc8\v4.00\pic\dat\20260614213421_en.msgs \
   -cn -h+dist/default/debug\Questao2.X.debug.sym \
   --cmf=dist/default/debug\Questao2.X.debug.cmf -z -Q16F84A \
-  -oC:\Users\bande\AppData\Local\Temp\xcAsh64.0\driver_tmp_3.o \
+  -oC:\Users\bande\AppData\Local\Temp\xcAspzo.0\driver_tmp_3.o \
   --defsym=__MPLAB_BUILD=1 --fixupoverflow=error \
   -Mdist/default/debug/Questao2.X.debug.map -E1 -ver=XC8 Compiler \
   -ACODE=00h-03FFh -ASTRCODE=00h-03FFh -ASTRING=00h-0FFhx4 \
@@ -17,7 +17,7 @@ Linker command line:
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry,sivt,init,end_init -ppowerup=CODE -pcinit=CODE \
   -pfunctab=ENTRY -k \
-  C:\Users\bande\AppData\Local\Temp\xcAsh64.0\driver_tmp_4.o \
+  C:\Users\bande\AppData\Local\Temp\xcAspzo.0\driver_tmp_4.o \
   build/default/debug/questao2.o 
 
 Object code version is 3.11
@@ -27,18 +27,18 @@ Machine type is 16F84A
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\bande\AppData\Local\Temp\xcAsh64.0\driver_tmp_4.o
+C:\Users\bande\AppData\Local\Temp\xcAspzo.0\driver_tmp_4.o
                 end_init                              0        0        1        0       0
                 config                             2007     2007        1        0       4
 build/default/debug/questao2.o
                 config                             2007     2007        1        0       4
-                verificacao_portas                  3AC      3AC       53      3AC       0
+                verificacao_portas                  3AE      3AE       52      3AE       0
                 static_vars                           C        C        3        C       1
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   CODE           
                 end_init                              0        0        1         0
-                verificacao_portas                  3AC      3AC       53         0
+                verificacao_portas                  3AE      3AE       52         0
 
         CLASS   STRCODE        
 
@@ -80,29 +80,24 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 reset_vec                      000000  000001  000001         0       0  CODE        2
                 static_vars                    00000C  000003  00000F         C       1  RAM         1
-                verificacao_portas             0003AC  000053  0003FF       3AC       0  CODE        2
+                verificacao_portas             0003AE  000052  000400       3AE       0  CODE        2
 
 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
         BANK0            000F-004D             3F           1
-        CODE             0001-03AB            3AB           2
-                         03FF-03FF              1
+        CODE             0001-03AD            3AD           2
         COMMON           004E-004F              2           1
-        CONST            0001-03AB            100           2
-                         03FF-03FF              1
+        CONST            0001-03AD            100           2
         EEDATA           2100-213F             40           2
-        ENTRY            0001-03AB            100           2
-                         03FF-03FF              1
+        ENTRY            0001-03AD            100           2
         IDLOC            2000-2003              4           2
         RAM              000F-004D             3F           1
         SFR0             0000-000B              C           1
         SFR1             0080-00CD             4E           1
-        STRCODE          0001-03AB            3AB           2
-                         03FF-03FF              1
-        STRING           0001-03AB            100           2
-                         03FF-03FF              1
+        STRCODE          0001-03AD            3AD           2
+        STRING           0001-03AD            100           2
 
                                   Symbol Table
 
@@ -130,7 +125,7 @@ __Hreset_vec          reset_vec          0000
 __Hsfr0               sfr0               0000
 __Hsfr1               sfr1               0000
 __Hsivt               sivt               0000
-__Hspace_0            (abs)              03FF
+__Hspace_0            (abs)              0400
 __Hspace_1            (abs)              000F
 __Hspace_2            (abs)              0000
 __Hspace_3            (abs)              0000
@@ -178,7 +173,7 @@ __Ltext               text               0000
 __Ludata              udata              0000
 __Ludata_bank0        udata_bank0        0000
 __Lverificacao_portas verificacao_portas 0000
-__S0                  (abs)              03FF
+__S0                  (abs)              0400
 __S1                  (abs)              000F
 __S3                  (abs)              0000
 ___heap_hi            (abs)              0000
@@ -191,7 +186,7 @@ ___stack_hi           stack              0000
 ___stack_lo           stack              0000
 ___stackhi            (abs)              0000
 ___stacklo            (abs)              0000
-_main                 verificacao_portas 03AC
+_main                 verificacao_portas 03AE
 intlevel0             functab            0000
 intlevel1             functab            0000
 intlevel2             functab            0000
@@ -200,4 +195,4 @@ intlevel4             functab            0000
 intlevel5             functab            0000
 reset_vec             reset_vec          0000
 start                 init               0000
-start_initialization  verificacao_portas 03AC
+start_initialization  verificacao_portas 03AE

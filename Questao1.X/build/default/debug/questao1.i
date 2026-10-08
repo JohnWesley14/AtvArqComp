@@ -470,6 +470,16 @@ movlf MACRO lit, reg
     movwf reg
 endm
 
+xorlf MACRO lit, reg, bit
+    movlw lit ; move o var para port
+    xorwf reg, bit
+endm
+
+iorlf MACRO lit, reg, bit
+    movlw lit ; move o var para port
+    iorwf reg, bit
+endm
+
 _salvar_contexto MACRO
     movwf W_TEMP
     swapf STATUS, 0
@@ -485,13 +495,19 @@ endm
 # 9 "questao1.s" 2
 
 config FOSC = XT, WDTE = OFF, PWRTE = OFF, CP = OFF
-global _main, start_initialization, _verify_portA, _interrupt_settings
+;global _main, start_initialization
+global _portas_settings, _verificar_sensor_S, _interrupt_settings_S
 ; #define:
 varAHigh equ 0x2C ; pode ser tratado como regsitrador nas instruções
 varALow equ 0x2E
+global _time_flag
+
+; OBS: Todos os botoes/inputs da porta A são pull-up
+
 
 PSECT static_vars, class=RAM, space=1
 contador_4hz: ds 1
+divisor_tempo: ds 1
 STATUS_TEMP: ds 1
 W_TEMP: ds 1
 
@@ -517,21 +533,26 @@ _interruptVector: ; ((INTCON) and 07Fh), 7 = 0 -> impede novas interrupts
  banksel PORTA
  movlw 0b00000001
  xorwf PORTA, 1 ; altera só esse PA0
- movlf 62, contador_4hz ; 0x0C <- 0x7D
+ movlf 125, contador_4hz ; 0x0C <- 0x7D
+ _if_time_flag_up:
+     banksel divisor_tempo
+     decfsz divisor_tempo, 1
+     goto _sair_int ; Se o múltiplo ainda não zerou, sai
+     movlf 8, divisor_tempo ; Reinicia o divisor para o próximo ciclo
+     movlf 1, _time_flag
  _retornar_contexto
     retfie ; return e ((INTCON) and 07Fh), 7 = 1 (habilita de novo)
 
 
 
 PSECT verificacao_portas, class=CODE, space=0, reloc=2, delta=2
-start_initialization:
-_main:
-    call _portas_settings
-    movlf 0x81, varALow
-    movlf 0x72, varAHigh
-    movlf 0x00, contador_4hz
-    call _interrupt_settings
-    goto _verify_portA
+;start_initialization:
+;_main:
+; call _portas_settings
+; movlf 0x81, varALow
+; movlf 0x72, varAHigh
+; call _interrupt_settings_S
+; goto _verificar_sensor_S
 
 _portas_settings:
     banksel PORTA ; bsf STATUS, 5
@@ -542,9 +563,19 @@ _portas_settings:
     bsf TRISA, 1 ; ((PORTA) and 07Fh), 1 é input
     clrf TRISB ; PORTB inteira é output
     banksel PORTA
+
+ call _setar_variaveis
+
     retlw 0x00
 
-_verify_portA:
+
+    _setar_variaveis:
+ movlf 125, contador_4hz
+ movlf 8, divisor_tempo
+ return
+
+
+_verificar_sensor_S:
     banksel PORTA
     btfss PORTA, 1 ; Se o bit ((PORTA) and 07Fh), 1 == 1 pula a próxima instrucao
     goto _else_if1
@@ -555,10 +586,10 @@ _else_if1: ; Se o ((PORTA) and 07Fh), 1 == 0
     movvf varALow, PORTB
 
 _end:
-    goto _verify_portA
+    goto _verificar_sensor_S
 
 
-_interrupt_settings:
+_interrupt_settings_S:
     banksel OPTION_REG
     movlw 0b10000001 ; ((OPTION_REG) and 07Fh), 5=0, ((OPTION_REG) and 07Fh), 3=0, Prescaler=1:4 (001)
     movwf OPTION_REG

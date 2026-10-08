@@ -18,7 +18,8 @@ global _main, start_initialization
 ; ou B ativado e C desativado (PORTA = 0b011I ou 0b110I ou 0b00AI)
 ; I é o botao q pode ser 0 ou 1 e A tbm
     
-    
+; OBS: Todos os botoes/inputs da porta A são pull-up 
+   
 _if_erro_detectado MACRO
     btfsc PORTB, 2
     goto _end
@@ -53,23 +54,22 @@ _verifica_niveis:
     btfss STATUS, 2
     call _if_botao_pressionado
     
-    btfss PORTA, 1
+    btfsc PORTA, 1
     goto if_nivC
     if_botaoHigh:
 	movlf 0x01, botao_pressionado
-	btfss PORTA, 2
+	btfsc PORTA, 2
 	goto if1_nivB
 	if1_nivA:
 	    bsf reg_niveis, 0
 	    call _ligarEvs
 	if1_nivB:
-	    btfss PORTA, 3
+	    btfsc PORTA, 3
 	    goto if_nivC
 	    bsf reg_niveis, 1
-	    call _desligarEvs
-	    call _desligarEve
+	    call _ligarEvs
     if_nivC:
-	btfsc PORTA, 4
+	btfss PORTA, 4
 	bsf reg_niveis, 2
 	call _desligarEvs
 	call _ligarEve
@@ -104,7 +104,7 @@ _desligarEvs:
     return
 _ifC_desligarEvs:
     bcf PORTB, 0
-    btfss PORTA, 1
+    btfsc PORTA, 1
     return
     goto if1_nivB
 _ligarEve:

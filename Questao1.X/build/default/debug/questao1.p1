@@ -1,0 +1,156 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[p mainexit ]
+"22 questao1.c
+[; ;questao1.c: 22: extern void portas_settings(void);
+[v _portas_settings `(v ~T0 @X0 0 ef ]
+"23
+[; ;questao1.c: 23: extern void interrupt_settings_S(void);
+[v _interrupt_settings_S `(v ~T0 @X0 0 ef ]
+"25
+[; ;questao1.c: 25: void _verificar_sensor_C(void);
+[v __verificar_sensor_C `(v ~T0 @X0 0 ef ]
+"156 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 156:     struct {
+[s S10 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S10 . RA0 RA1 RA2 RA3 RA4 ]
+"155
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 155: typedef union {
+[u S9 `S10 1 ]
+[n S9 . . ]
+"164
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 164: extern volatile PORTAbits_t PORTAbits __attribute__((address(0x005)));
+[v _PORTAbits `VS9 ~T0 @X0 0 e@5 ]
+"194
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 194: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"38 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 38: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"45
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 45: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"52
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 52: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"59
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 59: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"145
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 145: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"152
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 152: __asm("PORTA equ 05h");
+[; <" PORTA equ 05h ;# ">
+"196
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 196: __asm("PORTB equ 06h");
+[; <" PORTB equ 06h ;# ">
+"258
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 258: __asm("EEDATA equ 08h");
+[; <" EEDATA equ 08h ;# ">
+"265
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 265: __asm("EEADR equ 09h");
+[; <" EEADR equ 09h ;# ">
+"272
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 272: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"292
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 292: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"370
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 370: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"440
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 440: __asm("TRISA equ 085h");
+[; <" TRISA equ 085h ;# ">
+"484
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 484: __asm("TRISB equ 086h");
+[; <" TRISB equ 086h ;# ">
+"546
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 546: __asm("EECON1 equ 088h");
+[; <" EECON1 equ 088h ;# ">
+"590
+[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 590: __asm("EECON2 equ 089h");
+[; <" EECON2 equ 089h ;# ">
+"20 questao1.c
+[; ;questao1.c: 20: volatile u8 time_flag = 0;
+[v _time_flag `Vuc ~T0 @X0 1 e ]
+[i _time_flag
+-> -> 0 `i `uc
+]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"27
+[; ;questao1.c: 27: int main(void) {
+[v _main `(i ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"28
+[; ;questao1.c: 28:     portas_settings();
+[e ( _portas_settings ..  ]
+"29
+[; ;questao1.c: 29:     interrupt_settings_S();
+[e ( _interrupt_settings_S ..  ]
+"31
+[; ;questao1.c: 31:     while(1){
+[e :U 29 ]
+{
+"33
+[; ;questao1.c: 33:         if(time_flag){
+[e $ ! != -> _time_flag `i -> 0 `i 31  ]
+{
+"34
+[; ;questao1.c: 34:             time_flag = 0;
+[e = _time_flag -> -> 0 `i `uc ]
+"35
+[; ;questao1.c: 35:             _verificar_sensor_C();
+[e ( __verificar_sensor_C ..  ]
+"36
+[; ;questao1.c: 36:         }
+}
+[e :U 31 ]
+"37
+[; ;questao1.c: 37:     }
+}
+[e :U 28 ]
+"31
+[; ;questao1.c: 31:     while(1){
+[e $U 29  ]
+[e :U 30 ]
+"39
+[; ;questao1.c: 39:     return 0;
+[e ) -> 0 `i ]
+[e $UE 27  ]
+"40
+[; ;questao1.c: 40: }
+[e :UE 27 ]
+}
+"42
+[; ;questao1.c: 42: void _verificar_sensor_C(void){
+[v __verificar_sensor_C `(v ~T0 @X0 1 ef ]
+{
+[e :U __verificar_sensor_C ]
+[f ]
+"43
+[; ;questao1.c: 43:     if(PORTAbits.RA1){
+[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 33  ]
+{
+"44
+[; ;questao1.c: 44:         PORTB = 0x72;
+[e = _PORTB -> -> 114 `i `uc ]
+"45
+[; ;questao1.c: 45:     } else {
+}
+[e $U 34  ]
+[e :U 33 ]
+{
+"46
+[; ;questao1.c: 46:         PORTB = 0x81;
+[e = _PORTB -> -> 129 `i `uc ]
+"47
+[; ;questao1.c: 47:     }
+}
+[e :U 34 ]
+"48
+[; ;questao1.c: 48: }
+[e :UE 32 ]
+}

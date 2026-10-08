@@ -1,0 +1,10 @@
+[p ASM ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F84A ]
+"1 questao3.s
+"1 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.inc
+"1 ./macros.inc
+"1 D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.inc
+"1 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.inc
+"1 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic_as_chip_select.inc

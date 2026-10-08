@@ -4,17 +4,17 @@ movvf MACRO var, reg
 endm
 
 movlf MACRO lit, reg
-    movlw lit ; move o var para port
+    movlw lit ; move o lit para port
     movwf reg
 endm
 
 xorlf MACRO lit, reg
-    movlw lit ; move o var para port
+    movlw lit 
     xorwf reg
 endm
     
 iorlf MACRO lit, reg
-    movlw lit ; move o var para port
+    movlw lit
     iorwf reg
 endm
     

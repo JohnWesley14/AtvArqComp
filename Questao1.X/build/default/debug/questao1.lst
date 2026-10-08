@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V4.00 build 20260614213421 
-                                                                                                           Mon Oct  5 09:30:27 2026
+                                                                                                           Thu Oct  8 04:45:21 2026
 
 
      1                           	processor	16F84A
@@ -363,131 +363,148 @@ Microchip MPLAB XC8 Assembler V4.00 build 20260614213421
    357                           ; restore_stack adjusts the SP to remove all auto and parameter
    358                           ; objects from the stack prior to returning from a function
    359     0000                     
-   360                           ; #define:
-   361     002C                     varAHigh        equ	44	; pode ser tratado como regsitrador nas instruções
-   362     002E                     varALow         equ	46
-   363                           
-   364                           	psect	static_vars
-   365     000C                     contador_4hz:
-   366     000C                     	ds	1
-   367     000D                     STATUS_TEMP:
-   368     000D                     	ds	1
-   369     000E                     W_TEMP:
-   370     000E                     	ds	1
-   371                           
-   372                           	psect	intCode
-   373     0004                     	org	4
-   374     0004                     _interruptVector:
-   375                           
-   376                           ; ((INTCON) and 07Fh), 7 = 0 -> impede novas interrupts
-   377     0004  008E               	movwf	W_TEMP
-   378     0005  0E03               	swapf	3,w
-   379     0006  008D               	movwf	STATUS_TEMP
-   380     0007  1283               	banksel	11
-   381     0008  1D0B               	btfss	11,2	; ((INTCON) and 07Fh), 2: TMR0 que interrompeu
-   382     0009  2BFA               	goto	_sair_int
-   383     000A                     _recarregaTMR0:	
-   384                           ; Recarrega o TMR0 com 250 (256 - 6)
-   385                           
-   386     000A  110B               	bcf	11,2
-   387     000B  1283               	banksel	1
-   388     000C  3006               	movlw	6	; move o var para port
-   389     000D  0081               	movwf	1
+   360                           ;global _main, start_initialization
+   361                           ; #define:
+   362     002C                     varAHigh        equ	44	; pode ser tratado como regsitrador nas instruções
+   363     002E                     varALow         equ	46
+   364                           
+   365                           	psect	static_vars
+   366     000C                     contador_4hz:	
+   367                           ; OBS: Todos os botoes/inputs da porta A são pull-up
+   368                           
+   369     000C                     	ds	1
+   370     000D                     divisor_tempo:
+   371     000D                     	ds	1
+   372     000E                     STATUS_TEMP:
+   373     000E                     	ds	1
+   374     000F                     W_TEMP:
+   375     000F                     	ds	1
+   376                           
+   377                           	psect	intCode
+   378     0004                     	org	4
+   379     0004                     _interruptVector:
+   380                           
+   381                           ; ((INTCON) and 07Fh), 7 = 0 -> impede novas interrupts
+   382     0004  008F               	movwf	W_TEMP
+   383     0005  0E03               	swapf	3,w
+   384     0006  008E               	movwf	STATUS_TEMP
+   385     0007  1283               	banksel	11
+   386     0008  1D0B               	btfss	11,2	; ((INTCON) and 07Fh), 2: TMR0 que interrompeu
+   387     0009  2BF5               	goto	_sair_int
+   388     000A                     _recarregaTMR0:	
+   389                           ; Recarrega o TMR0 com 250 (256 - 6)
    390                           
-   391                           ; Decrementa contador_4hz (O "Prescaler" de software)
-   392     000E  0B8C               	decfsz	contador_4hz,f
-   393     000F  2BFA               	goto	_sair_int	; Se não chegou a 0, sai e espera o próximo estouro (de 2ms)
-   394     0010                     _ifint_ok:
+   391     000A  110B               	bcf	11,2
+   392     000B  1283               	banksel	1
+   393     000C  3006               	movlw	6	; move o var para port
+   394     000D  0081               	movwf	1
    395                           
-   396                           ; 2 Hz
-   397     0010  1283               	banksel	5
-   398     0011  3001               	movlw	1
-   399     0012  0685               	xorwf	5,f	; altera só esse PA0
-   400     0013  303E               	movlw	62	; move o var para port
-   401     0014  008C               	movwf	contador_4hz
-   402     0015  0E0D               	swapf	STATUS_TEMP,w
-   403     0016  0083               	movwf	3
-   404     0017  0E8E               	swapf	W_TEMP,f
-   405     0018  0E0E               	swapf	W_TEMP,w
-   406     0019  0009               	retfie	; return e ((INTCON) and 07Fh), 7 = 1 (habilita de novo)
-   407                           
-   408                           	psect	verificacao_portas
-   409     03D8                     start_initialization:
-   410     03D8                     _main:
-   411     03D8  23E1               	call	_portas_settings
-   412     03D9  3081               	movlw	129	; move o var para port
-   413     03DA  00AE               	movwf	46
-   414     03DB  3072               	movlw	114	; move o var para port
-   415     03DC  00AC               	movwf	44
-   416     03DD  3000               	movlw	0	; move o var para port
-   417     03DE  008C               	movwf	contador_4hz
-   418     03DF  23F3               	call	_interrupt_settings
-   419     03E0  2BEA               	goto	_verify_portA
-   420     03E1                     _portas_settings:
-   421     03E1  1283               	banksel	5	; bsf STATUS, 5
-   422     03E2  0185               	clrf	5
-   423     03E3  0186               	clrf	6
-   424     03E4  1683               	banksel	133	; bcf STATUS, 5
-   425     03E5  0185               	clrf	133	; PORTA é output por padrao
-   426     03E6  1485               	bsf	133,1	; ((PORTA) and 07Fh), 1 é input
-   427     03E7  0186               	clrf	134	; PORTB inteira é output
-   428     03E8  1283               	banksel	5
-   429     03E9  3400               	retlw	0
-   430     03EA                     _verify_portA:
-   431     03EA  1283               	banksel	5
-   432     03EB  1C85               	btfss	5,1	; Se o bit ((PORTA) and 07Fh), 1 == 1 pula a próxima instrucao
-   433     03EC  2BF0               	goto	_else_if1
-   434     03ED                     _if1_PA1_HIGH:
-   435                           
-   436                           ; Se o ((PORTA) and 07Fh), 1 == 1
-   437     03ED  082C               	movf	44,w	; move o var (tratado como reg) para reg
-   438     03EE  0086               	movwf	6
-   439     03EF  2BF2               	goto	_end
-   440     03F0                     _else_if1:
-   441                           
-   442                           ; Se o ((PORTA) and 07Fh), 1 == 0
-   443     03F0  082E               	movf	46,w	; move o var (tratado como reg) para reg
-   444     03F1  0086               	movwf	6
-   445     03F2                     _end:
-   446     03F2  2BEA               	goto	_verify_portA
-   447     03F3                     _interrupt_settings:
-   448     03F3  1683               	banksel	129
-   449     03F4  3081               	movlw	129	; ((OPTION_REG) and 07Fh), 5=0, ((OPTION_REG) and 07Fh), 3=0, Prescaler=1:4 (001)
-   450     03F5  0081               	movwf	129
-   451     03F6  1283               	banksel	11
-   452     03F7  168B               	bsf	11,5	; ((INTCON) and 07Fh), 5 = 1 -> timer 0 ligado
-   453     03F8  178B               	bsf	11,7	; ((INTCON) and 07Fh), 7 = 1 -> habilita interrupts
-   454     03F9  0008               	return
-   455     03FA                     _sair_int:
-   456     03FA  110B               	bcf	11,2	; ((INTCON) and 07Fh), 2 <- 0
-   457     03FB  0E0D               	swapf	STATUS_TEMP,w
-   458     03FC  0083               	movwf	3
-   459     03FD  0E8E               	swapf	W_TEMP,f
-   460     03FE  0E0E               	swapf	W_TEMP,w
-   461     03FF  0009               	retfie
-   462                           
-   463                           	psect	config
-   464                           
-   465                           ;Config register CONFIG @ 0x2007
-   466                           ;	Oscillator Selection bits
-   467                           ;	FOSC = XT, XT oscillator
-   468                           ;	Watchdog Timer
-   469                           ;	WDTE = OFF, WDT disabled
-   470                           ;	Power-up Timer Enable bit
-   471                           ;	PWRTE = OFF, Power-up Timer is disabled
-   472                           ;	Code Protection bit
-   473                           ;	CP = OFF, Code protection disabled
-   474     2007                     	org	8199
-   475     2007  3FF9               	dw	16377
+   396                           ; Decrementa contador_4hz (O "Prescaler" de software)
+   397     000E  0B8C               	decfsz	contador_4hz,f
+   398     000F  2BF5               	goto	_sair_int	; Se não chegou a 0, sai e espera o próximo estouro (de 2ms)
+   399     0010                     _ifint_ok:
+   400                           
+   401                           ; 2 Hz
+   402     0010  1283               	banksel	5
+   403     0011  3001               	movlw	1
+   404     0012  0685               	xorwf	5,f	; altera só esse PA0
+   405     0013  307D               	movlw	125	; move o var para port
+   406     0014  008C               	movwf	contador_4hz
+   407     0015                     _if_time_flag_up:
+   408     0015  1283               	banksel	divisor_tempo
+   409     0016  0B8D               	decfsz	divisor_tempo,f
+   410     0017  2BF5               	goto	_sair_int	; Se o múltiplo ainda não zerou, sai
+   411     0018  3008               	movlw	8	; move o var para port
+   412     0019  008D               	movwf	divisor_tempo
+   413     001A  3001               	movlw	1	; move o var para port
+   414     001B  0090               	movwf	_time_flag
+   415     001C  0E0E               	swapf	STATUS_TEMP,w
+   416     001D  0083               	movwf	3
+   417     001E  0E8F               	swapf	W_TEMP,f
+   418     001F  0E0F               	swapf	W_TEMP,w
+   419     0020  0009               	retfie	; return e ((INTCON) and 07Fh), 7 = 1 (habilita de novo)
+   420                           
+   421                           	psect	verificacao_portas
+   422     03D6                     _portas_settings:	
+   423                           ;start_initialization:
+   424                           ;_main:
+   425                           ; call _portas_settings
+   426                           ; movlf 0x81, varALow
+   427                           ; movlf 0x72, varAHigh
+   428                           ; call _interrupt_settings_S
+   429                           ; goto _verificar_sensor_S
+   430                           
+   431     03D6  1283               	banksel	5	; bsf STATUS, 5
+   432     03D7  0185               	clrf	5
+   433     03D8  0186               	clrf	6
+   434     03D9  1683               	banksel	133	; bcf STATUS, 5
+   435     03DA  0185               	clrf	133	; PORTA é output por padrao
+   436     03DB  1485               	bsf	133,1	; ((PORTA) and 07Fh), 1 é input
+   437     03DC  0186               	clrf	134	; PORTB inteira é output
+   438     03DD  1283               	banksel	5
+   439     03DE  23E0               	call	_setar_variaveis
+   440     03DF  3400               	retlw	0
+   441     03E0                     _setar_variaveis:
+   442     03E0  307D               	movlw	125	; move o var para port
+   443     03E1  008C               	movwf	contador_4hz
+   444     03E2  3008               	movlw	8	; move o var para port
+   445     03E3  008D               	movwf	divisor_tempo
+   446     03E4  0008               	return
+   447     03E5                     _verificar_sensor_S:
+   448     03E5  1283               	banksel	5
+   449     03E6  1C85               	btfss	5,1	; Se o bit ((PORTA) and 07Fh), 1 == 1 pula a próxima instrucao
+   450     03E7  2BEB               	goto	_else_if1
+   451     03E8                     _if1_PA1_HIGH:
+   452                           
+   453                           ; Se o ((PORTA) and 07Fh), 1 == 1
+   454     03E8  082C               	movf	44,w	; move o var (tratado como reg) para reg
+   455     03E9  0086               	movwf	6
+   456     03EA  2BED               	goto	_end
+   457     03EB                     _else_if1:
+   458                           
+   459                           ; Se o ((PORTA) and 07Fh), 1 == 0
+   460     03EB  082E               	movf	46,w	; move o var (tratado como reg) para reg
+   461     03EC  0086               	movwf	6
+   462     03ED                     _end:
+   463     03ED  2BE5               	goto	_verificar_sensor_S
+   464     03EE                     _interrupt_settings_S:
+   465     03EE  1683               	banksel	129
+   466     03EF  3081               	movlw	129	; ((OPTION_REG) and 07Fh), 5=0, ((OPTION_REG) and 07Fh), 3=0, Prescaler=1:4 (001)
+   467     03F0  0081               	movwf	129
+   468     03F1  1283               	banksel	11
+   469     03F2  168B               	bsf	11,5	; ((INTCON) and 07Fh), 5 = 1 -> timer 0 ligado
+   470     03F3  178B               	bsf	11,7	; ((INTCON) and 07Fh), 7 = 1 -> habilita interrupts
+   471     03F4  0008               	return
+   472     03F5                     _sair_int:
+   473     03F5  110B               	bcf	11,2	; ((INTCON) and 07Fh), 2 <- 0
+   474     03F6  0E0E               	swapf	STATUS_TEMP,w
+   475     03F7  0083               	movwf	3
+   476     03F8  0E8F               	swapf	W_TEMP,f
+   477     03F9  0E0F               	swapf	W_TEMP,w
+   478     03FA  0009               	retfie
+   479                           
+   480                           	psect	config
+   481                           
+   482                           ;Config register CONFIG @ 0x2007
+   483                           ;	Oscillator Selection bits
+   484                           ;	FOSC = XT, XT oscillator
+   485                           ;	Watchdog Timer
+   486                           ;	WDTE = OFF, WDT disabled
+   487                           ;	Power-up Timer Enable bit
+   488                           ;	PWRTE = OFF, Power-up Timer is disabled
+   489                           ;	Code Protection bit
+   490                           ;	CP = OFF, Code protection disabled
+   491     2007                     	org	8199
+   492     2007  3FF9               	dw	16377
 
 
 Microchip Technology PIC Macro Assembler V4.00 build 20260614213421 
-Symbol Table                                                                                               Mon Oct  5 09:30:27 2026
+Symbol Table                                                                                               Thu Oct  8 04:45:21 2026
 
-                      TMR0 0001                        _end 03F2                       PORTA 0005                       PORTB 0006  
-                     TRISA 0085                       TRISB 0086                       _main 03D8                contador_4hz 000C  
-                    INTCON 000B                      STATUS 0003                      W_TEMP 000E                     varALow 002E  
-                OPTION_REG 0081         _interrupt_settings 03F3              _recarregaTMR0 000A                    varAHigh 002C  
-      start_initialization 03D8                 STATUS_TEMP 000D               _if1_PA1_HIGH 03ED                   _else_if1 03F0  
-                 _ifint_ok 0010                   _sair_int 03FA            _interruptVector 0004            _portas_settings 03E1  
-             _verify_portA 03EA  
+                      TMR0 0001                        _end 03ED                       PORTA 0005                       PORTB 0006  
+                     TRISA 0085                       TRISB 0086                contador_4hz 000C                      INTCON 000B  
+                    STATUS 0003            _setar_variaveis 03E0                      W_TEMP 000F               divisor_tempo 000D  
+                   varALow 002E                  OPTION_REG 0081              _recarregaTMR0 000A                    varAHigh 002C  
+          _if_time_flag_up 0015       _interrupt_settings_S 03EE         _verificar_sensor_S 03E5                  _time_flag 0010  
+               STATUS_TEMP 000E               _if1_PA1_HIGH 03E8                   _else_if1 03EB                   _ifint_ok 0010  
+                 _sair_int 03F5            _interruptVector 0004            _portas_settings 03D6  

@@ -19,6 +19,7 @@
                    projectFiles="true">
       <itemPath>questao2.s</itemPath>
       <itemPath>macros.inc</itemPath>
+      <itemPath>config_pic.h</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

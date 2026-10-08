@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V4.00 build 20260614213421 
-                                                                                                           Mon Oct  5 10:38:13 2026
+                                                                                                           Wed Oct  7 22:34:52 2026
 
 
      1                           	processor	16F84A
@@ -372,116 +372,116 @@ Microchip MPLAB XC8 Assembler V4.00 build 20260614213421
    364                           ; A e B ativados, mas C desativado; ou A ativado e B e C desativados
    365                           ; ou B ativado e C desativado (PORTA = 0b011I ou 0b110I ou 0b00AI)
    366                           ; I é o botao q pode ser 0 ou 1 e A tbm
-   367     0000                     
-   368                           	psect	static_vars
-   369     000C                     botao_pressionado:
-   370     000C                     	ds	1
-   371     000D                     reg_niveis:
-   372     000D                     	ds	1
-   373     000E                     reg_niveis_temp:
-   374     000E                     	ds	1
-   375                           
-   376                           	psect	verificacao_portas
-   377     03AC                     start_initialization:
-   378     03AC                     _main:
-   379     03AC  23B2               	call	_portas_settings
-   380     03AD  3000               	movlw	0	; move o var para port
-   381     03AE  008C               	movwf	botao_pressionado
-   382     03AF  3000               	movlw	0	; move o var para port
-   383     03B0  008D               	movwf	reg_niveis
-   384     03B1  2BBC               	goto	_verifica_niveis
-   385     03B2                     _portas_settings:
-   386     03B2  1283               	banksel	5	; bsf STATUS, 5
-   387     03B3  0185               	clrf	5
-   388     03B4  0186               	clrf	6
-   389     03B5  1683               	banksel	133	; bcf STATUS, 5
-   390     03B6  301E               	movlw	30	; move o var para port
-   391     03B7  0085               	movwf	133
-   392     03B8  0186               	clrf	134	; PORTB inteira é output por padrao
-   393     03B9  1586               	bsf	134,3	; B2 como input para alerta de erro
-   394     03BA  1283               	banksel	5
-   395     03BB  3400               	retlw	0
-   396     03BC                     _verifica_niveis:
-   397     03BC  088C               	movf	botao_pressionado,f
-   398     03BD  1D03               	btfss	3,2
-   399     03BE  23F7               	call	_if_botao_pressionado
-   400     03BF  1C85               	btfss	5,1
-   401     03C0  2BCC               	goto	if_nivC
-   402     03C1                     if_botaoHigh:
-   403     03C1  3001               	movlw	1	; move o var para port
-   404     03C2  008C               	movwf	botao_pressionado
-   405     03C3  1D05               	btfss	5,2
-   406     03C4  2BC7               	goto	if1_nivB
-   407     03C5                     if1_nivA:
-   408     03C5  140D               	bsf	reg_niveis,0
-   409     03C6  23EB               	call	_ligarEvs
-   410     03C7                     if1_nivB:
-   411     03C7  1D85               	btfss	5,3
-   412     03C8  2BCC               	goto	if_nivC
-   413     03C9  148D               	bsf	reg_niveis,1
-   414     03CA  23ED               	call	_desligarEvs
-   415     03CB  23F5               	call	_desligarEve
-   416     03CC                     if_nivC:
-   417     03CC  1A05               	btfsc	5,4
-   418     03CD  150D               	bsf	reg_niveis,2
-   419     03CE  23ED               	call	_desligarEvs
-   420     03CF  23F3               	call	_ligarEve
-   421     03D0                     _verifica_erros:
-   422     03D0  080D               	movf	reg_niveis,w
-   423     03D1  008E               	movwf	reg_niveis_temp
-   424     03D2  3003               	movlw	3	; move o var para port
-   425     03D3  068D               	xorwf	reg_niveis,f
-   426     03D4  23FC               	call	_verifica_zero
-   427     03D5  1906               	btfsc	6,2
-   428     03D6  2BEA               	goto	_end
-   429     03D7  3006               	movlw	6	; move o var para port
-   430     03D8  068D               	xorwf	reg_niveis,f
-   431     03D9  23FC               	call	_verifica_zero
-   432     03DA  1906               	btfsc	6,2
-   433     03DB  2BEA               	goto	_end
-   434     03DC  3000               	movlw	0	; move o var para port
-   435     03DD  068D               	xorwf	reg_niveis,f
-   436     03DE  23FC               	call	_verifica_zero
-   437     03DF  1906               	btfsc	6,2
-   438     03E0  2BEA               	goto	_end
-   439     03E1  3001               	movlw	1	; move o var para port
-   440     03E2  068D               	xorwf	reg_niveis,f
-   441     03E3  23FC               	call	_verifica_zero
-   442     03E4  1906               	btfsc	6,2
-   443     03E5  2BEA               	goto	_end
-   444     03E6  3000               	movlw	0	; move o var para port
-   445     03E7  008D               	movwf	reg_niveis
-   446     03E8  080E               	movf	reg_niveis_temp,w
-   447     03E9  008D               	movwf	reg_niveis
-   448     03EA                     _end:
-   449     03EA  2BBC               	goto	_verifica_niveis
-   450     03EB                     _ligarEvs:
-   451     03EB  1406               	bsf	6,0
-   452     03EC  0008               	return
-   453     03ED                     _desligarEvs:
-   454     03ED  1006               	bcf	6,0
-   455     03EE  0008               	return
-   456     03EF                     _ifC_desligarEvs:
-   457     03EF  1006               	bcf	6,0
-   458     03F0  1C85               	btfss	5,1
-   459     03F1  0008               	return
-   460     03F2  2BC7               	goto	if1_nivB
-   461     03F3                     _ligarEve:
-   462     03F3  1486               	bsf	6,1
-   463     03F4  0008               	return
-   464     03F5                     _desligarEve:
-   465     03F5  1086               	bcf	6,1
-   466     03F6  0008               	return
-   467     03F7                     _if_botao_pressionado:
-   468     03F7  23ED               	call	_desligarEvs
-   469     03F8  23ED               	call	_desligarEvs
-   470     03F9  3000               	movlw	0	; move o var para port
-   471     03FA  008C               	movwf	botao_pressionado
-   472     03FB  0008               	return
-   473     03FC                     _verifica_zero:
-   474     03FC  1903               	btfsc	3,2
-   475     03FD  1506               	bsf	6,2
-   476     03FE  0008               	return
+   367                           ; OBS: Todos os botoes/inputs da porta A são pull-up
+   368     0000                     
+   369                           	psect	static_vars
+   370     000C                     botao_pressionado:
+   371     000C                     	ds	1
+   372     000D                     reg_niveis:
+   373     000D                     	ds	1
+   374     000E                     reg_niveis_temp:
+   375     000E                     	ds	1
+   376                           
+   377                           	psect	verificacao_portas
+   378     03AE                     start_initialization:
+   379     03AE                     _main:
+   380     03AE  23B4               	call	_portas_settings
+   381     03AF  3000               	movlw	0	; move o var para port
+   382     03B0  008C               	movwf	botao_pressionado
+   383     03B1  3000               	movlw	0	; move o var para port
+   384     03B2  008D               	movwf	reg_niveis
+   385     03B3  2BBE               	goto	_verifica_niveis
+   386     03B4                     _portas_settings:
+   387     03B4  1283               	banksel	5	; bsf STATUS, 5
+   388     03B5  0185               	clrf	5
+   389     03B6  0186               	clrf	6
+   390     03B7  1683               	banksel	133	; bcf STATUS, 5
+   391     03B8  301E               	movlw	30	; move o var para port
+   392     03B9  0085               	movwf	133
+   393     03BA  0186               	clrf	134	; PORTB inteira é output por padrao
+   394     03BB  1586               	bsf	134,3	; B2 como input para alerta de erro
+   395     03BC  1283               	banksel	5
+   396     03BD  3400               	retlw	0
+   397     03BE                     _verifica_niveis:
+   398     03BE  088C               	movf	botao_pressionado,f
+   399     03BF  1D03               	btfss	3,2
+   400     03C0  23F8               	call	_if_botao_pressionado
+   401     03C1  1885               	btfsc	5,1
+   402     03C2  2BCD               	goto	if_nivC
+   403     03C3                     if_botaoHigh:
+   404     03C3  3001               	movlw	1	; move o var para port
+   405     03C4  008C               	movwf	botao_pressionado
+   406     03C5  1905               	btfsc	5,2
+   407     03C6  2BC9               	goto	if1_nivB
+   408     03C7                     if1_nivA:
+   409     03C7  140D               	bsf	reg_niveis,0
+   410     03C8  23EC               	call	_ligarEvs
+   411     03C9                     if1_nivB:
+   412     03C9  1985               	btfsc	5,3
+   413     03CA  2BCD               	goto	if_nivC
+   414     03CB  148D               	bsf	reg_niveis,1
+   415     03CC  23EC               	call	_ligarEvs
+   416     03CD                     if_nivC:
+   417     03CD  1E05               	btfss	5,4
+   418     03CE  150D               	bsf	reg_niveis,2
+   419     03CF  23EE               	call	_desligarEvs
+   420     03D0  23F4               	call	_ligarEve
+   421     03D1                     _verifica_erros:
+   422     03D1  080D               	movf	reg_niveis,w
+   423     03D2  008E               	movwf	reg_niveis_temp
+   424     03D3  3003               	movlw	3	; move o var para port
+   425     03D4  068D               	xorwf	reg_niveis,f
+   426     03D5  23FD               	call	_verifica_zero
+   427     03D6  1906               	btfsc	6,2
+   428     03D7  2BEB               	goto	_end
+   429     03D8  3006               	movlw	6	; move o var para port
+   430     03D9  068D               	xorwf	reg_niveis,f
+   431     03DA  23FD               	call	_verifica_zero
+   432     03DB  1906               	btfsc	6,2
+   433     03DC  2BEB               	goto	_end
+   434     03DD  3000               	movlw	0	; move o var para port
+   435     03DE  068D               	xorwf	reg_niveis,f
+   436     03DF  23FD               	call	_verifica_zero
+   437     03E0  1906               	btfsc	6,2
+   438     03E1  2BEB               	goto	_end
+   439     03E2  3001               	movlw	1	; move o var para port
+   440     03E3  068D               	xorwf	reg_niveis,f
+   441     03E4  23FD               	call	_verifica_zero
+   442     03E5  1906               	btfsc	6,2
+   443     03E6  2BEB               	goto	_end
+   444     03E7  3000               	movlw	0	; move o var para port
+   445     03E8  008D               	movwf	reg_niveis
+   446     03E9  080E               	movf	reg_niveis_temp,w
+   447     03EA  008D               	movwf	reg_niveis
+   448     03EB                     _end:
+   449     03EB  2BBE               	goto	_verifica_niveis
+   450     03EC                     _ligarEvs:
+   451     03EC  1406               	bsf	6,0
+   452     03ED  0008               	return
+   453     03EE                     _desligarEvs:
+   454     03EE  1006               	bcf	6,0
+   455     03EF  0008               	return
+   456     03F0                     _ifC_desligarEvs:
+   457     03F0  1006               	bcf	6,0
+   458     03F1  1885               	btfsc	5,1
+   459     03F2  0008               	return
+   460     03F3  2BC9               	goto	if1_nivB
+   461     03F4                     _ligarEve:
+   462     03F4  1486               	bsf	6,1
+   463     03F5  0008               	return
+   464     03F6                     _desligarEve:
+   465     03F6  1086               	bcf	6,1
+   466     03F7  0008               	return
+   467     03F8                     _if_botao_pressionado:
+   468     03F8  23EE               	call	_desligarEvs
+   469     03F9  23EE               	call	_desligarEvs
+   470     03FA  3000               	movlw	0	; move o var para port
+   471     03FB  008C               	movwf	botao_pressionado
+   472     03FC  0008               	return
+   473     03FD                     _verifica_zero:
+   474     03FD  1903               	btfsc	3,2
+   475     03FE  1506               	bsf	6,2
+   476     03FF  0008               	return
    477                           
    478                           	psect	config
    479                           
@@ -499,12 +499,12 @@ Microchip MPLAB XC8 Assembler V4.00 build 20260614213421
 
 
 Microchip Technology PIC Macro Assembler V4.00 build 20260614213421 
-Symbol Table                                                                                               Mon Oct  5 10:38:13 2026
+Symbol Table                                                                                               Wed Oct  7 22:34:52 2026
 
-                      _end 03EA                       PORTA 0005                       PORTB 0006                       TRISA 0085  
-                     TRISB 0086                       _main 03AC                      STATUS 0003                     if_nivC 03CC  
-         botao_pressionado 000C                    if1_nivA 03C5                    if1_nivB 03C7             reg_niveis_temp 000E  
-      start_initialization 03AC                _desligarEve 03F5                _desligarEvs 03ED            _verifica_niveis 03BC  
-                reg_niveis 000D                   _ligarEve 03F3                   _ligarEvs 03EB             _verifica_erros 03D0  
-     _if_botao_pressionado 03F7            _ifC_desligarEvs 03EF              _verifica_zero 03FC            _portas_settings 03B2  
-              if_botaoHigh 03C1  
+                      _end 03EB                       PORTA 0005                       PORTB 0006                       TRISA 0085  
+                     TRISB 0086                       _main 03AE                      STATUS 0003                     if_nivC 03CD  
+         botao_pressionado 000C                    if1_nivA 03C7                    if1_nivB 03C9             reg_niveis_temp 000E  
+      start_initialization 03AE                _desligarEve 03F6                _desligarEvs 03EE            _verifica_niveis 03BE  
+                reg_niveis 000D                   _ligarEve 03F4                   _ligarEvs 03EC             _verifica_erros 03D1  
+     _if_botao_pressionado 03F8            _ifC_desligarEvs 03F0              _verifica_zero 03FD            _portas_settings 03B4  
+              if_botaoHigh 03C3  
