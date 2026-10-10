@@ -8,14 +8,14 @@ movlf MACRO lit, reg
     movwf reg
 endm
 
-xorlf MACRO lit, reg
+xorlf MACRO lit, reg, bit
     movlw lit ; move o var para port
-    xorwf reg
+    xorwf reg, bit
 endm
     
-iorlf MACRO lit, reg
+iorlf MACRO lit, reg, bit
     movlw lit ; move o var para port
-    iorwf reg
+    iorwf reg, bit
 endm
 
 _salvar_contexto MACRO

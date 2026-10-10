@@ -13,22 +13,22 @@
 //#define MY_INTERRUPT_C
 
 #ifdef MY_INTERRUPT_C
-u8 contador_4hz = 125;
-u8 divisor_tempo = 8;
-void _interrupt() interruptC(void);
+    u8 contador_4hz = 125;
+    u8 divisor_tempo = 8;
+    void __interrupt() interruptC(void);
 #endif
 
 volatile u8 time_flag = 0;
 
-extern void interrupt_settings_S(void);
-extern void portas_settings(void);
+extern void interrupt_settings_asm(void);
+extern void portas_settings_asm(void);
 void _verificar_prioridade_C(void);
 void _limpar_correia(void);
 
 int main(void) {
     
-    portas_settings();
-    interrupt_settings_S();
+    portas_settings_asm();
+    interrupt_settings_asm();
     
     while (1){
         //time_flag = 1; //teste
@@ -46,7 +46,7 @@ int main(void) {
 
 void _verificar_prioridade_C(void){
     
-    if (!P(A, 1)){ // Botões em pull-down
+    if (!P(A, 1)){ // Botões em pull-up
         P(B, 0) = 1;
     }
     else if (!P(A, 2)){
@@ -67,7 +67,7 @@ void _limpar_correia(void){
 }
 
 #ifdef MY_INTERRUPT_C
-void _interrupt() interruptC(void) { 
+void __interrupt() interruptC(void) { 
     // Verifica qual módulo disparou a interrupção
     if (INTCONbits.T0IF) {
         INTCONbits.T0IF = 0; // Limpa a flag (equivalente ao bcf INTCON, 2)
@@ -81,7 +81,7 @@ void _interrupt() interruptC(void) {
             // Sub-contador para o múltiplo desejado
             divisor_tempo--;
             if (divisor_tempo == 0) {
-                flag_leitura = 1;     // Libera a leitura dos botões no múltiplo
+                time_flag = 1;     // Libera a leitura dos botões no múltiplo
                 divisor_tempo = 8;    // Reinicia para o próximo intervalo
             }
         }

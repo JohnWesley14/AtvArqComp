@@ -1,8 +1,0 @@
-
-16F84A Memory Summary:
-    Program space        used    79h (   121) of   400h words   ( 11.8%)
-    Data space           used     7h (     7) of    44h bytes   ( 10.3%)
-    EEPROM space         used     0h (     0) of    40h bytes   (  0.0%)
-    Configuration bits   used     1h (     1) of     1h word    (100.0%)
-    ID Location space    used     0h (     0) of     4h bytes   (  0.0%)
-

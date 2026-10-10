@@ -1,13 +1,10 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
-"22 questao1.c
-[; ;questao1.c: 22: extern void portas_settings(void);
-[v _portas_settings `(v ~T0 @X0 0 ef ]
-"23
-[; ;questao1.c: 23: extern void interrupt_settings_S(void);
-[v _interrupt_settings_S `(v ~T0 @X0 0 ef ]
-"25
-[; ;questao1.c: 25: void _verificar_sensor_C(void);
+"20 questao1.c
+[; ;questao1.c: 20: extern void portas_settings_asm(void);
+[v _portas_settings_asm `(v ~T0 @X0 0 ef ]
+"22
+[; ;questao1.c: 22: void _verificar_sensor_C(void);
 [v __verificar_sensor_C `(v ~T0 @X0 0 ef ]
 "156 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
 [; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 156:     struct {
@@ -71,86 +68,66 @@ Version 4.0 HI-TECH Software Intermediate Code
 "590
 [; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 590: __asm("EECON2 equ 089h");
 [; <" EECON2 equ 089h ;# ">
-"20 questao1.c
-[; ;questao1.c: 20: volatile u8 time_flag = 0;
-[v _time_flag `Vuc ~T0 @X0 1 e ]
-[i _time_flag
--> -> 0 `i `uc
-]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"27
-[; ;questao1.c: 27: int main(void) {
+"24 questao1.c
+[; ;questao1.c: 24: int main(void) {
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"28
-[; ;questao1.c: 28:     portas_settings();
-[e ( _portas_settings ..  ]
-"29
-[; ;questao1.c: 29:     interrupt_settings_S();
-[e ( _interrupt_settings_S ..  ]
-"31
-[; ;questao1.c: 31:     while(1){
+"25
+[; ;questao1.c: 25:     portas_settings_asm();
+[e ( _portas_settings_asm ..  ]
+"27
+[; ;questao1.c: 27:     while(1){
 [e :U 29 ]
 {
-"33
-[; ;questao1.c: 33:         if(time_flag){
-[e $ ! != -> _time_flag `i -> 0 `i 31  ]
-{
-"34
-[; ;questao1.c: 34:             time_flag = 0;
-[e = _time_flag -> -> 0 `i `uc ]
-"35
-[; ;questao1.c: 35:             _verificar_sensor_C();
+"28
+[; ;questao1.c: 28:         _verificar_sensor_C();
 [e ( __verificar_sensor_C ..  ]
-"36
-[; ;questao1.c: 36:         }
-}
-[e :U 31 ]
-"37
-[; ;questao1.c: 37:     }
+"29
+[; ;questao1.c: 29:     }
 }
 [e :U 28 ]
-"31
-[; ;questao1.c: 31:     while(1){
+"27
+[; ;questao1.c: 27:     while(1){
 [e $U 29  ]
 [e :U 30 ]
-"39
-[; ;questao1.c: 39:     return 0;
+"31
+[; ;questao1.c: 31:     return 0;
 [e ) -> 0 `i ]
 [e $UE 27  ]
-"40
-[; ;questao1.c: 40: }
+"32
+[; ;questao1.c: 32: }
 [e :UE 27 ]
 }
-"42
-[; ;questao1.c: 42: void _verificar_sensor_C(void){
+"34
+[; ;questao1.c: 34: void _verificar_sensor_C(void){
 [v __verificar_sensor_C `(v ~T0 @X0 1 ef ]
 {
 [e :U __verificar_sensor_C ]
 [f ]
-"43
-[; ;questao1.c: 43:     if(PORTAbits.RA1){
-[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 33  ]
+"35
+[; ;questao1.c: 35:     if(PORTAbits.RA1){
+[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 32  ]
 {
-"44
-[; ;questao1.c: 44:         PORTB = 0x72;
+"36
+[; ;questao1.c: 36:         PORTB = 0x72;
 [e = _PORTB -> -> 114 `i `uc ]
-"45
-[; ;questao1.c: 45:     } else {
+"37
+[; ;questao1.c: 37:     } else {
 }
-[e $U 34  ]
-[e :U 33 ]
+[e $U 33  ]
+[e :U 32 ]
 {
-"46
-[; ;questao1.c: 46:         PORTB = 0x81;
+"38
+[; ;questao1.c: 38:         PORTB = 0x81;
 [e = _PORTB -> -> 129 `i `uc ]
-"47
-[; ;questao1.c: 47:     }
+"39
+[; ;questao1.c: 39:     }
 }
-[e :U 34 ]
-"48
-[; ;questao1.c: 48: }
-[e :UE 32 ]
+[e :U 33 ]
+"40
+[; ;questao1.c: 40: }
+[e :UE 31 ]
 }

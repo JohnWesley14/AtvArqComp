@@ -6,10 +6,10 @@ Linker command line:
   --edf=D:\Program Files\Microchip\xc8\v4.00\pic\dat\20260614213421_en.msgs \
   -cn -h+dist/default/debug\Questao1.X.debug.sym \
   --cmf=dist/default/debug\Questao1.X.debug.cmf -z -Q16F84A \
-  -oC:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_3.o \
+  -oC:\Users\bande\AppData\Local\Temp\xcAs67g.0\driver_tmp_3.o \
   --defsym=__MPLAB_BUILD=1 --fixupoverflow=error \
   -Mdist/default/debug/Questao1.X.debug.map \
-  --md=C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_0.dat -E1 \
+  --md=C:\Users\bande\AppData\Local\Temp\xcAs67g.0\driver_tmp_0.dat -E1 \
   -ver=XC8 Compiler -ACODE=00h-03FFh -ASTRCODE=00h-03FFh \
   -ASTRING=00h-0FFhx4 -ACONST=00h-0FFhx4 -AENTRY=00h-0FFhx4 \
   -ABANK0=0Ch-04Dh -ARAM=0Ch-04Dh -AABS1=0Ch-04Fh -ACOMMON=04Eh-04Fh \
@@ -18,8 +18,8 @@ Linker command line:
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
   -DENTRY=2 -preset_vec=00h,intentry,sivt,init,end_init -ppowerup=CODE \
   -pcinit=CODE -pfunctab=ENTRY -k \
-  C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o \
-  dist/default/debug\Questao1.X.debug.o build/default/debug/questao1.o 
+  C:\Users\bande\AppData\Local\Temp\xcAs67g.0\driver_tmp_10.o \
+  dist/default/debug\Questao1.X.debug.o build/default/debug/questao1_asm.o 
 
 Object code version is 3.11
 
@@ -28,28 +28,25 @@ Machine type is 16F84A
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\bande\AppData\Local\Temp\xcAs1wk.0\driver_tmp_10.o
+C:\Users\bande\AppData\Local\Temp\xcAs67g.0\driver_tmp_10.o
                 end_init                              0        0        1        0       0
                 config                             2007     2007        1        0       4
 dist/default/debug\Questao1.X.debug.o
-                cinit                               3FC      3FC        4      7F8       0
-                text1                               3BF      3BF        B      77E       0
-                maintext                            3CA      3CA        C      794       0
-                bssBANK0                             10       10        1       10       1
-build/default/debug/questao1.o
+                cinit                               3FE      3FE        2      7FC       0
+                text1                               3E1      3E1        B      7C2       0
+                maintext                            3DD      3DD        4      7BA       0
+build/default/debug/questao1_asm.o
                 config                             2007     2007        1        0       4
-                verificacao_portas                  3D6      3D6       25      3D6       0
-                intCode                               0        0       21        0       0
-                static_vars                           C        C        4        C       1
+                verificacao_portas                  3EC      3EC       12      3EC       0
+                static_vars                           C        C        2        C       1
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   CODE           
                 end_init                              0        0        1         0
-                cinit                               3FC      3FC        4         0
-                text1                               3BF      3BF        B         0
-                maintext                            3CA      3CA        C         0
-                verificacao_portas                  3D6      3D6       25         0
-                intCode                               0        0       21         0
+                cinit                               3FE      3FE        2         0
+                text1                               3E1      3E1        B         0
+                maintext                            3DD      3DD        4         0
+                verificacao_portas                  3EC      3EC       12         0
 
         CLASS   STRCODE        
 
@@ -60,10 +57,9 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   ENTRY          
 
         CLASS   BANK0          
-                bssBANK0                             10       10        1         1
 
         CLASS   RAM            
-                static_vars                           C        C        4         1
+                static_vars                           C        C        2         1
 
         CLASS   ABS1           
                 abs_s1                               4E       4E        2         1
@@ -92,33 +88,27 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000001  000001         0       0  CODE        2
-                static_vars                    00000C  000004  000010         C       1  RAM         1
-                bssBANK0                       000010  000001  000011        10       1  BANK0       1
-                text1                          0003BF  00000B  0003CA       77E       0  CODE        2
-                maintext                       0003CA  00000C  0003D6       794       0  CODE        2
-                verificacao_portas             0003D6  000025  0003FB       3D6       0  CODE        2
-                cinit                          0003FC  000004  000400       7F8       0  CODE        2
+                static_vars                    00000C  000002  00000E         C       1  RAM         1
+                maintext                       0003DD  000004  0003E1       7BA       0  CODE        2
+                text1                          0003E1  00000B  0003EC       7C2       0  CODE        2
+                verificacao_portas             0003EC  000012  0003FE       3EC       0  CODE        2
+                cinit                          0003FE  000002  000400       7FC       0  CODE        2
 
 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            0011-004D             3D           1
-        CODE             0021-03BE            39E           2
-                         03FB-03FB              1
-        CONST            0021-03BE            100           2
-                         03FB-03FB              1
+        BANK0            000E-004D             40           1
+        CODE             0001-03DC            3DC           2
+        CONST            0001-03DC            100           2
         EEDATA           2100-213F             40           2
-        ENTRY            0021-03BE            100           2
-                         03FB-03FB              1
+        ENTRY            0001-03DC            100           2
         IDLOC            2000-2003              4           2
-        RAM              0011-004D             3D           1
+        RAM              000E-004D             40           1
         SFR0             0000-000B              C           1
         SFR1             0080-00CD             4E           1
-        STRCODE          0021-03BE            39E           2
-                         03FB-03FB              1
-        STRING           0021-03BE            100           2
-                         03FB-03FB              1
+        STRCODE          0001-03DC            3DC           2
+        STRING           0001-03DC            100           2
 
                                   Symbol Table
 
@@ -128,7 +118,6 @@ __H__absolute__              __absolute__       0000
 __Habs1                      abs1               0000
 __Hbank0                     bank0              0000
 __Hbank1                     bank1              0000
-__HbssBANK0                  bssBANK0           0000
 __Hcinit                     cinit              0400
 __Hclrtext                   clrtext            0000
 __Hcode                      code               0000
@@ -143,7 +132,6 @@ __Hend_init                  end_init           0001
 __Hfunctab                   functab            0000
 __Hheap                      heap               0000
 __Hinit                      init               0000
-__HintCode                   intCode            0000
 __Hintentry                  intentry           0000
 __Hmaintext                  maintext           0000
 __Hpowerup                   powerup            0000
@@ -153,7 +141,7 @@ __Hsfr0                      sfr0               0000
 __Hsfr1                      sfr1               0000
 __Hsivt                      sivt               0000
 __Hspace_0                   (abs)              0400
-__Hspace_1                   (abs)              0011
+__Hspace_1                   (abs)              000E
 __Hspace_2                   (abs)              0000
 __Hspace_3                   (abs)              0000
 __Hspace_4                   (abs)              400F
@@ -168,8 +156,7 @@ __L__absolute__              __absolute__       0000
 __Labs1                      abs1               0000
 __Lbank0                     bank0              0000
 __Lbank1                     bank1              0000
-__LbssBANK0                  bssBANK0           0000
-__Lcinit                     cinit              03FC
+__Lcinit                     cinit              03FE
 __Lclrtext                   clrtext            0000
 __Lcode                      code               0000
 __Lcommon                    common             0000
@@ -183,7 +170,6 @@ __Lend_init                  end_init           0000
 __Lfunctab                   functab            0000
 __Lheap                      heap               0000
 __Linit                      init               0000
-__LintCode                   intCode            0000
 __Lintentry                  intentry           0000
 __Lmaintext                  maintext           0000
 __Lpowerup                   powerup            0000
@@ -205,7 +191,7 @@ __Ludata                     udata              0000
 __Ludata_bank0               udata_bank0        0000
 __Lverificacao_portas        verificacao_portas 0000
 __S0                         (abs)              0400
-__S1                         (abs)              0011
+__S1                         (abs)              000E
 __S3                         (abs)              0000
 ___heap_hi                   (abs)              0000
 ___heap_lo                   (abs)              0000
@@ -219,20 +205,17 @@ ___stack_lo                  stack              0000
 ___stackhi                   (abs)              0000
 ___stacklo                   (abs)              0000
 __end_of__initialization     cinit              03FE
-__end_of__verificar_sensor_C text1              03CA
-__end_of_main                maintext           03D6
-__initialization             cinit              03FC
-__pbssBANK0                  bssBANK0           0010
+__end_of__verificar_sensor_C text1              03EC
+__end_of_main                maintext           03E1
+__initialization             cinit              03FE
 __pcstackBANK0               cstackBANK0        0000
 __pcstackCOMMON              cstackCOMMON       0000
-__pmaintext                  maintext           03CA
-__ptext1                     text1              03BF
-__verificar_sensor_C         text1              03BF
-_interrupt_settings_S        verificacao_portas 03EE
-_main                        maintext           03CA
-_portas_settings             verificacao_portas 03D6
-_time_flag                   bssBANK0           0010
-_verificar_sensor_S          verificacao_portas 03E5
+__pmaintext                  maintext           03DD
+__ptext1                     text1              03E1
+__verificar_sensor_C         text1              03E1
+_main                        maintext           03DD
+_portas_settings_asm         verificacao_portas 03EC
+_verificar_sensor_asm        verificacao_portas 03F5
 btemp                        (abs)              004E
 btemp0                       (abs)              004E
 btemp1                       (abs)              004F
@@ -246,7 +229,7 @@ intlevel5                    functab            0000
 ltemp0a                      (abs)              0050
 reset_vec                    reset_vec          0000
 start                        init               0000
-start_initialization         cinit              03FC
+start_initialization         cinit              03FE
 ttemp0a                      (abs)              004F
 wtemp0                       (abs)              004E
 wtemp0a                      (abs)              004F
@@ -256,13 +239,13 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 shared
-		__initialization		CODE           	03FC	0000	2
+		__initialization		CODE           	03FE	0000	1
 
-shared estimated size: 2
+shared estimated size: 1
 
 questao1.c
-		_main          		CODE           	03CA	0000	12
-		__verificar_sensor_C		CODE           	03BF	0000	11
+		_main          		CODE           	03DD	0000	4
+		__verificar_sensor_C		CODE           	03E1	0000	11
 
-questao1.c estimated size: 23
+questao1.c estimated size: 15
 

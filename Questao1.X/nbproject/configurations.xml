@@ -17,10 +17,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>questao1.s</itemPath>
       <itemPath>macros.inc</itemPath>
       <itemPath>config_pic.h</itemPath>
       <itemPath>questao1.c</itemPath>
+      <itemPath>questao1_asm.s</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

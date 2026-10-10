@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=questao2.s
+SOURCEFILES_QUOTED_IF_SPACED=questao2_asm.s questao2.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/questao2.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/questao2.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/questao2_asm.o ${OBJECTDIR}/questao2.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/questao2_asm.o.d ${OBJECTDIR}/questao2.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/questao2.o
+OBJECTFILES=${OBJECTDIR}/questao2_asm.o ${OBJECTDIR}/questao2.p1
 
 # Source Files
-SOURCEFILES=questao2.s
+SOURCEFILES=questao2_asm.s questao2.c
 
 
 
@@ -88,28 +88,44 @@ MP_PROCESSOR_OPTION=16F84A
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/questao2.p1: questao2.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/questao2.p1.d 
+	@${RM} ${OBJECTDIR}/questao2.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/questao2.p1 questao2.c 
+	@-${MV} ${OBJECTDIR}/questao2.d ${OBJECTDIR}/questao2.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/questao2.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
+${OBJECTDIR}/questao2.p1: questao2.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/questao2.p1.d 
+	@${RM} ${OBJECTDIR}/questao2.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/questao2.p1 questao2.c 
+	@-${MV} ${OBJECTDIR}/questao2.d ${OBJECTDIR}/questao2.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/questao2.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 endif
 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/questao2.o: questao2.s  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/questao2_asm.o: questao2_asm.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/questao2.o.d 
-	@${RM} ${OBJECTDIR}/questao2.o 
-	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao2.o  questao2.s 
-	@-${MV} ${OBJECTDIR}/questao2.d ${OBJECTDIR}/questao2.o.d 
-	@${FIXDEPS} ${OBJECTDIR}/questao2.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/questao2_asm.o.d 
+	@${RM} ${OBJECTDIR}/questao2_asm.o 
+	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao2_asm.o  questao2_asm.s 
+	@-${MV} ${OBJECTDIR}/questao2_asm.d ${OBJECTDIR}/questao2_asm.o.d 
+	@${FIXDEPS} ${OBJECTDIR}/questao2_asm.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
-${OBJECTDIR}/questao2.o: questao2.s  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/questao2_asm.o: questao2_asm.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/questao2.o.d 
-	@${RM} ${OBJECTDIR}/questao2.o 
-	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao2.o  questao2.s 
-	@-${MV} ${OBJECTDIR}/questao2.d ${OBJECTDIR}/questao2.o.d 
-	@${FIXDEPS} ${OBJECTDIR}/questao2.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/questao2_asm.o.d 
+	@${RM} ${OBJECTDIR}/questao2_asm.o 
+	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao2_asm.o  questao2_asm.s 
+	@-${MV} ${OBJECTDIR}/questao2_asm.d ${OBJECTDIR}/questao2_asm.o.d 
+	@${FIXDEPS} ${OBJECTDIR}/questao2_asm.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

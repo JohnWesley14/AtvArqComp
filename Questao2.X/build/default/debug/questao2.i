@@ -1,612 +1,763 @@
-# 1 "questao2.s"
+# 1 "questao2.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
-# 296 "<built-in>" 3
+# 295 "<built-in>" 3
 # 1 "<command line>" 1
 # 1 "<built-in>" 2
-# 1 "questao2.s" 2
-; CONTROLE DE PLANTA
-; Botao I acionado -> Sistema Liga -> OK
-; Ligar Evs <-> (Se, e somente se) o líquido estiver no nível A ou B -> OK
-; Se o líquido estiver no nível C, a Evs deve ser desligada até ele atingir B -> OK
-; Ligar Eve <-> (Se, e somente se) Botão I ligado e o líquido não estiver em A -> OK
-; Se o botão I foi pressionado mais uma vez -> desligar Evs e Eve -> OK
-PROCESSOR 16F84A
-# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.inc" 1 3
-
-
-
-
-
-
-# 1 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.inc" 1 3
-
-
-
-# 1 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic_as_chip_select.inc" 1 3
-# 290 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic_as_chip_select.inc" 3
-# 1 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.inc" 1 3
-# 33 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.inc" 3
-INDF equ 0000h
-
-
-
-TMR0 equ 0001h
-
-
-
-PCL equ 0002h
-
-
-
-STATUS equ 0003h
-
-STATUS_C_POSN equ 0000h
-STATUS_C_POSITION equ 0000h
-STATUS_C_SIZE equ 0001h
-STATUS_C_LENGTH equ 0001h
-STATUS_C_MASK equ 0001h
-STATUS_DC_POSN equ 0001h
-STATUS_DC_POSITION equ 0001h
-STATUS_DC_SIZE equ 0001h
-STATUS_DC_LENGTH equ 0001h
-STATUS_DC_MASK equ 0002h
-STATUS_Z_POSN equ 0002h
-STATUS_Z_POSITION equ 0002h
-STATUS_Z_SIZE equ 0001h
-STATUS_Z_LENGTH equ 0001h
-STATUS_Z_MASK equ 0004h
-STATUS_nPD_POSN equ 0003h
-STATUS_nPD_POSITION equ 0003h
-STATUS_nPD_SIZE equ 0001h
-STATUS_nPD_LENGTH equ 0001h
-STATUS_nPD_MASK equ 0008h
-STATUS_nTO_POSN equ 0004h
-STATUS_nTO_POSITION equ 0004h
-STATUS_nTO_SIZE equ 0001h
-STATUS_nTO_LENGTH equ 0001h
-STATUS_nTO_MASK equ 0010h
-STATUS_RP_POSN equ 0005h
-STATUS_RP_POSITION equ 0005h
-STATUS_RP_SIZE equ 0002h
-STATUS_RP_LENGTH equ 0002h
-STATUS_RP_MASK equ 0060h
-STATUS_IRP_POSN equ 0007h
-STATUS_IRP_POSITION equ 0007h
-STATUS_IRP_SIZE equ 0001h
-STATUS_IRP_LENGTH equ 0001h
-STATUS_IRP_MASK equ 0080h
-STATUS_RP0_POSN equ 0005h
-STATUS_RP0_POSITION equ 0005h
-STATUS_RP0_SIZE equ 0001h
-STATUS_RP0_LENGTH equ 0001h
-STATUS_RP0_MASK equ 0020h
-STATUS_RP1_POSN equ 0006h
-STATUS_RP1_POSITION equ 0006h
-STATUS_RP1_SIZE equ 0001h
-STATUS_RP1_LENGTH equ 0001h
-STATUS_RP1_MASK equ 0040h
-STATUS_CARRY_POSN equ 0000h
-STATUS_CARRY_POSITION equ 0000h
-STATUS_CARRY_SIZE equ 0001h
-STATUS_CARRY_LENGTH equ 0001h
-STATUS_CARRY_MASK equ 0001h
-STATUS_ZERO_POSN equ 0002h
-STATUS_ZERO_POSITION equ 0002h
-STATUS_ZERO_SIZE equ 0001h
-STATUS_ZERO_LENGTH equ 0001h
-STATUS_ZERO_MASK equ 0004h
-
-
-
-FSR equ 0004h
-
-
-
-PORTA equ 0005h
-
-PORTA_RA0_POSN equ 0000h
-PORTA_RA0_POSITION equ 0000h
-PORTA_RA0_SIZE equ 0001h
-PORTA_RA0_LENGTH equ 0001h
-PORTA_RA0_MASK equ 0001h
-PORTA_RA1_POSN equ 0001h
-PORTA_RA1_POSITION equ 0001h
-PORTA_RA1_SIZE equ 0001h
-PORTA_RA1_LENGTH equ 0001h
-PORTA_RA1_MASK equ 0002h
-PORTA_RA2_POSN equ 0002h
-PORTA_RA2_POSITION equ 0002h
-PORTA_RA2_SIZE equ 0001h
-PORTA_RA2_LENGTH equ 0001h
-PORTA_RA2_MASK equ 0004h
-PORTA_RA3_POSN equ 0003h
-PORTA_RA3_POSITION equ 0003h
-PORTA_RA3_SIZE equ 0001h
-PORTA_RA3_LENGTH equ 0001h
-PORTA_RA3_MASK equ 0008h
-PORTA_RA4_POSN equ 0004h
-PORTA_RA4_POSITION equ 0004h
-PORTA_RA4_SIZE equ 0001h
-PORTA_RA4_LENGTH equ 0001h
-PORTA_RA4_MASK equ 0010h
-
-
-
-PORTB equ 0006h
-
-PORTB_RB0_POSN equ 0000h
-PORTB_RB0_POSITION equ 0000h
-PORTB_RB0_SIZE equ 0001h
-PORTB_RB0_LENGTH equ 0001h
-PORTB_RB0_MASK equ 0001h
-PORTB_RB1_POSN equ 0001h
-PORTB_RB1_POSITION equ 0001h
-PORTB_RB1_SIZE equ 0001h
-PORTB_RB1_LENGTH equ 0001h
-PORTB_RB1_MASK equ 0002h
-PORTB_RB2_POSN equ 0002h
-PORTB_RB2_POSITION equ 0002h
-PORTB_RB2_SIZE equ 0001h
-PORTB_RB2_LENGTH equ 0001h
-PORTB_RB2_MASK equ 0004h
-PORTB_RB3_POSN equ 0003h
-PORTB_RB3_POSITION equ 0003h
-PORTB_RB3_SIZE equ 0001h
-PORTB_RB3_LENGTH equ 0001h
-PORTB_RB3_MASK equ 0008h
-PORTB_RB4_POSN equ 0004h
-PORTB_RB4_POSITION equ 0004h
-PORTB_RB4_SIZE equ 0001h
-PORTB_RB4_LENGTH equ 0001h
-PORTB_RB4_MASK equ 0010h
-PORTB_RB5_POSN equ 0005h
-PORTB_RB5_POSITION equ 0005h
-PORTB_RB5_SIZE equ 0001h
-PORTB_RB5_LENGTH equ 0001h
-PORTB_RB5_MASK equ 0020h
-PORTB_RB6_POSN equ 0006h
-PORTB_RB6_POSITION equ 0006h
-PORTB_RB6_SIZE equ 0001h
-PORTB_RB6_LENGTH equ 0001h
-PORTB_RB6_MASK equ 0040h
-PORTB_RB7_POSN equ 0007h
-PORTB_RB7_POSITION equ 0007h
-PORTB_RB7_SIZE equ 0001h
-PORTB_RB7_LENGTH equ 0001h
-PORTB_RB7_MASK equ 0080h
-
-
-
-EEDATA equ 0008h
-
-
-
-EEADR equ 0009h
-
-
-
-PCLATH equ 000Ah
-
-PCLATH_PCLATH_POSN equ 0000h
-PCLATH_PCLATH_POSITION equ 0000h
-PCLATH_PCLATH_SIZE equ 0005h
-PCLATH_PCLATH_LENGTH equ 0005h
-PCLATH_PCLATH_MASK equ 001Fh
-
-
-
-INTCON equ 000Bh
-
-INTCON_RBIF_POSN equ 0000h
-INTCON_RBIF_POSITION equ 0000h
-INTCON_RBIF_SIZE equ 0001h
-INTCON_RBIF_LENGTH equ 0001h
-INTCON_RBIF_MASK equ 0001h
-INTCON_INTF_POSN equ 0001h
-INTCON_INTF_POSITION equ 0001h
-INTCON_INTF_SIZE equ 0001h
-INTCON_INTF_LENGTH equ 0001h
-INTCON_INTF_MASK equ 0002h
-INTCON_T0IF_POSN equ 0002h
-INTCON_T0IF_POSITION equ 0002h
-INTCON_T0IF_SIZE equ 0001h
-INTCON_T0IF_LENGTH equ 0001h
-INTCON_T0IF_MASK equ 0004h
-INTCON_RBIE_POSN equ 0003h
-INTCON_RBIE_POSITION equ 0003h
-INTCON_RBIE_SIZE equ 0001h
-INTCON_RBIE_LENGTH equ 0001h
-INTCON_RBIE_MASK equ 0008h
-INTCON_INTE_POSN equ 0004h
-INTCON_INTE_POSITION equ 0004h
-INTCON_INTE_SIZE equ 0001h
-INTCON_INTE_LENGTH equ 0001h
-INTCON_INTE_MASK equ 0010h
-INTCON_T0IE_POSN equ 0005h
-INTCON_T0IE_POSITION equ 0005h
-INTCON_T0IE_SIZE equ 0001h
-INTCON_T0IE_LENGTH equ 0001h
-INTCON_T0IE_MASK equ 0020h
-INTCON_EEIE_POSN equ 0006h
-INTCON_EEIE_POSITION equ 0006h
-INTCON_EEIE_SIZE equ 0001h
-INTCON_EEIE_LENGTH equ 0001h
-INTCON_EEIE_MASK equ 0040h
-INTCON_GIE_POSN equ 0007h
-INTCON_GIE_POSITION equ 0007h
-INTCON_GIE_SIZE equ 0001h
-INTCON_GIE_LENGTH equ 0001h
-INTCON_GIE_MASK equ 0080h
-INTCON_TMR0IF_POSN equ 0002h
-INTCON_TMR0IF_POSITION equ 0002h
-INTCON_TMR0IF_SIZE equ 0001h
-INTCON_TMR0IF_LENGTH equ 0001h
-INTCON_TMR0IF_MASK equ 0004h
-INTCON_TMR0IE_POSN equ 0005h
-INTCON_TMR0IE_POSITION equ 0005h
-INTCON_TMR0IE_SIZE equ 0001h
-INTCON_TMR0IE_LENGTH equ 0001h
-INTCON_TMR0IE_MASK equ 0020h
-
-
-
-OPTION_REG equ 0081h
-
-OPTION_REG_PS_POSN equ 0000h
-OPTION_REG_PS_POSITION equ 0000h
-OPTION_REG_PS_SIZE equ 0003h
-OPTION_REG_PS_LENGTH equ 0003h
-OPTION_REG_PS_MASK equ 0007h
-OPTION_REG_PSA_POSN equ 0003h
-OPTION_REG_PSA_POSITION equ 0003h
-OPTION_REG_PSA_SIZE equ 0001h
-OPTION_REG_PSA_LENGTH equ 0001h
-OPTION_REG_PSA_MASK equ 0008h
-OPTION_REG_T0SE_POSN equ 0004h
-OPTION_REG_T0SE_POSITION equ 0004h
-OPTION_REG_T0SE_SIZE equ 0001h
-OPTION_REG_T0SE_LENGTH equ 0001h
-OPTION_REG_T0SE_MASK equ 0010h
-OPTION_REG_T0CS_POSN equ 0005h
-OPTION_REG_T0CS_POSITION equ 0005h
-OPTION_REG_T0CS_SIZE equ 0001h
-OPTION_REG_T0CS_LENGTH equ 0001h
-OPTION_REG_T0CS_MASK equ 0020h
-OPTION_REG_INTEDG_POSN equ 0006h
-OPTION_REG_INTEDG_POSITION equ 0006h
-OPTION_REG_INTEDG_SIZE equ 0001h
-OPTION_REG_INTEDG_LENGTH equ 0001h
-OPTION_REG_INTEDG_MASK equ 0040h
-OPTION_REG_nRBPU_POSN equ 0007h
-OPTION_REG_nRBPU_POSITION equ 0007h
-OPTION_REG_nRBPU_SIZE equ 0001h
-OPTION_REG_nRBPU_LENGTH equ 0001h
-OPTION_REG_nRBPU_MASK equ 0080h
-OPTION_REG_PS0_POSN equ 0000h
-OPTION_REG_PS0_POSITION equ 0000h
-OPTION_REG_PS0_SIZE equ 0001h
-OPTION_REG_PS0_LENGTH equ 0001h
-OPTION_REG_PS0_MASK equ 0001h
-OPTION_REG_PS1_POSN equ 0001h
-OPTION_REG_PS1_POSITION equ 0001h
-OPTION_REG_PS1_SIZE equ 0001h
-OPTION_REG_PS1_LENGTH equ 0001h
-OPTION_REG_PS1_MASK equ 0002h
-OPTION_REG_PS2_POSN equ 0002h
-OPTION_REG_PS2_POSITION equ 0002h
-OPTION_REG_PS2_SIZE equ 0001h
-OPTION_REG_PS2_LENGTH equ 0001h
-OPTION_REG_PS2_MASK equ 0004h
-
-
-
-TRISA equ 0085h
-
-TRISA_TRISA0_POSN equ 0000h
-TRISA_TRISA0_POSITION equ 0000h
-TRISA_TRISA0_SIZE equ 0001h
-TRISA_TRISA0_LENGTH equ 0001h
-TRISA_TRISA0_MASK equ 0001h
-TRISA_TRISA1_POSN equ 0001h
-TRISA_TRISA1_POSITION equ 0001h
-TRISA_TRISA1_SIZE equ 0001h
-TRISA_TRISA1_LENGTH equ 0001h
-TRISA_TRISA1_MASK equ 0002h
-TRISA_TRISA2_POSN equ 0002h
-TRISA_TRISA2_POSITION equ 0002h
-TRISA_TRISA2_SIZE equ 0001h
-TRISA_TRISA2_LENGTH equ 0001h
-TRISA_TRISA2_MASK equ 0004h
-TRISA_TRISA3_POSN equ 0003h
-TRISA_TRISA3_POSITION equ 0003h
-TRISA_TRISA3_SIZE equ 0001h
-TRISA_TRISA3_LENGTH equ 0001h
-TRISA_TRISA3_MASK equ 0008h
-TRISA_TRISA4_POSN equ 0004h
-TRISA_TRISA4_POSITION equ 0004h
-TRISA_TRISA4_SIZE equ 0001h
-TRISA_TRISA4_LENGTH equ 0001h
-TRISA_TRISA4_MASK equ 0010h
-
-
-
-TRISB equ 0086h
-
-TRISB_TRISB0_POSN equ 0000h
-TRISB_TRISB0_POSITION equ 0000h
-TRISB_TRISB0_SIZE equ 0001h
-TRISB_TRISB0_LENGTH equ 0001h
-TRISB_TRISB0_MASK equ 0001h
-TRISB_TRISB1_POSN equ 0001h
-TRISB_TRISB1_POSITION equ 0001h
-TRISB_TRISB1_SIZE equ 0001h
-TRISB_TRISB1_LENGTH equ 0001h
-TRISB_TRISB1_MASK equ 0002h
-TRISB_TRISB2_POSN equ 0002h
-TRISB_TRISB2_POSITION equ 0002h
-TRISB_TRISB2_SIZE equ 0001h
-TRISB_TRISB2_LENGTH equ 0001h
-TRISB_TRISB2_MASK equ 0004h
-TRISB_TRISB3_POSN equ 0003h
-TRISB_TRISB3_POSITION equ 0003h
-TRISB_TRISB3_SIZE equ 0001h
-TRISB_TRISB3_LENGTH equ 0001h
-TRISB_TRISB3_MASK equ 0008h
-TRISB_TRISB4_POSN equ 0004h
-TRISB_TRISB4_POSITION equ 0004h
-TRISB_TRISB4_SIZE equ 0001h
-TRISB_TRISB4_LENGTH equ 0001h
-TRISB_TRISB4_MASK equ 0010h
-TRISB_TRISB5_POSN equ 0005h
-TRISB_TRISB5_POSITION equ 0005h
-TRISB_TRISB5_SIZE equ 0001h
-TRISB_TRISB5_LENGTH equ 0001h
-TRISB_TRISB5_MASK equ 0020h
-TRISB_TRISB6_POSN equ 0006h
-TRISB_TRISB6_POSITION equ 0006h
-TRISB_TRISB6_SIZE equ 0001h
-TRISB_TRISB6_LENGTH equ 0001h
-TRISB_TRISB6_MASK equ 0040h
-TRISB_TRISB7_POSN equ 0007h
-TRISB_TRISB7_POSITION equ 0007h
-TRISB_TRISB7_SIZE equ 0001h
-TRISB_TRISB7_LENGTH equ 0001h
-TRISB_TRISB7_MASK equ 0080h
-
-
-
-EECON1 equ 0088h
-
-EECON1_RD_POSN equ 0000h
-EECON1_RD_POSITION equ 0000h
-EECON1_RD_SIZE equ 0001h
-EECON1_RD_LENGTH equ 0001h
-EECON1_RD_MASK equ 0001h
-EECON1_WR_POSN equ 0001h
-EECON1_WR_POSITION equ 0001h
-EECON1_WR_SIZE equ 0001h
-EECON1_WR_LENGTH equ 0001h
-EECON1_WR_MASK equ 0002h
-EECON1_WREN_POSN equ 0002h
-EECON1_WREN_POSITION equ 0002h
-EECON1_WREN_SIZE equ 0001h
-EECON1_WREN_LENGTH equ 0001h
-EECON1_WREN_MASK equ 0004h
-EECON1_WRERR_POSN equ 0003h
-EECON1_WRERR_POSITION equ 0003h
-EECON1_WRERR_SIZE equ 0001h
-EECON1_WRERR_LENGTH equ 0001h
-EECON1_WRERR_MASK equ 0008h
-EECON1_EEIF_POSN equ 0004h
-EECON1_EEIF_POSITION equ 0004h
-EECON1_EEIF_SIZE equ 0001h
-EECON1_EEIF_LENGTH equ 0001h
-EECON1_EEIF_MASK equ 0010h
-
-
-
-EECON2 equ 0089h
-# 492 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.inc" 3
-psect udata,class=RAM,space=1,noexec
-psect udata_bank0,class=BANK0,space=1,noexec
-psect code,class=CODE,space=0,delta=2
-psect data,class=STRCODE,space=0,delta=2,noexec
-psect edata,class=EEDATA,space=3,delta=2,noexec
-# 291 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic_as_chip_select.inc" 2 3
-# 5 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.inc" 2 3
-
-
-
-stk_offset SET 0
-auto_size SET 0
-
-
-; stack_auto defines a symbol /name/_offset which equates to the
-; stack offset of the auto object in question
-
-stack_auto MACRO name, size
-name&_offset EQU stk_offset-size
-stk_offset SET name&_offset
-auto_size SET -stk_offset
-ENDM
-
-
-; stack_param defines a symbol /name/_offset which equates to the
-; stack offset of the parameter object in question
-
-stack_param MACRO name, size
-name&_offset EQU stk_offset-size
-stk_offset SET name&_offset
-ENDM
-
-
-; alloc_stack adjusts the SP to allocate space for auto objects
-; it also links in to the btemp symbol so that can be used
-
-alloc_stack MACRO
-GLOBAL btemp
-addfsr FSR1,auto_size
-ENDM
-
-
-; restore_stack adjusts the SP to remove all auto and parameter
-; objects from the stack prior to returning from a function
-
-restore_stack MACRO
-addfsr FSR1,stk_offset
-stk_offset SET 0
-auto_size SET 0
-ENDM
-# 8 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.inc" 2 3
-# 9 "questao2.s" 2
-# 1 "./macros.inc" 1
-movvf MACRO var, reg
-    movf var, 0 ; move o var (tratado como reg) para reg
-    movwf reg
-endm
-
-movlf MACRO lit, reg
-    movlw lit ; move o var para port
-    movwf reg
-endm
-
-xorlf MACRO lit, reg
-    movlw lit ; move o var para port
-    xorwf reg
-endm
-
-iorlf MACRO lit, reg
-    movlw lit ; move o var para port
-    iorwf reg
-endm
-
-_salvar_contexto MACRO
-    movwf W_TEMP
-    swapf STATUS, 0
-    movwf STATUS_TEMP
-endm
-
-_retornar_contexto MACRO
-    swapf STATUS_TEMP, 0
-    movwf STATUS
-    swapf W_TEMP, 1
-    swapf W_TEMP, 0
-endm
-# 10 "questao2.s" 2
-
-config FOSC = XT, WDTE = OFF, PWRTE = OFF, CP = OFF
-global _main, start_initialization
-
-; ((PORTA) and 07Fh), 1 = Botao I, ((PORTA) and 07Fh), 2 = A, ((PORTA) and 07Fh), 3 = B, ((PORTA) and 07Fh), 4 = C
-; ((PORTB) and 07Fh), 0 = Evs, ((PORTB) and 07Fh), 1 = Eve, ((PORTB) and 07Fh), 2 = Status Flag de Erro
-; Flag de Erro:
-; A e B ativados, mas C desativado; ou A ativado e B e C desativados
-; ou B ativado e C desativado (PORTA = 0b011I ou 0b110I ou 0b00AI)
-; I é o botao q pode ser 0 ou 1 e A tbm
-
-; OBS: Todos os botoes/inputs da porta A são pull-up
-
-_if_erro_detectado MACRO
-    btfsc PORTB, 2
-    goto _end
-ENDM
-
-PSECT static_vars, class=RAM, space=1
-botao_pressionado: ds 1
-reg_niveis: ds 1
-reg_niveis_temp: ds 1
-
-PSECT verificacao_portas, class=CODE, space=0, reloc=2, delta=2
-start_initialization:
-_main:
-    call _portas_settings
-    movlf 0x00, botao_pressionado
-    movlf 0x00, reg_niveis
-    goto _verifica_niveis
-
-_portas_settings:
-    banksel PORTA ; bsf STATUS, 5
-    clrf PORTA
-    clrf PORTB
-    banksel TRISA ; bcf STATUS, 5
-    movlf 0b00011110, TRISA ; PORTA é input em A1, A2, A3 e A4
-    clrf TRISB ; PORTB inteira é output por padrao
-    bsf TRISB, 3 ; B2 como input para alerta de erro
-    banksel PORTA
-    retlw 0x00
-
-_verifica_niveis:
-    movf botao_pressionado, 1
-    btfss STATUS, 2
-    call _if_botao_pressionado
-
-    btfsc PORTA, 1
-    goto if_nivC
-    if_botaoHigh:
- movlf 0x01, botao_pressionado
- btfsc PORTA, 2
- goto if1_nivB
- if1_nivA:
-     bsf reg_niveis, 0
-     call _ligarEvs
- if1_nivB:
-     btfsc PORTA, 3
-     goto if_nivC
-     bsf reg_niveis, 1
-     call _ligarEvs
-    if_nivC:
- btfss PORTA, 4
- bsf reg_niveis, 2
- call _desligarEvs
- call _ligarEve
-_verifica_erros:
-    movf reg_niveis, 0
-    movwf reg_niveis_temp
-    xorlf 0b011, reg_niveis, 0
-    call _verifica_zero
-    _if_erro_detectado
-    xorlf 0b110, reg_niveis, 0
-    call _verifica_zero
-    _if_erro_detectado
-    xorlf 0b000, reg_niveis, 0
-    call _verifica_zero
-    _if_erro_detectado
-    xorlf 0b001, reg_niveis, 0
-    call _verifica_zero
-    _if_erro_detectado
-    movlf 0x00, reg_niveis
-    movf reg_niveis_temp, 0
-    movwf reg_niveis
-_end:
-    goto _verifica_niveis
-
-
-
-_ligarEvs:
-    bsf PORTB, 0
-    return
-_desligarEvs:
-    bcf PORTB, 0
-    return
-_ifC_desligarEvs:
-    bcf PORTB, 0
-    btfsc PORTA, 1
-    return
-    goto if1_nivB
-_ligarEve:
-    bsf PORTB, 1
-    return
-_desligarEve:
-    bcf PORTB, 1
-    return
-_if_botao_pressionado:
-    call _desligarEvs
-    call _desligarEvs
-    movlf 0x00, botao_pressionado
-    return
-
-_verifica_zero:
-    btfsc STATUS, 2
-    bsf PORTB, 2
-    return
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/language_support.h" 1 3
+# 2 "<built-in>" 2
+# 1 "questao2.c" 2
+# 25 "questao2.c"
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.h" 1 3
+# 18 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.h" 3
+extern const char __xc8_OPTIM_SPEED;
+
+extern double __fpnormalize(double);
+
+
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/xc8debug.h" 1 3
+
+
+
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdlib.h" 1 3
+
+
+
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/musl_xc8.h" 1 3
+# 5 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdlib.h" 2 3
+
+
+
+
+
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/features.h" 1 3
+# 11 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdlib.h" 2 3
+# 21 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdlib.h" 3
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 1 3
+# 24 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef long int wchar_t;
+# 128 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef unsigned size_t;
+# 174 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef __int24 int24_t;
+# 210 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef __uint24 uint24_t;
+# 22 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdlib.h" 2 3
+
+int atoi (const char *);
+long atol (const char *);
+
+
+
+double atof (const char *);
+
+
+float strtof (const char *restrict, char **restrict);
+double strtod (const char *restrict, char **restrict);
+long double strtold (const char *restrict, char **restrict);
+
+
+
+long strtol (const char *restrict, char **restrict, int);
+unsigned long strtoul (const char *restrict, char **restrict, int);
+
+
+
+
+
+unsigned long __strtoxl(const char * s, char ** endptr, int base, char is_signed);
+# 55 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdlib.h" 3
+int rand (void);
+void srand (unsigned);
+
+void *malloc (size_t);
+void *calloc (size_t, size_t);
+void *realloc (void *, size_t);
+void free (void *);
+
+          void abort (void);
+int atexit (void (*) (void));
+          void exit (int);
+          void _Exit (int);
+
+void *bsearch (const void *, const void *, size_t, size_t, int (*)(const void *, const void *));
+
+
+
+
+
+
+
+__attribute__((nonreentrant)) void qsort (void *, size_t, size_t, int (*)(const void *, const void *));
+
+int abs (int);
+long labs (long);
+
+
+
+
+typedef struct { int quot, rem; } div_t;
+typedef struct { long quot, rem; } ldiv_t;
+
+
+
+
+div_t div (int, int);
+ldiv_t ldiv (long, long);
+
+
+
+
+typedef struct { unsigned int quot, rem; } udiv_t;
+typedef struct { unsigned long quot, rem; } uldiv_t;
+udiv_t udiv (unsigned int, unsigned int);
+uldiv_t uldiv (unsigned long, unsigned long);
+# 5 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/xc8debug.h" 2 3
+
+
+
+
+
+
+
+#pragma intrinsic(__builtin_software_breakpoint)
+extern void __builtin_software_breakpoint(void);
+# 24 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.h" 2 3
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/builtins.h" 1 3
+
+
+
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdint.h" 1 3
+# 26 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdint.h" 3
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 1 3
+# 133 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef unsigned short uintptr_t;
+# 148 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef short intptr_t;
+# 164 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+# 179 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef long int32_t;
+# 192 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef int32_t intmax_t;
+
+
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+# 215 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef unsigned long uint32_t;
+# 233 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/alltypes.h" 3
+typedef uint32_t uintmax_t;
+# 27 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdint.h" 2 3
+
+typedef int8_t int_fast8_t;
+
+
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+typedef int24_t int_fast24_t;
+
+typedef int32_t int_least32_t;
+
+
+
+
+typedef uint8_t uint_fast8_t;
+
+
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+typedef uint24_t uint_fast24_t;
+
+typedef uint32_t uint_least32_t;
+# 148 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdint.h" 3
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/bits/stdint.h" 1 3
+typedef int16_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint16_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 149 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include\\c99/stdint.h" 2 3
+# 5 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/builtins.h" 2 3
+
+
+#pragma intrinsic(__nop)
+extern void __nop(void);
+# 19 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/builtins.h" 3
+#pragma intrinsic(_delay)
+extern __attribute__((nonreentrant)) void _delay(uint32_t);
+#pragma intrinsic(_delaywdt)
+extern __attribute__((nonreentrant)) void _delaywdt(uint32_t);
+# 25 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.h" 2 3
+
+
+
+# 1 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.h" 1 3
+
+
+
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.h" 1 3
+# 5 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.h" 2 3
+
+
+
+
+
+
+# 1 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic_chip_select.h" 1 3
+# 290 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic_chip_select.h" 3
+# 1 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 1 3
+# 36 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char INDF __attribute__((address(0x000)));
+
+__asm("INDF equ 00h");
+
+
+
+
+extern volatile unsigned char TMR0 __attribute__((address(0x001)));
+
+__asm("TMR0 equ 01h");
+
+
+
+
+extern volatile unsigned char PCL __attribute__((address(0x002)));
+
+__asm("PCL equ 02h");
+
+
+
+
+extern volatile unsigned char STATUS __attribute__((address(0x003)));
+
+__asm("STATUS equ 03h");
+
+
+typedef union {
+    struct {
+        unsigned C :1;
+        unsigned DC :1;
+        unsigned Z :1;
+        unsigned nPD :1;
+        unsigned nTO :1;
+        unsigned RP :2;
+        unsigned IRP :1;
+    };
+    struct {
+        unsigned :5;
+        unsigned RP0 :1;
+        unsigned RP1 :1;
+    };
+    struct {
+        unsigned CARRY :1;
+        unsigned :1;
+        unsigned ZERO :1;
+    };
+} STATUSbits_t;
+extern volatile STATUSbits_t STATUSbits __attribute__((address(0x003)));
+# 143 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char FSR __attribute__((address(0x004)));
+
+__asm("FSR equ 04h");
+
+
+
+
+extern volatile unsigned char PORTA __attribute__((address(0x005)));
+
+__asm("PORTA equ 05h");
+
+
+typedef union {
+    struct {
+        unsigned RA0 :1;
+        unsigned RA1 :1;
+        unsigned RA2 :1;
+        unsigned RA3 :1;
+        unsigned RA4 :1;
+    };
+} PORTAbits_t;
+extern volatile PORTAbits_t PORTAbits __attribute__((address(0x005)));
+# 194 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char PORTB __attribute__((address(0x006)));
+
+__asm("PORTB equ 06h");
+
+
+typedef union {
+    struct {
+        unsigned RB0 :1;
+        unsigned RB1 :1;
+        unsigned RB2 :1;
+        unsigned RB3 :1;
+        unsigned RB4 :1;
+        unsigned RB5 :1;
+        unsigned RB6 :1;
+        unsigned RB7 :1;
+    };
+} PORTBbits_t;
+extern volatile PORTBbits_t PORTBbits __attribute__((address(0x006)));
+# 256 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char EEDATA __attribute__((address(0x008)));
+
+__asm("EEDATA equ 08h");
+
+
+
+
+extern volatile unsigned char EEADR __attribute__((address(0x009)));
+
+__asm("EEADR equ 09h");
+
+
+
+
+extern volatile unsigned char PCLATH __attribute__((address(0x00A)));
+
+__asm("PCLATH equ 0Ah");
+
+
+typedef union {
+    struct {
+        unsigned PCLATH :5;
+    };
+} PCLATHbits_t;
+extern volatile PCLATHbits_t PCLATHbits __attribute__((address(0x00A)));
+# 290 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char INTCON __attribute__((address(0x00B)));
+
+__asm("INTCON equ 0Bh");
+
+
+typedef union {
+    struct {
+        unsigned RBIF :1;
+        unsigned INTF :1;
+        unsigned T0IF :1;
+        unsigned RBIE :1;
+        unsigned INTE :1;
+        unsigned T0IE :1;
+        unsigned EEIE :1;
+        unsigned GIE :1;
+    };
+    struct {
+        unsigned :2;
+        unsigned TMR0IF :1;
+        unsigned :2;
+        unsigned TMR0IE :1;
+    };
+} INTCONbits_t;
+extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
+# 368 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char OPTION_REG __attribute__((address(0x081)));
+
+__asm("OPTION_REG equ 081h");
+
+
+typedef union {
+    struct {
+        unsigned PS :3;
+        unsigned PSA :1;
+        unsigned T0SE :1;
+        unsigned T0CS :1;
+        unsigned INTEDG :1;
+        unsigned nRBPU :1;
+    };
+    struct {
+        unsigned PS0 :1;
+        unsigned PS1 :1;
+        unsigned PS2 :1;
+    };
+} OPTION_REGbits_t;
+extern volatile OPTION_REGbits_t OPTION_REGbits __attribute__((address(0x081)));
+# 438 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char TRISA __attribute__((address(0x085)));
+
+__asm("TRISA equ 085h");
+
+
+typedef union {
+    struct {
+        unsigned TRISA0 :1;
+        unsigned TRISA1 :1;
+        unsigned TRISA2 :1;
+        unsigned TRISA3 :1;
+        unsigned TRISA4 :1;
+    };
+} TRISAbits_t;
+extern volatile TRISAbits_t TRISAbits __attribute__((address(0x085)));
+# 482 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char TRISB __attribute__((address(0x086)));
+
+__asm("TRISB equ 086h");
+
+
+typedef union {
+    struct {
+        unsigned TRISB0 :1;
+        unsigned TRISB1 :1;
+        unsigned TRISB2 :1;
+        unsigned TRISB3 :1;
+        unsigned TRISB4 :1;
+        unsigned TRISB5 :1;
+        unsigned TRISB6 :1;
+        unsigned TRISB7 :1;
+    };
+} TRISBbits_t;
+extern volatile TRISBbits_t TRISBbits __attribute__((address(0x086)));
+# 544 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char EECON1 __attribute__((address(0x088)));
+
+__asm("EECON1 equ 088h");
+
+
+typedef union {
+    struct {
+        unsigned RD :1;
+        unsigned WR :1;
+        unsigned WREN :1;
+        unsigned WRERR :1;
+        unsigned EEIF :1;
+    };
+} EECON1bits_t;
+extern volatile EECON1bits_t EECON1bits __attribute__((address(0x088)));
+# 588 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile unsigned char EECON2 __attribute__((address(0x089)));
+
+__asm("EECON2 equ 089h");
+# 605 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include\\proc/pic16f84a.h" 3
+extern volatile __bit CARRY __attribute__((address(0x18)));
+
+
+extern volatile __bit DC __attribute__((address(0x19)));
+
+
+extern volatile __bit EEIE __attribute__((address(0x5E)));
+
+
+extern volatile __bit EEIF __attribute__((address(0x444)));
+
+
+extern volatile __bit GIE __attribute__((address(0x5F)));
+
+
+extern volatile __bit INTE __attribute__((address(0x5C)));
+
+
+extern volatile __bit INTEDG __attribute__((address(0x40E)));
+
+
+extern volatile __bit INTF __attribute__((address(0x59)));
+
+
+extern volatile __bit IRP __attribute__((address(0x1F)));
+
+
+extern volatile __bit PS0 __attribute__((address(0x408)));
+
+
+extern volatile __bit PS1 __attribute__((address(0x409)));
+
+
+extern volatile __bit PS2 __attribute__((address(0x40A)));
+
+
+extern volatile __bit PSA __attribute__((address(0x40B)));
+
+
+extern volatile __bit RA0 __attribute__((address(0x28)));
+
+
+extern volatile __bit RA1 __attribute__((address(0x29)));
+
+
+extern volatile __bit RA2 __attribute__((address(0x2A)));
+
+
+extern volatile __bit RA3 __attribute__((address(0x2B)));
+
+
+extern volatile __bit RA4 __attribute__((address(0x2C)));
+
+
+extern volatile __bit RB0 __attribute__((address(0x30)));
+
+
+extern volatile __bit RB1 __attribute__((address(0x31)));
+
+
+extern volatile __bit RB2 __attribute__((address(0x32)));
+
+
+extern volatile __bit RB3 __attribute__((address(0x33)));
+
+
+extern volatile __bit RB4 __attribute__((address(0x34)));
+
+
+extern volatile __bit RB5 __attribute__((address(0x35)));
+
+
+extern volatile __bit RB6 __attribute__((address(0x36)));
+
+
+extern volatile __bit RB7 __attribute__((address(0x37)));
+
+
+extern volatile __bit RBIE __attribute__((address(0x5B)));
+
+
+extern volatile __bit RBIF __attribute__((address(0x58)));
+
+
+extern volatile __bit RD __attribute__((address(0x440)));
+
+
+extern volatile __bit RP0 __attribute__((address(0x1D)));
+
+
+extern volatile __bit RP1 __attribute__((address(0x1E)));
+
+
+extern volatile __bit T0CS __attribute__((address(0x40D)));
+
+
+extern volatile __bit T0IE __attribute__((address(0x5D)));
+
+
+extern volatile __bit T0IF __attribute__((address(0x5A)));
+
+
+extern volatile __bit T0SE __attribute__((address(0x40C)));
+
+
+extern volatile __bit TMR0IE __attribute__((address(0x5D)));
+
+
+extern volatile __bit TMR0IF __attribute__((address(0x5A)));
+
+
+extern volatile __bit TRISA0 __attribute__((address(0x428)));
+
+
+extern volatile __bit TRISA1 __attribute__((address(0x429)));
+
+
+extern volatile __bit TRISA2 __attribute__((address(0x42A)));
+
+
+extern volatile __bit TRISA3 __attribute__((address(0x42B)));
+
+
+extern volatile __bit TRISA4 __attribute__((address(0x42C)));
+
+
+extern volatile __bit TRISB0 __attribute__((address(0x430)));
+
+
+extern volatile __bit TRISB1 __attribute__((address(0x431)));
+
+
+extern volatile __bit TRISB2 __attribute__((address(0x432)));
+
+
+extern volatile __bit TRISB3 __attribute__((address(0x433)));
+
+
+extern volatile __bit TRISB4 __attribute__((address(0x434)));
+
+
+extern volatile __bit TRISB5 __attribute__((address(0x435)));
+
+
+extern volatile __bit TRISB6 __attribute__((address(0x436)));
+
+
+extern volatile __bit TRISB7 __attribute__((address(0x437)));
+
+
+extern volatile __bit WR __attribute__((address(0x441)));
+
+
+extern volatile __bit WREN __attribute__((address(0x442)));
+
+
+extern volatile __bit WRERR __attribute__((address(0x443)));
+
+
+extern volatile __bit ZERO __attribute__((address(0x1A)));
+
+
+extern volatile __bit nPD __attribute__((address(0x1B)));
+
+
+extern volatile __bit nRBPU __attribute__((address(0x40F)));
+
+
+extern volatile __bit nTO __attribute__((address(0x1C)));
+# 291 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic_chip_select.h" 2 3
+# 12 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.h" 2 3
+# 60 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.h" 3
+__attribute__((__unsupported__("The " "FLASH_READ" " macro function is no longer supported. Please use the MPLAB X MCC."))) unsigned char __flash_read(unsigned short addr);
+
+__attribute__((__unsupported__("The " "FLASH_WRITE" " macro function is no longer supported. Please use the MPLAB X MCC."))) void __flash_write(unsigned short addr, unsigned short data);
+
+__attribute__((__unsupported__("The " "FLASH_ERASE" " macro function is no longer supported. Please use the MPLAB X MCC."))) void __flash_erase(unsigned short addr);
+
+
+
+# 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/eeprom_routines.h" 1 3
+# 114 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/eeprom_routines.h" 3
+extern void eeprom_write(unsigned char addr, unsigned char value);
+extern unsigned char eeprom_read(unsigned char addr);
+# 69 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.h" 2 3
+# 103 "D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\\pic\\include/pic.h" 3
+extern __bank0 unsigned char __resetbits;
+extern __bank0 __bit __powerdown;
+extern __bank0 __bit __timeout;
+# 29 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.h" 2 3
+# 26 "questao2.c" 2
+# 1 "./config_pic.h" 1
+# 19 "./config_pic.h"
+typedef int8_t i8;
+typedef int16_t i16;
+typedef int32_t i32;
+typedef uint8_t u8;
+typedef uint16_t u16;
+typedef uint32_t u32;
+# 27 "questao2.c" 2
+
+
+
+
+    u8 contador_4hz = 125;
+    u8 divisor_tempo = 8;
+    void __attribute__((picinterrupt(("")))) interruptC(void);
+# 46 "questao2.c"
+volatile u8 time_flag = 0;
+volatile u8 reg_niveis = 0;
+volatile u8 botao_pressionado = 0;
+
+extern void interrupt_settings_asm(void);
+extern void portas_settings_asm(void);
+void _verificar_niveis_C(void);
+void _limpar_niveis(void);
+void _verificar_erros_C(void);
+
+
+int main(void) {
+
+    portas_settings_asm();
+    interrupt_settings_asm();
+
+
+    while (1){
+
+        if(time_flag){
+            reg_niveis = 0;
+            PORTBbits.RB2 = 0;
+            _verificar_niveis_C();
+
+            time_flag = 0;
+        }
+
+    }
+
+    return 0;
+}
+
+void _verificar_niveis_C(void){
+
+ reg_niveis = 0;
+
+ if (botao_pressionado) {
+        ((PORTBbits.RB0) = 0);
+        ((PORTBbits.RB1) = 0);
+    }
+
+    if(!PORTAbits.RA1){
+        botao_pressionado = 1;
+
+        if (!PORTAbits.RA2){
+            reg_niveis |= 1;
+            ((PORTBbits.RB0) = 1);
+        } else {
+            ((PORTBbits.RB1) = 1);
+        }
+
+        if (!PORTAbits.RA3){
+            reg_niveis |= (1 << 1);
+            if (PORTAbits.RA2){
+                ((PORTBbits.RB0) = 1);
+            }
+        }
+        if (!PORTAbits.RA4){
+            reg_niveis |= (1 << 2);
+            if (PORTAbits.RA3){
+                ((PORTBbits.RB0) = 0);
+            }
+        }
+    }
+
+    _verificar_erros_C();
+}
+
+
+void _verificar_erros_C(void){
+    switch(reg_niveis){
+        case 0b011:
+        case 0b110:
+        case 0b000:
+        case 0b001:
+            PORTBbits.RB2 = 1;
+            break;
+        default:
+            break;
+    }
+}
+
+
+
+void __attribute__((picinterrupt(("")))) interruptC(void) {
+
+    if (INTCONbits.T0IF) {
+        INTCONbits.T0IF = 0;
+        TMR0 = 6;
+
+        contador_4hz--;
+
+        if (contador_4hz == 0) {
+            PORTAbits.RA0 = ~PORTAbits.RA0;
+            contador_4hz = 125;
+
+            divisor_tempo--;
+            if (divisor_tempo == 0) {
+                time_flag = 1;
+                divisor_tempo = 8;
+            }
+        }
+
+    }
+}

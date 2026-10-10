@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=questao1.s questao1.c
+SOURCEFILES_QUOTED_IF_SPACED=questao1.c questao1_asm.s
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/questao1.o ${OBJECTDIR}/questao1.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/questao1.o.d ${OBJECTDIR}/questao1.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/questao1.p1 ${OBJECTDIR}/questao1_asm.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/questao1.p1.d ${OBJECTDIR}/questao1_asm.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/questao1.o ${OBJECTDIR}/questao1.p1
+OBJECTFILES=${OBJECTDIR}/questao1.p1 ${OBJECTDIR}/questao1_asm.o
 
 # Source Files
-SOURCEFILES=questao1.s questao1.c
+SOURCEFILES=questao1.c questao1_asm.s
 
 
 
@@ -110,22 +110,22 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/questao1.o: questao1.s  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/questao1_asm.o: questao1_asm.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/questao1.o.d 
-	@${RM} ${OBJECTDIR}/questao1.o 
-	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao1.o  questao1.s 
-	@-${MV} ${OBJECTDIR}/questao1.d ${OBJECTDIR}/questao1.o.d 
-	@${FIXDEPS} ${OBJECTDIR}/questao1.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/questao1_asm.o.d 
+	@${RM} ${OBJECTDIR}/questao1_asm.o 
+	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao1_asm.o  questao1_asm.s 
+	@-${MV} ${OBJECTDIR}/questao1_asm.d ${OBJECTDIR}/questao1_asm.o.d 
+	@${FIXDEPS} ${OBJECTDIR}/questao1_asm.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
-${OBJECTDIR}/questao1.o: questao1.s  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/questao1_asm.o: questao1_asm.s  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/questao1.o.d 
-	@${RM} ${OBJECTDIR}/questao1.o 
-	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao1.o  questao1.s 
-	@-${MV} ${OBJECTDIR}/questao1.d ${OBJECTDIR}/questao1.o.d 
-	@${FIXDEPS} ${OBJECTDIR}/questao1.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/questao1_asm.o.d 
+	@${RM} ${OBJECTDIR}/questao1_asm.o 
+	${MP_CC} -c $(MP_EXTRA_AS_PRE) -mcpu=$(MP_PROCESSOR_OPTION)   -mdfp="${DFP_DIR}/xc8"  -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto   -o ${OBJECTDIR}/questao1_asm.o  questao1_asm.s 
+	@-${MV} ${OBJECTDIR}/questao1_asm.d ${OBJECTDIR}/questao1_asm.o.d 
+	@${FIXDEPS} ${OBJECTDIR}/questao1_asm.o.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

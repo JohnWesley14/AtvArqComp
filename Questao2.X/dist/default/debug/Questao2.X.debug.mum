@@ -1,7 +1,7 @@
 
 16F84A Memory Summary:
-    Program space        used    53h (    83) of   400h words   (  8.1%)
-    Data space           used     3h (     3) of    44h bytes   (  4.4%)
+    Program space        used    F2h (   242) of   400h words   ( 23.6%)
+    Data space           used     Bh (    11) of    44h bytes   ( 16.2%)
     EEPROM space         used     0h (     0) of    40h bytes   (  0.0%)
     Configuration bits   used     1h (     1) of     1h word    (100.0%)
     ID Location space    used     0h (     0) of     4h bytes   (  0.0%)

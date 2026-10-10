@@ -1,0 +1,769 @@
+
+
+Microchip MPLAB XC8 Assembler V4.00 build 20260614213421 
+                                                                                               Sat Oct 10 15:47:18 2026
+
+Microchip MPLAB XC8 C Compiler v4.00 build 20260614213421 Og1 
+     1                           	processor	16F84A
+     2                           	pagewidth 120
+     3                           	psect	idataBANK0,global,class=CODE,space=0,delta=2,noexec
+     4                           	psect	cinit,global,class=CODE,space=0,merge=1,delta=2
+     5                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1,noexec
+     6                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1,noexec
+     7                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1,noexec
+     8                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1,noexec
+     9                           	psect	maintext,global,class=CODE,space=0,split=1,delta=2
+    10                           	psect	text1,local,class=CODE,space=0,merge=1,delta=2
+    11                           	psect	text2,local,class=CODE,space=0,merge=1,delta=2
+    12                           	psect	text3,local,class=CODE,space=0,merge=1,delta=2
+    13                           	psect	intentry,global,class=CODE,space=0,delta=2
+    14                           	dabs	1,0x4E,2
+    15     0000                     
+    16                           ; Generated 22/04/2026 GMT
+    17                           ; 
+    18                           ; Copyright (c) 2026 Microchip Technology Inc. and its subsidiaries.
+    19                           ; 
+    20                           ; Licensed under the Apache License, Version 2.0 (the "License");
+    21                           ; you may not use this file except in compliance with the License.
+    22                           ; You may obtain a copy of the License at
+    23                           ; 
+    24                           ;   http://www.apache.org/licenses/LICENSE-2.0
+    25                           ; 
+    26                           ; Unless required by applicable law or agreed to in writing, software
+    27                           ; distributed under the License is distributed on an "AS IS" BASIS,
+    28                           ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    29                           ; See the License for the specific language governing permissions and
+    30                           ; limitations under the License.
+    31                           ; 
+    32                           ; 
+    33                           ; Code-generator required, PIC16F84A Definitions
+    34                           ; 
+    35                           ; SFR Addresses
+    36     0004                     fsr             equ	4
+    37     0004                     fsr0            equ	4
+    38     0000                     indf            equ	0
+    39     0000                     indf0           equ	0
+    40     0002                     pc              equ	2
+    41     0002                     pcl             equ	2
+    42     000A                     pclath          equ	10
+    43     0003                     status          equ	3
+    44     0000                     INDF            equ	0	;# 
+    45     0001                     TMR0            equ	1	;# 
+    46     0002                     PCL             equ	2	;# 
+    47     0003                     STATUS          equ	3	;# 
+    48     0004                     FSR             equ	4	;# 
+    49     0005                     PORTA           equ	5	;# 
+    50     0006                     PORTB           equ	6	;# 
+    51     0008                     EEDATA          equ	8	;# 
+    52     0009                     EEADR           equ	9	;# 
+    53     000A                     PCLATH          equ	10	;# 
+    54     000B                     INTCON          equ	11	;# 
+    55     0081                     OPTION_REG      equ	129	;# 
+    56     0085                     TRISA           equ	133	;# 
+    57     0086                     TRISB           equ	134	;# 
+    58     0088                     EECON1          equ	136	;# 
+    59     0089                     EECON2          equ	137	;# 
+    60     0000                     INDF            equ	0	;# 
+    61     0001                     TMR0            equ	1	;# 
+    62     0002                     PCL             equ	2	;# 
+    63     0003                     STATUS          equ	3	;# 
+    64     0004                     FSR             equ	4	;# 
+    65     0005                     PORTA           equ	5	;# 
+    66     0006                     PORTB           equ	6	;# 
+    67     0008                     EEDATA          equ	8	;# 
+    68     0009                     EEADR           equ	9	;# 
+    69     000A                     PCLATH          equ	10	;# 
+    70     000B                     INTCON          equ	11	;# 
+    71     0081                     OPTION_REG      equ	129	;# 
+    72     0085                     TRISA           equ	133	;# 
+    73     0086                     TRISB           equ	134	;# 
+    74     0088                     EECON1          equ	136	;# 
+    75     0089                     EECON2          equ	137	;# 
+    76                           
+    77                           	psect	idataBANK0
+    78     00F4                     __pidataBANK0:
+    79                           
+    80                           ;initializer for _divisor_tempo
+    81     00F4  3408               	retlw	8
+    82                           
+    83                           ;initializer for _contador_4hz
+    84     00F5  347D               	retlw	125
+    85     0001                     _TMR0           set	1
+    86     000B                     _INTCONbits     set	11
+    87     0005                     _PORTAbits      set	5
+    88     0006                     _PORTBbits      set	6
+    89                           
+    90                           	psect	cinit
+    91     000C                     start_initialization:	
+    92                           ; #config settings
+    93                           
+    94     000C                     __initialization:
+    95                           
+    96                           ; Initialize objects allocated to BANK0
+    97     000C  20F4               	fcall	__pidataBANK0	;fetch initializer
+    98     000D  0091               	movwf	__pdataBANK0& (0+127)
+    99     000E  20F5               	fcall	__pidataBANK0+1	;fetch initializer
+   100     000F  0092               	movwf	(__pdataBANK0+1)& (0+127)
+   101                           
+   102                           ; Clear objects allocated to BANK0
+   103     0010  018C               	clrf	__pbssBANK0& (0+127)
+   104     0011  018D               	clrf	(__pbssBANK0+1)& (0+127)
+   105     0012  018E               	clrf	(__pbssBANK0+2)& (0+127)
+   106     0013                     end_of_initialization:	
+   107                           ;End of C runtime variable initialization code
+   108                           
+   109     0013                     __end_of__initialization:
+   110     0013  0183               	clrf	3
+   111     0014  28E5               	ljmp	_main	;jump to C main() function
+   112                           
+   113                           	psect	bssBANK0
+   114     000C                     __pbssBANK0:
+   115     000C                     _botao_pressionado:
+   116     000C                     	ds	1
+   117     000D                     _reg_niveis:
+   118     000D                     	ds	1
+   119     000E                     _time_flag:
+   120     000E                     	ds	1
+   121                           
+   122                           	psect	dataBANK0
+   123     0011                     __pdataBANK0:
+   124     0011                     _divisor_tempo:
+   125     0011                     	ds	1
+   126     0012                     _contador_4hz:
+   127     0012                     	ds	1
+   128                           
+   129                           	psect	cstackCOMMON
+   130     0000                     __pcstackCOMMON:
+   131     0000                     ??_portas_settings_asm:
+   132     0000                     ??_interrupt_settings_asm:	
+   133                           ; 1 bytes @ 0x0
+   134                           
+   135     0000                     ??__verificar_niveis_C:	
+   136                           ; 1 bytes @ 0x0
+   137                           
+   138     0000                     ??__verificar_erros_C:	
+   139                           ; 1 bytes @ 0x0
+   140                           
+   141     0000                     ??_main:	
+   142                           ; 1 bytes @ 0x0
+   143                           
+   144                           
+   145                           	psect	cstackBANK0
+   146     0013                     __pcstackBANK0:	
+   147                           ; 1 bytes @ 0x0
+   148                           
+   149     0013                     ?_portas_settings_asm:
+   150     0013                     ?_interrupt_settings_asm:	
+   151                           ; 1 bytes @ 0x0
+   152                           
+   153     0013                     ?__verificar_niveis_C:	
+   154                           ; 1 bytes @ 0x0
+   155                           
+   156     0013                     ?__verificar_erros_C:	
+   157                           ; 1 bytes @ 0x0
+   158                           
+   159     0013                     ?_interruptC:	
+   160                           ; 1 bytes @ 0x0
+   161                           
+   162     0013                     ?_main:	
+   163                           ; 1 bytes @ 0x0
+   164                           
+   165     0013                     ??_interruptC:	
+   166                           ; 2 bytes @ 0x0
+   167                           
+   168                           
+   169                           ; 1 bytes @ 0x0
+   170     0013                     	ds	2
+   171                           
+   172                           	psect	maintext
+   173     00E5                     __pmaintext:	
+   174 ;;
+   175 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   176 ;;
+   177 ;; *************** function _main *****************
+   178 ;; Defined at:
+   179 ;;		line 57 in file "questao2.c"
+   180 ;; Parameters:    Size  Location     Type
+   181 ;;		None
+   182 ;; Auto vars:     Size  Location     Type
+   183 ;;		None
+   184 ;; Return value:  Size  Location     Type
+   185 ;;                  2   30[None  ] int 
+   186 ;; Registers used:
+   187 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, fsr1l, fsr1h, status,2, status,0, pclath, btemp1, cstack
+   188 ;; Tracked objects:
+   189 ;;		On entry : B00/0
+   190 ;;		On exit  : 0/0
+   191 ;;		Unchanged: 0/0
+   192 ;; Data sizes:     COMMON   BANK0
+   193 ;;      Params:         0       0
+   194 ;;      Locals:         0       0
+   195 ;;      Temps:          0       0
+   196 ;;      Totals:         0       0
+   197 ;;Total ram usage:        0 bytes
+   198 ;; Hardware stack levels required when called: 3
+   199 ;; This function calls:
+   200 ;;		__verificar_niveis_C
+   201 ;;		_interrupt_settings_asm
+   202 ;;		_portas_settings_asm
+   203 ;; This function is called by:
+   204 ;;		Startup code after reset
+   205 ;; This function uses a non-reentrant model
+   206 ;;
+   207                           
+   208     00E5                     _main:	
+   209                           ;psect for function _main
+   210                           
+   211     00E5                     l634:	
+   212                           ;incstack = 0
+   213                           ; Regs used in _main: [allreg]
+   214                           
+   215                           
+   216                           ;questao2.c: 59:     portas_settings_asm();
+   217     00E5  2016               	fcall	_portas_settings_asm
+   218                           
+   219                           ;questao2.c: 60:     interrupt_settings_asm();
+   220     00E6  206B               	fcall	_interrupt_settings_asm
+   221     00E7                     l636:
+   222                           
+   223                           ;questao2.c: 65:         if(time_flag){
+   224     00E7  1283               	bcf	3,5	;RP0=0, select bank0
+   225     00E8  080E               	movf	_time_flag,w	;volatile
+   226     00E9  1903               	btfsc	3,2
+   227     00EA  28EC               	goto	u81
+   228     00EB  28ED               	goto	u80
+   229     00EC                     u81:
+   230     00EC  28E7               	goto	l636
+   231     00ED                     u80:
+   232     00ED                     l638:
+   233                           
+   234                           ;questao2.c: 66:             reg_niveis = 0;
+   235     00ED  018D               	clrf	_reg_niveis	;volatile
+   236     00EE                     l640:
+   237                           
+   238                           ;questao2.c: 67:             PORTBbits.RB2 = 0;
+   239     00EE  1106               	bcf	6,2	;volatile
+   240     00EF                     l642:
+   241                           
+   242                           ;questao2.c: 68:             _verificar_niveis_C();
+   243     00EF  2078               	fcall	__verificar_niveis_C
+   244     00F0                     l644:
+   245                           
+   246                           ;questao2.c: 70:             time_flag = 0;
+   247     00F0  1283               	bcf	3,5	;RP0=0, select bank0
+   248     00F1  018E               	clrf	_time_flag	;volatile
+   249     00F2  28E7               	goto	l636
+   250     00F3  280B               	ljmp	start
+   251     00F4                     __end_of_main:
+   252                           
+   253                           	psect	text1
+   254     0078                     __ptext1:	
+   255 ;; *************** function __verificar_niveis_C *****************
+   256 ;; Defined at:
+   257 ;;		line 78 in file "questao2.c"
+   258 ;; Parameters:    Size  Location     Type
+   259 ;;		None
+   260 ;; Auto vars:     Size  Location     Type
+   261 ;;		None
+   262 ;; Return value:  Size  Location     Type
+   263 ;;                  1    wreg      void 
+   264 ;; Registers used:
+   265 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   266 ;; Tracked objects:
+   267 ;;		On entry : 0/0
+   268 ;;		On exit  : 0/0
+   269 ;;		Unchanged: 0/0
+   270 ;; Data sizes:     COMMON   BANK0
+   271 ;;      Params:         0       0
+   272 ;;      Locals:         0       0
+   273 ;;      Temps:          0       0
+   274 ;;      Totals:         0       0
+   275 ;;Total ram usage:        0 bytes
+   276 ;; Hardware stack levels used: 1
+   277 ;; Hardware stack levels required when called: 2
+   278 ;; This function calls:
+   279 ;;		__verificar_erros_C
+   280 ;; This function is called by:
+   281 ;;		_main
+   282 ;; This function uses a non-reentrant model
+   283 ;;
+   284                           
+   285     0078                     __verificar_niveis_C:	
+   286                           ;psect for function __verificar_niveis_C
+   287                           
+   288     0078                     l614:	
+   289                           ;incstack = 0
+   290                           ; Regs used in __verificar_niveis_C: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   291                           
+   292                           
+   293                           ;questao2.c: 80:  reg_niveis = 0;
+   294     0078  1283               	bcf	3,5	;RP0=0, select bank0
+   295     0079  018D               	clrf	_reg_niveis	;volatile
+   296     007A                     l616:
+   297                           
+   298                           ;questao2.c: 82:  if (botao_pressionado) {
+   299     007A  080C               	movf	_botao_pressionado,w	;volatile
+   300     007B  1903               	btfsc	3,2
+   301     007C  287E               	goto	u11
+   302     007D  287F               	goto	u10
+   303     007E                     u11:
+   304     007E  2881               	goto	l38
+   305     007F                     u10:
+   306     007F                     l618:
+   307                           
+   308                           ;questao2.c: 83:         ((PORTBbits.RB0) = 0);
+   309     007F  1006               	bcf	6,0	;volatile
+   310                           
+   311                           ;questao2.c: 84:         ((PORTBbits.RB1) = 0);
+   312     0080  1086               	bcf	6,1	;volatile
+   313     0081                     l38:	
+   314                           ;questao2.c: 85:     }
+   315                           
+   316                           
+   317                           ;questao2.c: 87:     if(!PORTAbits.RA1){
+   318     0081  1885               	btfsc	5,1	;volatile
+   319     0082  2884               	goto	u21
+   320     0083  2885               	goto	u20
+   321     0084                     u21:
+   322     0084  28A3               	goto	l632
+   323     0085                     u20:
+   324     0085                     l620:
+   325                           
+   326                           ;questao2.c: 88:         botao_pressionado = 1;
+   327     0085  3001               	movlw	1
+   328     0086  008C               	movwf	_botao_pressionado	;volatile
+   329                           
+   330                           ;questao2.c: 90:         if (!PORTAbits.RA2){
+   331     0087  1905               	btfsc	5,2	;volatile
+   332     0088  288A               	goto	u31
+   333     0089  288B               	goto	u30
+   334     008A                     u31:
+   335     008A  288E               	goto	l40
+   336     008B                     u30:
+   337     008B                     l622:
+   338                           
+   339                           ;questao2.c: 91:             reg_niveis |= 1;
+   340     008B  140D               	bsf	_reg_niveis,0	;volatile
+   341                           
+   342                           ;questao2.c: 92:             ((PORTBbits.RB0) = 1);
+   343     008C  1406               	bsf	6,0	;volatile
+   344                           
+   345                           ;questao2.c: 93:         } else {
+   346     008D  288F               	goto	l41
+   347     008E                     l40:
+   348                           
+   349                           ;questao2.c: 94:             ((PORTBbits.RB1) = 1);
+   350     008E  1486               	bsf	6,1	;volatile
+   351     008F                     l41:	
+   352                           ;questao2.c: 95:         }
+   353                           
+   354                           
+   355                           ;questao2.c: 97:         if (!PORTAbits.RA3){
+   356     008F  1985               	btfsc	5,3	;volatile
+   357     0090  2892               	goto	u41
+   358     0091  2893               	goto	u40
+   359     0092                     u41:
+   360     0092  2899               	goto	l42
+   361     0093                     u40:
+   362     0093                     l624:
+   363                           
+   364                           ;questao2.c: 98:             reg_niveis |= (1 << 1);
+   365     0093  148D               	bsf	_reg_niveis,1	;volatile
+   366                           
+   367                           ;questao2.c: 99:             if (PORTAbits.RA2){
+   368     0094  1D05               	btfss	5,2	;volatile
+   369     0095  2897               	goto	u51
+   370     0096  2898               	goto	u50
+   371     0097                     u51:
+   372     0097  2899               	goto	l42
+   373     0098                     u50:
+   374     0098                     l626:
+   375                           
+   376                           ;questao2.c: 100:                 ((PORTBbits.RB0) = 1);
+   377     0098  1406               	bsf	6,0	;volatile
+   378     0099                     l42:	
+   379                           ;questao2.c: 102:         }
+   380                           
+   381                           
+   382                           ;questao2.c: 103:         if (!PORTAbits.RA4){
+   383     0099  1A05               	btfsc	5,4	;volatile
+   384     009A  289C               	goto	u61
+   385     009B  289D               	goto	u60
+   386     009C                     u61:
+   387     009C  28A3               	goto	l632
+   388     009D                     u60:
+   389     009D                     l628:
+   390                           
+   391                           ;questao2.c: 104:             reg_niveis |= (1 << 2);
+   392     009D  150D               	bsf	_reg_niveis,2	;volatile
+   393                           
+   394                           ;questao2.c: 105:             if (PORTAbits.RA3){
+   395     009E  1D85               	btfss	5,3	;volatile
+   396     009F  28A1               	goto	u71
+   397     00A0  28A2               	goto	u70
+   398     00A1                     u71:
+   399     00A1  28A3               	goto	l632
+   400     00A2                     u70:
+   401     00A2                     l630:
+   402                           
+   403                           ;questao2.c: 106:                 ((PORTBbits.RB0) = 0);
+   404     00A2  1006               	bcf	6,0	;volatile
+   405     00A3                     l632:
+   406                           
+   407                           ;questao2.c: 111:     _verificar_erros_C();
+   408     00A3  20D2               	fcall	__verificar_erros_C
+   409     00A4                     l46:
+   410     00A4  0008               	return
+   411     00A5                     __end_of__verificar_niveis_C:
+   412                           
+   413                           	psect	text2
+   414     00D2                     __ptext2:	
+   415 ;; *************** function __verificar_erros_C *****************
+   416 ;; Defined at:
+   417 ;;		line 115 in file "questao2.c"
+   418 ;; Parameters:    Size  Location     Type
+   419 ;;		None
+   420 ;; Auto vars:     Size  Location     Type
+   421 ;;		None
+   422 ;; Return value:  Size  Location     Type
+   423 ;;                  1    wreg      void 
+   424 ;; Registers used:
+   425 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   426 ;; Tracked objects:
+   427 ;;		On entry : 0/0
+   428 ;;		On exit  : 0/0
+   429 ;;		Unchanged: 0/0
+   430 ;; Data sizes:     COMMON   BANK0
+   431 ;;      Params:         0       0
+   432 ;;      Locals:         0       0
+   433 ;;      Temps:          0       0
+   434 ;;      Totals:         0       0
+   435 ;;Total ram usage:        0 bytes
+   436 ;; Hardware stack levels used: 1
+   437 ;; Hardware stack levels required when called: 1
+   438 ;; This function calls:
+   439 ;;		Nothing
+   440 ;; This function is called by:
+   441 ;;		__verificar_niveis_C
+   442 ;; This function uses a non-reentrant model
+   443 ;;
+   444                           
+   445     00D2                     __verificar_erros_C:	
+   446                           ;psect for function __verificar_erros_C
+   447                           
+   448     00D2                     l608:	
+   449                           ;incstack = 0
+   450                           ; Regs used in __verificar_erros_C: [wreg-fsr0h+status,2+status,0]
+   451                           
+   452                           
+   453                           ;questao2.c: 116:     switch(reg_niveis){
+   454     00D2  28D5               	goto	l612
+   455     00D3                     l53:	
+   456                           ;questao2.c: 120:         case 0b001:
+   457                           
+   458                           
+   459                           ;questao2.c: 121:             PORTBbits.RB2 = 1;
+   460     00D3  1506               	bsf	6,2	;volatile
+   461                           
+   462                           ;questao2.c: 122:             break;
+   463     00D4  28E4               	goto	l56
+   464     00D5                     l612:
+   465                           
+   466                           ;questao2.c: 116:     switch(reg_niveis){
+   467     00D5  1283               	bcf	3,5	;RP0=0, select bank0
+   468     00D6  080D               	movf	_reg_niveis,w	;volatile
+   469                           
+   470                           ; Switch size 1, requested type "simple"
+   471                           ; Number of cases is 4, Range of values is 0 to 6
+   472                           ; switch strategies available:
+   473                           ; Name         Instructions Cycles
+   474                           ; direct_byte           13     6 (fixed)
+   475                           ; simple_byte           13     7 (average)
+   476                           ; jumptable            260     6 (fixed)
+   477                           ;	Chosen strategy is simple_byte
+   478     00D7  3A00               	xorlw	0	; case 0
+   479     00D8  1903               	skipnz
+   480     00D9  28D3               	goto	l53
+   481     00DA  3A01               	xorlw	1	; case 1
+   482     00DB  1903               	skipnz
+   483     00DC  28D3               	goto	l53
+   484     00DD  3A02               	xorlw	2	; case 3
+   485     00DE  1903               	skipnz
+   486     00DF  28D3               	goto	l53
+   487     00E0  3A05               	xorlw	5	; case 6
+   488     00E1  1903               	skipnz
+   489     00E2  28D3               	goto	l53
+   490     00E3  28E4               	goto	l56
+   491     00E4                     l56:
+   492     00E4  0008               	return
+   493     00E5                     __end_of__verificar_erros_C:
+   494                           
+   495                           	psect	text3
+   496     00A5                     __ptext3:	
+   497 ;; *************** function _interruptC *****************
+   498 ;; Defined at:
+   499 ;;		line 130 in file "questao2.c"
+   500 ;; Parameters:    Size  Location     Type
+   501 ;;		None
+   502 ;; Auto vars:     Size  Location     Type
+   503 ;;		None
+   504 ;; Return value:  Size  Location     Type
+   505 ;;                  1    wreg      void 
+   506 ;; Registers used:
+   507 ;;		wreg, status,2, status,0
+   508 ;; Tracked objects:
+   509 ;;		On entry : 0/0
+   510 ;;		On exit  : 0/0
+   511 ;;		Unchanged: 0/0
+   512 ;; Data sizes:     COMMON   BANK0
+   513 ;;      Params:         0       0
+   514 ;;      Locals:         0       0
+   515 ;;      Temps:          0       2
+   516 ;;      Totals:         0       2
+   517 ;;Total ram usage:        2 bytes
+   518 ;; Hardware stack levels used: 1
+   519 ;; This function calls:
+   520 ;;		Nothing
+   521 ;; This function is called by:
+   522 ;;		Interrupt level 1
+   523 ;; This function uses a non-reentrant model
+   524 ;;
+   525                           
+   526     00A5                     _interruptC:	
+   527                           ;psect for function _interruptC
+   528                           
+   529     00A5                     i1l662:
+   530                           
+   531                           ;questao2.c: 132:     if (INTCONbits.T0IF) {
+   532     00A5  1D0B               	btfss	11,2	;volatile
+   533     00A6  28A8               	goto	u14_21
+   534     00A7  28A9               	goto	u14_20
+   535     00A8                     u14_21:
+   536     00A8  28CB               	goto	i1l64
+   537     00A9                     u14_20:
+   538     00A9                     i1l664:
+   539                           
+   540                           ;questao2.c: 133:         INTCONbits.T0IF = 0;
+   541     00A9  110B               	bcf	11,2	;volatile
+   542                           
+   543                           ;questao2.c: 134:         TMR0 = 6;
+   544     00AA  3006               	movlw	6
+   545     00AB  0081               	movwf	1	;volatile
+   546     00AC                     i1l666:
+   547                           
+   548                           ;questao2.c: 136:         contador_4hz--;
+   549     00AC  3001               	movlw	1
+   550     00AD  0292               	subwf	_contador_4hz,f
+   551                           
+   552                           ;questao2.c: 138:         if (contador_4hz == 0) {
+   553     00AE  0812               	movf	_contador_4hz,w
+   554     00AF  1D03               	btfss	3,2
+   555     00B0  28B2               	goto	u15_21
+   556     00B1  28B3               	goto	u15_20
+   557     00B2                     u15_21:
+   558     00B2  28CB               	goto	i1l64
+   559     00B3                     u15_20:
+   560     00B3                     i1l668:
+   561                           
+   562                           ;questao2.c: 139:             PORTAbits.RA0 = ~PORTAbits.RA0;
+   563     00B3  1003               	clrc
+   564     00B4  1C05               	btfss	5,0	;volatile
+   565     00B5  1403               	setc
+   566     00B6  1803               	btfsc	3,0
+   567     00B7  28B9               	goto	u16_21
+   568     00B8  28BC               	goto	u16_20
+   569     00B9                     u16_21:
+   570     00B9  1283               	bcf	3,5	;RP0=0, select bank0
+   571     00BA  1405               	bsf	5,0	;volatile
+   572     00BB  28BE               	goto	u17_24
+   573     00BC                     u16_20:
+   574     00BC  1283               	bcf	3,5	;RP0=0, select bank0
+   575     00BD  1005               	bcf	5,0	;volatile
+   576     00BE                     u17_24:
+   577     00BE                     i1l670:
+   578                           
+   579                           ;questao2.c: 140:             contador_4hz = 125;
+   580     00BE  307D               	movlw	125
+   581     00BF  0092               	movwf	_contador_4hz
+   582     00C0                     i1l672:
+   583                           
+   584                           ;questao2.c: 142:             divisor_tempo--;
+   585     00C0  3001               	movlw	1
+   586     00C1  0291               	subwf	_divisor_tempo,f
+   587     00C2                     i1l674:
+   588                           
+   589                           ;questao2.c: 143:             if (divisor_tempo == 0) {
+   590     00C2  0811               	movf	_divisor_tempo,w
+   591     00C3  1D03               	btfss	3,2
+   592     00C4  28C6               	goto	u18_21
+   593     00C5  28C7               	goto	u18_20
+   594     00C6                     u18_21:
+   595     00C6  28CB               	goto	i1l64
+   596     00C7                     u18_20:
+   597     00C7                     i1l676:
+   598                           
+   599                           ;questao2.c: 144:                 time_flag = 1;
+   600     00C7  3001               	movlw	1
+   601     00C8  008E               	movwf	_time_flag	;volatile
+   602                           
+   603                           ;questao2.c: 145:                 divisor_tempo = 8;
+   604     00C9  3008               	movlw	8
+   605     00CA  0091               	movwf	_divisor_tempo
+   606     00CB                     i1l64:
+   607     00CB  0814               	movf	??_interruptC+1,w
+   608     00CC  008A               	movwf	10
+   609     00CD  0E13               	swapf	??_interruptC,w
+   610     00CE  0083               	movwf	3
+   611     00CF  0ECE               	swapf	btemp,f
+   612     00D0  0E4E               	swapf	btemp,w
+   613     00D1  0009               	retfie
+   614     00D2                     __end_of_interruptC:
+   615     0000                     ___latbits      equ	0
+   616     004E                     btemp           set	78	;btemp
+   617     004E                     btemp0          set	78
+   618     004F                     btemp1          set	79
+   619     004E                     wtemp0          set	78
+   620     004F                     wtemp0a         set	79
+   621     004F                     ttemp0a         set	79
+   622     0050                     ltemp0a         set	80
+   623                           
+   624                           	psect	intentry
+   625     0004                     __pintentry:	
+   626                           ;incstack = 0
+   627                           ; Regs used in _interruptC: [wreg+status,2+status,0]
+   628                           
+   629     0004                     interrupt_function:
+   630     004E                     saved_w         set	btemp
+   631     0004  00CE               	movwf	btemp
+   632     0005  0E03               	swapf	3,w
+   633     0006  1283               	bcf	3,5	;RP0=0, select bank0
+   634     0007  0093               	movwf	??_interruptC
+   635     0008  080A               	movf	10,w
+   636     0009  0094               	movwf	??_interruptC+1
+   637     000A  28A5               	ljmp	_interruptC
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        2
+    BSS         3
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            66      2       7
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _interruptC in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _interruptC in BANK0
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 0     0      0       0
+                __verificar_niveis_C
+             _interrupt_settings_asm
+                _portas_settings_asm
+ ---------------------------------------------------------------------------------
+ (1) _portas_settings_asm                                  0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _interrupt_settings_asm                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) __verificar_niveis_C                                  0     0      0       0
+                 __verificar_erros_C
+ ---------------------------------------------------------------------------------
+ (2) __verificar_erros_C                                   0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (3) _interruptC                                           2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   __verificar_niveis_C
+     __verificar_erros_C
+   _interrupt_settings_asm
+   _portas_settings_asm
+
+ _interruptC (ROOT)
+
+Address spaces:
+Name               Size   Autos  Total    Usage
+BANK0               66      2       7     10.6%
+BITBANK0            66      0       0      0.0%
+COMMON               0      0       0      0.0%
+BITCOMMON            0      0       0      0.0%
+DATA                 0      0       7      0.0%
+STACK                0      0       0      0.0%
+
+
+Microchip Technology PIC Macro Assembler V4.00 build 20260614213421 
+Symbol Table                                                                                   Sat Oct 10 15:47:18 2026
+
+                         l40 008E                           l41 008F                           l42 0099  
+                         l53 00D3                           l46 00A4                           l38 0081  
+                         l56 00E4                           u10 007F                           u11 007E  
+                         u20 0085                           u21 0084                           u30 008B  
+                         u31 008A                           u40 0093                           u41 0092  
+                         u50 0098                           u51 0097                           u60 009D  
+                         u61 009C                           u70 00A2                           u71 00A1  
+                         u80 00ED                           u81 00EC                          l612 00D5  
+                        l620 0085                          l630 00A2                          l622 008B  
+                        l614 0078                          l608 00D2                          l624 0093  
+                        l632 00A3                          l616 007A                          l640 00EE  
+                        l626 0098                          l618 007F                          l642 00EF  
+                        l634 00E5                          l628 009D                          l644 00F0  
+                        l636 00E7                          l638 00ED           __verificar_erros_C 00D2  
+              _divisor_tempo 0011          ?__verificar_erros_C 0013                         i1l64 00CB  
+                       _TMR0 0001                         _main 00E5                         btemp 004E  
+                       start 000B          __verificar_niveis_C 0078         ??__verificar_erros_C 0000  
+                      ?_main 0013                        i1l670 00BE                        i1l662 00A5  
+                      i1l672 00C0                        i1l664 00A9                        i1l674 00C2  
+                      i1l666 00AC                        i1l676 00C7                        i1l668 00B3  
+                      u14_20 00A9                        u14_21 00A8                        u15_20 00B3  
+                      u15_21 00B2                        u16_20 00BC                        u16_21 00B9  
+                      u17_24 00BE                        u18_20 00C7                        u18_21 00C6  
+       ?__verificar_niveis_C 0013                        btemp0 004E                        btemp1 004F  
+                      pclath 000A                        status 0003                        wtemp0 004E  
+            __initialization 000C                 __end_of_main 00F4                       ??_main 0000  
+      ??__verificar_niveis_C 0000            _botao_pressionado 000C                       ltemp0a 0050  
+                     saved_w 004E                       ttemp0a 004F                       wtemp0a 004F  
+    __end_of__initialization 0013               __pcstackCOMMON 0000                 __pidataBANK0 00F4  
+                 __pbssBANK0 000C                   __pmaintext 00E5                   __pintentry 0004  
+        _portas_settings_asm 0016     ??_interrupt_settings_asm 0000         ?_portas_settings_asm 0013  
+                    __ptext1 0078                      __ptext2 00D2                      __ptext3 00A5  
+                 _reg_niveis 000D                   _interruptC 00A5         end_of_initialization 0013  
+      ??_portas_settings_asm 0000  __end_of__verificar_niveis_C 00A5                    _PORTAbits 0005  
+                  _PORTBbits 0006                 _contador_4hz 0012          start_initialization 000C  
+                ?_interruptC 0013                  __pdataBANK0 0011       _interrupt_settings_asm 006B  
+                  ___latbits 0000                __pcstackBANK0 0013            interrupt_function 0004  
+ __end_of__verificar_erros_C 00E5                    _time_flag 000E                 ??_interruptC 0013  
+    ?_interrupt_settings_asm 0013           __end_of_interruptC 00D2                   _INTCONbits 000B  
+                   intlevel1 0000  
