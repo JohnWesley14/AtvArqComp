@@ -31,7 +31,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC16F84A</targetDevice>
+        <targetDevice>PIC16F628A</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
@@ -75,7 +75,7 @@
         <property key="call-prologues" value="false"/>
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
-        <property key="define-macros" value=""/>
+        <property key="define-macros" value="NAO_USAR_TIMER;ONLY_ASM_FUNCTIONS"/>
         <property key="disable-optimizations" value="true"/>
         <property key="extra-include-directories" value=""/>
         <property key="favor-optimization-for" value="-speed,+space"/>
@@ -96,7 +96,7 @@
         <property key="preprocess-assembler" value="true"/>
         <property key="short-enums" value="true"/>
         <property key="tentative-definitions" value="-fno-common"/>
-        <property key="undefine-macros" value=""/>
+        <property key="undefine-macros" value="NAO_USAR_TIMER;ONLY_ASM_FUNCTIONS"/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="verbose" value="false"/>

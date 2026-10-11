@@ -35,114 +35,135 @@
 
 #define  BotaoI !P(A, 1)
 #define  nivelA !P(A, 2)
-#define  nivelB !P(B, 3)
+#define  nivelB !P(A, 3)
 #define  nivelC !P(A, 4)
 #define  Evs P(B, 0)
 #define  Eve P(B, 1)
-#define  erro_detectado P(B, 2)
+#define erro_flag P(B, 2)
 #define ligar(pino)    ((pino) = 1)
 #define desligar(pino) ((pino) = 0)
     
-volatile u8 time_flag = 0;
-volatile u8 reg_niveis = 0;
-volatile u8 botao_pressionado = 0;
+static u8 botao_atual = 0;
+static u8 sensA = 0;
+static u8 sensB = 0;
+static u8 sensC = 0;
 
-extern void interrupt_settings_asm(void);
+#ifdef ONLY_ASM_FUNCTIONS
+    // Avisa o C que estas variáveis foram criadas no ficheiro Assembly
+    extern volatile u8 time_flag;
+#else
+    volatile u8 time_flag = 0;
+    volatile u8 estado_sistema = 0;
+    volatile u8 estado_anterior_botao = 0;
+#endif
+
+volatile u8 erro_detectado = 0;
+
+#ifndef NAO_USAR_TIMER
+    extern void interrupt_settings_asm(void);
+#endif
 extern void portas_settings_asm(void);
-void _verificar_niveis_C(void);
-void _limpar_niveis(void);
-void _verificar_erros_C(void);
+#ifdef ONLY_ASM_FUNCTIONS
+   extern u8 verificar_niveis_asm(void);
+#elif !defined(ONLY_ASM_FUNCTIONS)
+    u8 _verificar_niveis_C(void);
+#endif
+
 
 
 int main(void) {
     
     portas_settings_asm();
-    interrupt_settings_asm();
-    
+    #ifndef NAO_USAR_TIMER
+        interrupt_settings_asm();
+    #endif
     
     while (1){
+
         //time_flag = 1; //teste
+        #ifndef NAO_USAR_TIMER
         if(time_flag){
-            reg_niveis = 0;
-            erro_detectado = 0;
-            _verificar_niveis_C();
-            //_verificar_prioridade_S();
-            time_flag = 0;
-        }
+        #endif
         
+            #ifdef ONLY_ASM_FUNCTIONS
+                time_flag = verificar_niveis_asm(); // time_flag = 0
+            #elif !defined(ONLY_ASM_FUNCTIONS)
+                time_flag = _verificar_niveis_C(); // time_flag = 0
+            #endif
+
+        #ifndef NAO_USAR_TIMER
+        }
+        #endif
     }
     
     return 0;
 }
 
-void _verificar_niveis_C(void){
+#ifndef ONLY_ASM_FUNCTIONS
+u8 _verificar_niveis_C(void){
     
-	reg_niveis = 0;
-	
-	if (botao_pressionado) {
-        desligar(Evs);
-        desligar(Eve);
+    botao_atual = !P(A, 1);
+	sensA = !P(A, 2);
+    sensB = !P(A, 3);
+    sensC = !P(A, 4);
+    
+    // Botao apertado e antes não apertado -> entra
+    if (botao_atual && !estado_anterior_botao) {
+        estado_sistema = !estado_sistema;
     }
     
-    if(!P(A, 1)){ // Botão I pressionado
-        botao_pressionado = 1;
+    estado_anterior_botao = botao_atual;
+    erro_detectado = ((sensA && !sensB) || (sensA && !sensC) || (sensB && !sensC));
+    // Verificação de Erros (A sua lógica de reg_niveis está correta, mas pode ser direta)
+    if (erro_detectado) {
+        desligar(Evs); 
+        desligar(Eve);
+        ligar(erro_flag);
         
-        if (!P(A, 2)){
-            reg_niveis |= 1;
-            ligar(Evs);
-        } else {
-            ligar(Eve);
-        }
+    } else {
         
-        if (!P(A, 3)){
-            reg_niveis |= (1 << 1);
-            if (P(A, 2)){
+        desligar(erro_flag);
+        
+        if(estado_sistema){
+            
+            if (sensA){ // Nivel A (Último nível)
+                desligar(Eve);
+            } else { // Não
+                ligar(Eve);
+            }
+
+            if (sensB || sensA){ // Nivel B ou A
                 ligar(Evs);
             }
-        }
-        if (!P(A, 4)){
-            reg_niveis |= (1 << 2);
-            if (P(A, 3)){ // Se nivel B nao foi atingido
+            
+            else if (sensC && !sensB){ // Atingiu o Nível C, mas não o B
                 desligar(Evs);
             }
-        }
+        } else {
+            desligar(Evs);
+            desligar(Eve);
+        }    
     }
-    
-    _verificar_erros_C();
+    return 0;
 }
-
-
-void _verificar_erros_C(void){
-    switch(reg_niveis){
-        case 0b011: // C é o unico nao atingido
-        case 0b110: // A é o unico nao atingido
-        case 0b000: // Ninguem e atingido
-        case 0b001: // Apenas A é atingido
-            erro_detectado = 1;
-            break;
-        default:
-            break;
-    }
-}
-
+#endif
 
 #ifdef MY_INTERRUPT_C
 void __interrupt() interruptC(void) { 
     // Verifica qual módulo disparou a interrupção
     if (INTCONbits.T0IF) {
         INTCONbits.T0IF = 0; // Limpa a flag (equivalente ao bcf INTCON, 2)
-        TMR0 = 6;            // Recarrega o hardware para estourar em 1 ms
+        TMR0 = 6;   // Recarrega o hardware para estourar em 1 ms
         
-        contador_4hz--;      // Prescaler de software
+        contador_4hz--; // Prescaler de software
         
         if (contador_4hz == 0) {
-            PORTAbits.RA0 = ~PORTAbits.RA0; // Inverte o estado do pino (Toggle)
-            contador_4hz = 125;             // Reinicia a contagem dos 125 ms
+            contador_4hz = 125; // Reinicia a contagem dos 125 ms
             // Sub-contador para o múltiplo desejado
             divisor_tempo--;
             if (divisor_tempo == 0) {
-                time_flag = 1;     // Libera a leitura dos botões no múltiplo
-                divisor_tempo = 8;    // Reinicia para o próximo intervalo
+                time_flag = 1;  // Libera a leitura dos botões no múltiplo
+                divisor_tempo = 1;  // Reinicia para o próximo intervalo
             }
         }
         

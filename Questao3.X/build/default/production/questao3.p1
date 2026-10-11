@@ -1,39 +1,11 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
-"24 questao3.c
-[; ;questao3.c: 24: extern void portas_settings_asm(void);
+"20 questao3.c
+[; ;questao3.c: 20: extern void portas_settings_asm(void);
 [v _portas_settings_asm `(v ~T0 @X0 0 ef ]
-"23
-[; ;questao3.c: 23: extern void interrupt_settings_asm(void);
-[v _interrupt_settings_asm `(v ~T0 @X0 0 ef ]
-"26
-[; ;questao3.c: 26: void _limpar_correia(void);
-[v __limpar_correia `(v ~T0 @X0 0 ef ]
-"25
-[; ;questao3.c: 25: void _verificar_prioridade_C(void);
-[v __verificar_prioridade_C `(v ~T0 @X0 0 ef ]
-"156 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
-[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 156:     struct {
-[s S10 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S10 . RA0 RA1 RA2 RA3 RA4 ]
-"155
-[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 155: typedef union {
-[u S9 `S10 1 ]
-[n S9 . . ]
-"164
-[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 164: extern volatile PORTAbits_t PORTAbits __attribute__((address(0x005)));
-[v _PORTAbits `VS9 ~T0 @X0 0 e@5 ]
-"200
-[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 200:     struct {
-[s S12 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S12 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"199
-[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 199: typedef union {
-[u S11 `S12 1 ]
-[n S11 . . ]
-"211
-[; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 211: extern volatile PORTBbits_t PORTBbits __attribute__((address(0x006)));
-[v _PORTBbits `VS11 ~T0 @X0 0 e@6 ]
+"22
+[; ;questao3.c: 22:    extern void verificar_prioridade_asm(void);
+[v _verificar_prioridade_asm `(v ~T0 @X0 0 ef ]
 "38 D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
 [; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 38: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -82,14 +54,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "590
 [; ;D:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 590: __asm("EECON2 equ 089h");
 [; <" EECON2 equ 089h ;# ">
-"21 questao3.c
-[; ;questao3.c: 21: volatile u8 time_flag = 0;
-[v _time_flag `Vuc ~T0 @X0 1 e ]
-[i _time_flag
--> -> 0 `i `uc
-]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"28
+"28 questao3.c
 [; ;questao3.c: 28: int main(void) {
 [v _main `(i ~T0 @X0 1 ef ]
 {
@@ -98,121 +64,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 "30
 [; ;questao3.c: 30:     portas_settings_asm();
 [e ( _portas_settings_asm ..  ]
-"31
-[; ;questao3.c: 31:     interrupt_settings_asm();
-[e ( _interrupt_settings_asm ..  ]
-"33
-[; ;questao3.c: 33:     while (1){
+"32
+[; ;questao3.c: 32:     while (1){
 [e :U 29 ]
 {
 "35
-[; ;questao3.c: 35:         if(time_flag){
-[e $ ! != -> _time_flag `i -> 0 `i 31  ]
-{
-"36
-[; ;questao3.c: 36:             _limpar_correia();
-[e ( __limpar_correia ..  ]
-"37
-[; ;questao3.c: 37:             _verificar_prioridade_C();
-[e ( __verificar_prioridade_C ..  ]
-"39
-[; ;questao3.c: 39:             time_flag = 0;
-[e = _time_flag -> -> 0 `i `uc ]
-"40
-[; ;questao3.c: 40:         }
-}
-[e :U 31 ]
-"42
-[; ;questao3.c: 42:     }
+[; ;questao3.c: 35:             verificar_prioridade_asm();
+[e ( _verificar_prioridade_asm ..  ]
+"41
+[; ;questao3.c: 41:     }
 }
 [e :U 28 ]
-"33
-[; ;questao3.c: 33:     while (1){
+"32
+[; ;questao3.c: 32:     while (1){
 [e $U 29  ]
 [e :U 30 ]
-"44
-[; ;questao3.c: 44:     return 0;
+"43
+[; ;questao3.c: 43:     return 0;
 [e ) -> 0 `i ]
 [e $UE 27  ]
-"45
-[; ;questao3.c: 45: }
+"44
+[; ;questao3.c: 44: }
 [e :UE 27 ]
-}
-"47
-[; ;questao3.c: 47: void _verificar_prioridade_C(void){
-[v __verificar_prioridade_C `(v ~T0 @X0 1 ef ]
-{
-[e :U __verificar_prioridade_C ]
-[f ]
-"49
-[; ;questao3.c: 49:     if (!PORTAbits.RA1){
-[e $ ! ! != -> . . _PORTAbits 0 1 `i -> 0 `i 33  ]
-{
-"50
-[; ;questao3.c: 50:         PORTBbits.RB0 = 1;
-[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
-"51
-[; ;questao3.c: 51:     }
-}
-[e $U 34  ]
-"52
-[; ;questao3.c: 52:     else if (!PORTAbits.RA2){
-[e :U 33 ]
-[e $ ! ! != -> . . _PORTAbits 0 2 `i -> 0 `i 35  ]
-{
-"53
-[; ;questao3.c: 53:         PORTBbits.RB1 = 1;
-[e = . . _PORTBbits 0 1 -> -> 1 `i `uc ]
-"54
-[; ;questao3.c: 54:     }
-}
-[e $U 36  ]
-"55
-[; ;questao3.c: 55:     else if (!PORTAbits.RA3){
-[e :U 35 ]
-[e $ ! ! != -> . . _PORTAbits 0 3 `i -> 0 `i 37  ]
-{
-"56
-[; ;questao3.c: 56:         PORTBbits.RB2 = 1;
-[e = . . _PORTBbits 0 2 -> -> 1 `i `uc ]
-"57
-[; ;questao3.c: 57:     }
-}
-[e $U 38  ]
-"58
-[; ;questao3.c: 58:     else if (!PORTAbits.RA4){
-[e :U 37 ]
-[e $ ! ! != -> . . _PORTAbits 0 4 `i -> 0 `i 39  ]
-{
-"59
-[; ;questao3.c: 59:         PORTBbits.RB3 = 1;
-[e = . . _PORTBbits 0 3 -> -> 1 `i `uc ]
-"60
-[; ;questao3.c: 60:     }
-}
-[e :U 39 ]
-[e :U 38 ]
-[e :U 36 ]
-[e :U 34 ]
-"62
-[; ;questao3.c: 62: }
-[e :UE 32 ]
-}
-"64
-[; ;questao3.c: 64: void _limpar_correia(void){
-[v __limpar_correia `(v ~T0 @X0 1 ef ]
-{
-[e :U __limpar_correia ]
-[f ]
-"65
-[; ;questao3.c: 65:     PORTBbits.RB0 = 0; PORTBbits.RB1 = 0;
-[e = . . _PORTBbits 0 0 -> -> 0 `i `uc ]
-[e = . . _PORTBbits 0 1 -> -> 0 `i `uc ]
-"66
-[; ;questao3.c: 66:     PORTBbits.RB2 = 0; PORTBbits.RB3 = 0;
-[e = . . _PORTBbits 0 2 -> -> 0 `i `uc ]
-[e = . . _PORTBbits 0 3 -> -> 0 `i `uc ]
-"67
-[; ;questao3.c: 67: }
-[e :UE 40 ]
 }

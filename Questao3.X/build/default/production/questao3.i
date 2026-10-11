@@ -654,52 +654,31 @@ typedef int32_t i32;
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
+typedef unsigned char uchar;
 # 11 "questao3.c" 2
-# 21 "questao3.c"
-volatile u8 time_flag = 0;
-
-extern void interrupt_settings_asm(void);
+# 20 "questao3.c"
 extern void portas_settings_asm(void);
-void _verificar_prioridade_C(void);
-void _limpar_correia(void);
+
+   extern void verificar_prioridade_asm(void);
+
+
+
+
 
 int main(void) {
 
     portas_settings_asm();
-    interrupt_settings_asm();
 
     while (1){
 
-        if(time_flag){
-            _limpar_correia();
-            _verificar_prioridade_C();
 
-            time_flag = 0;
-        }
+            verificar_prioridade_asm();
+
+
+
+
 
     }
 
     return 0;
-}
-
-void _verificar_prioridade_C(void){
-
-    if (!PORTAbits.RA1){
-        PORTBbits.RB0 = 1;
-    }
-    else if (!PORTAbits.RA2){
-        PORTBbits.RB1 = 1;
-    }
-    else if (!PORTAbits.RA3){
-        PORTBbits.RB2 = 1;
-    }
-    else if (!PORTAbits.RA4){
-        PORTBbits.RB3 = 1;
-    }
-
-}
-
-void _limpar_correia(void){
-    PORTBbits.RB0 = 0; PORTBbits.RB1 = 0;
-    PORTBbits.RB2 = 0; PORTBbits.RB3 = 0;
 }

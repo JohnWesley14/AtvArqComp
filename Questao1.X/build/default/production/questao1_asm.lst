@@ -1,0 +1,499 @@
+
+
+Microchip MPLAB XC8 Assembler V4.00 build 20260614213421 
+                                                                                                           Sun Oct 11 19:23:00 2026
+
+
+     1                           	processor	16F84A
+     2                           	pagewidth 132
+     3                           	psect	udata,global,class=RAM,space=1,delta=1,noexec
+     4                           	psect	udata_bank0,global,class=BANK0,space=1,delta=1,noexec
+     5                           	psect	code,global,class=CODE,space=0,delta=2
+     6                           	psect	data,global,class=STRCODE,space=0,delta=2,noexec
+     7                           	psect	edata,global,class=EEDATA,space=3,delta=2,noexec
+     8                           	psect	static_vars,global,class=RAM,space=1,delta=1
+     9                           	psect	intCode,global,abs,class=CODE,space=0,delta=2
+    10                           	psect	verificacao_portas,global,reloc=2,class=CODE,space=0,delta=2
+    11                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=2,noexec
+    12                           
+    13                           ; PORTAS E TIMER
+    14                           ; PA1 � um bot�o pull-up
+    15                           ; if(PA1 == 0){ PB = 0x72 } else { PB = 0x81 }
+    16                           ; PA0 = 1
+    17                           ; PA1 � input, PA0 e PB � output
+    18                           ;PROCESSOR 16F84A
+    19                           ;PROCESSOR 16F628A
+    20     0000                     INDF            equ	0
+    21     0001                     TMR0            equ	1
+    22     0002                     PCL             equ	2
+    23     0003                     STATUS          equ	3
+    24     0000                     STATUS_C_POSN   equ	0
+    25     0000                     STATUS_C_POSITION equ	0
+    26     0001                     STATUS_C_SIZE   equ	1
+    27     0001                     STATUS_C_LENGTH equ	1
+    28     0001                     STATUS_C_MASK   equ	1
+    29     0001                     STATUS_DC_POSN  equ	1
+    30     0001                     STATUS_DC_POSITION equ	1
+    31     0001                     STATUS_DC_SIZE  equ	1
+    32     0001                     STATUS_DC_LENGTH equ	1
+    33     0002                     STATUS_DC_MASK  equ	2
+    34     0002                     STATUS_Z_POSN   equ	2
+    35     0002                     STATUS_Z_POSITION equ	2
+    36     0001                     STATUS_Z_SIZE   equ	1
+    37     0001                     STATUS_Z_LENGTH equ	1
+    38     0004                     STATUS_Z_MASK   equ	4
+    39     0003                     STATUS_nPD_POSN equ	3
+    40     0003                     STATUS_nPD_POSITION equ	3
+    41     0001                     STATUS_nPD_SIZE equ	1
+    42     0001                     STATUS_nPD_LENGTH equ	1
+    43     0008                     STATUS_nPD_MASK equ	8
+    44     0004                     STATUS_nTO_POSN equ	4
+    45     0004                     STATUS_nTO_POSITION equ	4
+    46     0001                     STATUS_nTO_SIZE equ	1
+    47     0001                     STATUS_nTO_LENGTH equ	1
+    48     0010                     STATUS_nTO_MASK equ	16
+    49     0005                     STATUS_RP_POSN  equ	5
+    50     0005                     STATUS_RP_POSITION equ	5
+    51     0002                     STATUS_RP_SIZE  equ	2
+    52     0002                     STATUS_RP_LENGTH equ	2
+    53     0060                     STATUS_RP_MASK  equ	96
+    54     0007                     STATUS_IRP_POSN equ	7
+    55     0007                     STATUS_IRP_POSITION equ	7
+    56     0001                     STATUS_IRP_SIZE equ	1
+    57     0001                     STATUS_IRP_LENGTH equ	1
+    58     0080                     STATUS_IRP_MASK equ	128
+    59     0005                     STATUS_RP0_POSN equ	5
+    60     0005                     STATUS_RP0_POSITION equ	5
+    61     0001                     STATUS_RP0_SIZE equ	1
+    62     0001                     STATUS_RP0_LENGTH equ	1
+    63     0020                     STATUS_RP0_MASK equ	32
+    64     0006                     STATUS_RP1_POSN equ	6
+    65     0006                     STATUS_RP1_POSITION equ	6
+    66     0001                     STATUS_RP1_SIZE equ	1
+    67     0001                     STATUS_RP1_LENGTH equ	1
+    68     0040                     STATUS_RP1_MASK equ	64
+    69     0000                     STATUS_CARRY_POSN equ	0
+    70     0000                     STATUS_CARRY_POSITION equ	0
+    71     0001                     STATUS_CARRY_SIZE equ	1
+    72     0001                     STATUS_CARRY_LENGTH equ	1
+    73     0001                     STATUS_CARRY_MASK equ	1
+    74     0002                     STATUS_ZERO_POSN equ	2
+    75     0002                     STATUS_ZERO_POSITION equ	2
+    76     0001                     STATUS_ZERO_SIZE equ	1
+    77     0001                     STATUS_ZERO_LENGTH equ	1
+    78     0004                     STATUS_ZERO_MASK equ	4
+    79     0004                     FSR             equ	4
+    80     0005                     PORTA           equ	5
+    81     0000                     PORTA_RA0_POSN  equ	0
+    82     0000                     PORTA_RA0_POSITION equ	0
+    83     0001                     PORTA_RA0_SIZE  equ	1
+    84     0001                     PORTA_RA0_LENGTH equ	1
+    85     0001                     PORTA_RA0_MASK  equ	1
+    86     0001                     PORTA_RA1_POSN  equ	1
+    87     0001                     PORTA_RA1_POSITION equ	1
+    88     0001                     PORTA_RA1_SIZE  equ	1
+    89     0001                     PORTA_RA1_LENGTH equ	1
+    90     0002                     PORTA_RA1_MASK  equ	2
+    91     0002                     PORTA_RA2_POSN  equ	2
+    92     0002                     PORTA_RA2_POSITION equ	2
+    93     0001                     PORTA_RA2_SIZE  equ	1
+    94     0001                     PORTA_RA2_LENGTH equ	1
+    95     0004                     PORTA_RA2_MASK  equ	4
+    96     0003                     PORTA_RA3_POSN  equ	3
+    97     0003                     PORTA_RA3_POSITION equ	3
+    98     0001                     PORTA_RA3_SIZE  equ	1
+    99     0001                     PORTA_RA3_LENGTH equ	1
+   100     0008                     PORTA_RA3_MASK  equ	8
+   101     0004                     PORTA_RA4_POSN  equ	4
+   102     0004                     PORTA_RA4_POSITION equ	4
+   103     0001                     PORTA_RA4_SIZE  equ	1
+   104     0001                     PORTA_RA4_LENGTH equ	1
+   105     0010                     PORTA_RA4_MASK  equ	16
+   106     0006                     PORTB           equ	6
+   107     0000                     PORTB_RB0_POSN  equ	0
+   108     0000                     PORTB_RB0_POSITION equ	0
+   109     0001                     PORTB_RB0_SIZE  equ	1
+   110     0001                     PORTB_RB0_LENGTH equ	1
+   111     0001                     PORTB_RB0_MASK  equ	1
+   112     0001                     PORTB_RB1_POSN  equ	1
+   113     0001                     PORTB_RB1_POSITION equ	1
+   114     0001                     PORTB_RB1_SIZE  equ	1
+   115     0001                     PORTB_RB1_LENGTH equ	1
+   116     0002                     PORTB_RB1_MASK  equ	2
+   117     0002                     PORTB_RB2_POSN  equ	2
+   118     0002                     PORTB_RB2_POSITION equ	2
+   119     0001                     PORTB_RB2_SIZE  equ	1
+   120     0001                     PORTB_RB2_LENGTH equ	1
+   121     0004                     PORTB_RB2_MASK  equ	4
+   122     0003                     PORTB_RB3_POSN  equ	3
+   123     0003                     PORTB_RB3_POSITION equ	3
+   124     0001                     PORTB_RB3_SIZE  equ	1
+   125     0001                     PORTB_RB3_LENGTH equ	1
+   126     0008                     PORTB_RB3_MASK  equ	8
+   127     0004                     PORTB_RB4_POSN  equ	4
+   128     0004                     PORTB_RB4_POSITION equ	4
+   129     0001                     PORTB_RB4_SIZE  equ	1
+   130     0001                     PORTB_RB4_LENGTH equ	1
+   131     0010                     PORTB_RB4_MASK  equ	16
+   132     0005                     PORTB_RB5_POSN  equ	5
+   133     0005                     PORTB_RB5_POSITION equ	5
+   134     0001                     PORTB_RB5_SIZE  equ	1
+   135     0001                     PORTB_RB5_LENGTH equ	1
+   136     0020                     PORTB_RB5_MASK  equ	32
+   137     0006                     PORTB_RB6_POSN  equ	6
+   138     0006                     PORTB_RB6_POSITION equ	6
+   139     0001                     PORTB_RB6_SIZE  equ	1
+   140     0001                     PORTB_RB6_LENGTH equ	1
+   141     0040                     PORTB_RB6_MASK  equ	64
+   142     0007                     PORTB_RB7_POSN  equ	7
+   143     0007                     PORTB_RB7_POSITION equ	7
+   144     0001                     PORTB_RB7_SIZE  equ	1
+   145     0001                     PORTB_RB7_LENGTH equ	1
+   146     0080                     PORTB_RB7_MASK  equ	128
+   147     0008                     EEDATA          equ	8
+   148     0009                     EEADR           equ	9
+   149     000A                     PCLATH          equ	10
+   150     0000                     PCLATH_PCLATH_POSN equ	0
+   151     0000                     PCLATH_PCLATH_POSITION equ	0
+   152     0005                     PCLATH_PCLATH_SIZE equ	5
+   153     0005                     PCLATH_PCLATH_LENGTH equ	5
+   154     001F                     PCLATH_PCLATH_MASK equ	31
+   155     000B                     INTCON          equ	11
+   156     0000                     INTCON_RBIF_POSN equ	0
+   157     0000                     INTCON_RBIF_POSITION equ	0
+   158     0001                     INTCON_RBIF_SIZE equ	1
+   159     0001                     INTCON_RBIF_LENGTH equ	1
+   160     0001                     INTCON_RBIF_MASK equ	1
+   161     0001                     INTCON_INTF_POSN equ	1
+   162     0001                     INTCON_INTF_POSITION equ	1
+   163     0001                     INTCON_INTF_SIZE equ	1
+   164     0001                     INTCON_INTF_LENGTH equ	1
+   165     0002                     INTCON_INTF_MASK equ	2
+   166     0002                     INTCON_T0IF_POSN equ	2
+   167     0002                     INTCON_T0IF_POSITION equ	2
+   168     0001                     INTCON_T0IF_SIZE equ	1
+   169     0001                     INTCON_T0IF_LENGTH equ	1
+   170     0004                     INTCON_T0IF_MASK equ	4
+   171     0003                     INTCON_RBIE_POSN equ	3
+   172     0003                     INTCON_RBIE_POSITION equ	3
+   173     0001                     INTCON_RBIE_SIZE equ	1
+   174     0001                     INTCON_RBIE_LENGTH equ	1
+   175     0008                     INTCON_RBIE_MASK equ	8
+   176     0004                     INTCON_INTE_POSN equ	4
+   177     0004                     INTCON_INTE_POSITION equ	4
+   178     0001                     INTCON_INTE_SIZE equ	1
+   179     0001                     INTCON_INTE_LENGTH equ	1
+   180     0010                     INTCON_INTE_MASK equ	16
+   181     0005                     INTCON_T0IE_POSN equ	5
+   182     0005                     INTCON_T0IE_POSITION equ	5
+   183     0001                     INTCON_T0IE_SIZE equ	1
+   184     0001                     INTCON_T0IE_LENGTH equ	1
+   185     0020                     INTCON_T0IE_MASK equ	32
+   186     0006                     INTCON_EEIE_POSN equ	6
+   187     0006                     INTCON_EEIE_POSITION equ	6
+   188     0001                     INTCON_EEIE_SIZE equ	1
+   189     0001                     INTCON_EEIE_LENGTH equ	1
+   190     0040                     INTCON_EEIE_MASK equ	64
+   191     0007                     INTCON_GIE_POSN equ	7
+   192     0007                     INTCON_GIE_POSITION equ	7
+   193     0001                     INTCON_GIE_SIZE equ	1
+   194     0001                     INTCON_GIE_LENGTH equ	1
+   195     0080                     INTCON_GIE_MASK equ	128
+   196     0002                     INTCON_TMR0IF_POSN equ	2
+   197     0002                     INTCON_TMR0IF_POSITION equ	2
+   198     0001                     INTCON_TMR0IF_SIZE equ	1
+   199     0001                     INTCON_TMR0IF_LENGTH equ	1
+   200     0004                     INTCON_TMR0IF_MASK equ	4
+   201     0005                     INTCON_TMR0IE_POSN equ	5
+   202     0005                     INTCON_TMR0IE_POSITION equ	5
+   203     0001                     INTCON_TMR0IE_SIZE equ	1
+   204     0001                     INTCON_TMR0IE_LENGTH equ	1
+   205     0020                     INTCON_TMR0IE_MASK equ	32
+   206     0081                     OPTION_REG      equ	129
+   207     0000                     OPTION_REG_PS_POSN equ	0
+   208     0000                     OPTION_REG_PS_POSITION equ	0
+   209     0003                     OPTION_REG_PS_SIZE equ	3
+   210     0003                     OPTION_REG_PS_LENGTH equ	3
+   211     0007                     OPTION_REG_PS_MASK equ	7
+   212     0003                     OPTION_REG_PSA_POSN equ	3
+   213     0003                     OPTION_REG_PSA_POSITION equ	3
+   214     0001                     OPTION_REG_PSA_SIZE equ	1
+   215     0001                     OPTION_REG_PSA_LENGTH equ	1
+   216     0008                     OPTION_REG_PSA_MASK equ	8
+   217     0004                     OPTION_REG_T0SE_POSN equ	4
+   218     0004                     OPTION_REG_T0SE_POSITION equ	4
+   219     0001                     OPTION_REG_T0SE_SIZE equ	1
+   220     0001                     OPTION_REG_T0SE_LENGTH equ	1
+   221     0010                     OPTION_REG_T0SE_MASK equ	16
+   222     0005                     OPTION_REG_T0CS_POSN equ	5
+   223     0005                     OPTION_REG_T0CS_POSITION equ	5
+   224     0001                     OPTION_REG_T0CS_SIZE equ	1
+   225     0001                     OPTION_REG_T0CS_LENGTH equ	1
+   226     0020                     OPTION_REG_T0CS_MASK equ	32
+   227     0006                     OPTION_REG_INTEDG_POSN equ	6
+   228     0006                     OPTION_REG_INTEDG_POSITION equ	6
+   229     0001                     OPTION_REG_INTEDG_SIZE equ	1
+   230     0001                     OPTION_REG_INTEDG_LENGTH equ	1
+   231     0040                     OPTION_REG_INTEDG_MASK equ	64
+   232     0007                     OPTION_REG_nRBPU_POSN equ	7
+   233     0007                     OPTION_REG_nRBPU_POSITION equ	7
+   234     0001                     OPTION_REG_nRBPU_SIZE equ	1
+   235     0001                     OPTION_REG_nRBPU_LENGTH equ	1
+   236     0080                     OPTION_REG_nRBPU_MASK equ	128
+   237     0000                     OPTION_REG_PS0_POSN equ	0
+   238     0000                     OPTION_REG_PS0_POSITION equ	0
+   239     0001                     OPTION_REG_PS0_SIZE equ	1
+   240     0001                     OPTION_REG_PS0_LENGTH equ	1
+   241     0001                     OPTION_REG_PS0_MASK equ	1
+   242     0001                     OPTION_REG_PS1_POSN equ	1
+   243     0001                     OPTION_REG_PS1_POSITION equ	1
+   244     0001                     OPTION_REG_PS1_SIZE equ	1
+   245     0001                     OPTION_REG_PS1_LENGTH equ	1
+   246     0002                     OPTION_REG_PS1_MASK equ	2
+   247     0002                     OPTION_REG_PS2_POSN equ	2
+   248     0002                     OPTION_REG_PS2_POSITION equ	2
+   249     0001                     OPTION_REG_PS2_SIZE equ	1
+   250     0001                     OPTION_REG_PS2_LENGTH equ	1
+   251     0004                     OPTION_REG_PS2_MASK equ	4
+   252     0085                     TRISA           equ	133
+   253     0000                     TRISA_TRISA0_POSN equ	0
+   254     0000                     TRISA_TRISA0_POSITION equ	0
+   255     0001                     TRISA_TRISA0_SIZE equ	1
+   256     0001                     TRISA_TRISA0_LENGTH equ	1
+   257     0001                     TRISA_TRISA0_MASK equ	1
+   258     0001                     TRISA_TRISA1_POSN equ	1
+   259     0001                     TRISA_TRISA1_POSITION equ	1
+   260     0001                     TRISA_TRISA1_SIZE equ	1
+   261     0001                     TRISA_TRISA1_LENGTH equ	1
+   262     0002                     TRISA_TRISA1_MASK equ	2
+   263     0002                     TRISA_TRISA2_POSN equ	2
+   264     0002                     TRISA_TRISA2_POSITION equ	2
+   265     0001                     TRISA_TRISA2_SIZE equ	1
+   266     0001                     TRISA_TRISA2_LENGTH equ	1
+   267     0004                     TRISA_TRISA2_MASK equ	4
+   268     0003                     TRISA_TRISA3_POSN equ	3
+   269     0003                     TRISA_TRISA3_POSITION equ	3
+   270     0001                     TRISA_TRISA3_SIZE equ	1
+   271     0001                     TRISA_TRISA3_LENGTH equ	1
+   272     0008                     TRISA_TRISA3_MASK equ	8
+   273     0004                     TRISA_TRISA4_POSN equ	4
+   274     0004                     TRISA_TRISA4_POSITION equ	4
+   275     0001                     TRISA_TRISA4_SIZE equ	1
+   276     0001                     TRISA_TRISA4_LENGTH equ	1
+   277     0010                     TRISA_TRISA4_MASK equ	16
+   278     0086                     TRISB           equ	134
+   279     0000                     TRISB_TRISB0_POSN equ	0
+   280     0000                     TRISB_TRISB0_POSITION equ	0
+   281     0001                     TRISB_TRISB0_SIZE equ	1
+   282     0001                     TRISB_TRISB0_LENGTH equ	1
+   283     0001                     TRISB_TRISB0_MASK equ	1
+   284     0001                     TRISB_TRISB1_POSN equ	1
+   285     0001                     TRISB_TRISB1_POSITION equ	1
+   286     0001                     TRISB_TRISB1_SIZE equ	1
+   287     0001                     TRISB_TRISB1_LENGTH equ	1
+   288     0002                     TRISB_TRISB1_MASK equ	2
+   289     0002                     TRISB_TRISB2_POSN equ	2
+   290     0002                     TRISB_TRISB2_POSITION equ	2
+   291     0001                     TRISB_TRISB2_SIZE equ	1
+   292     0001                     TRISB_TRISB2_LENGTH equ	1
+   293     0004                     TRISB_TRISB2_MASK equ	4
+   294     0003                     TRISB_TRISB3_POSN equ	3
+   295     0003                     TRISB_TRISB3_POSITION equ	3
+   296     0001                     TRISB_TRISB3_SIZE equ	1
+   297     0001                     TRISB_TRISB3_LENGTH equ	1
+   298     0008                     TRISB_TRISB3_MASK equ	8
+   299     0004                     TRISB_TRISB4_POSN equ	4
+   300     0004                     TRISB_TRISB4_POSITION equ	4
+   301     0001                     TRISB_TRISB4_SIZE equ	1
+   302     0001                     TRISB_TRISB4_LENGTH equ	1
+   303     0010                     TRISB_TRISB4_MASK equ	16
+   304     0005                     TRISB_TRISB5_POSN equ	5
+   305     0005                     TRISB_TRISB5_POSITION equ	5
+   306     0001                     TRISB_TRISB5_SIZE equ	1
+   307     0001                     TRISB_TRISB5_LENGTH equ	1
+   308     0020                     TRISB_TRISB5_MASK equ	32
+   309     0006                     TRISB_TRISB6_POSN equ	6
+   310     0006                     TRISB_TRISB6_POSITION equ	6
+   311     0001                     TRISB_TRISB6_SIZE equ	1
+   312     0001                     TRISB_TRISB6_LENGTH equ	1
+   313     0040                     TRISB_TRISB6_MASK equ	64
+   314     0007                     TRISB_TRISB7_POSN equ	7
+   315     0007                     TRISB_TRISB7_POSITION equ	7
+   316     0001                     TRISB_TRISB7_SIZE equ	1
+   317     0001                     TRISB_TRISB7_LENGTH equ	1
+   318     0080                     TRISB_TRISB7_MASK equ	128
+   319     0088                     EECON1          equ	136
+   320     0000                     EECON1_RD_POSN  equ	0
+   321     0000                     EECON1_RD_POSITION equ	0
+   322     0001                     EECON1_RD_SIZE  equ	1
+   323     0001                     EECON1_RD_LENGTH equ	1
+   324     0001                     EECON1_RD_MASK  equ	1
+   325     0001                     EECON1_WR_POSN  equ	1
+   326     0001                     EECON1_WR_POSITION equ	1
+   327     0001                     EECON1_WR_SIZE  equ	1
+   328     0001                     EECON1_WR_LENGTH equ	1
+   329     0002                     EECON1_WR_MASK  equ	2
+   330     0002                     EECON1_WREN_POSN equ	2
+   331     0002                     EECON1_WREN_POSITION equ	2
+   332     0001                     EECON1_WREN_SIZE equ	1
+   333     0001                     EECON1_WREN_LENGTH equ	1
+   334     0004                     EECON1_WREN_MASK equ	4
+   335     0003                     EECON1_WRERR_POSN equ	3
+   336     0003                     EECON1_WRERR_POSITION equ	3
+   337     0001                     EECON1_WRERR_SIZE equ	1
+   338     0001                     EECON1_WRERR_LENGTH equ	1
+   339     0008                     EECON1_WRERR_MASK equ	8
+   340     0004                     EECON1_EEIF_POSN equ	4
+   341     0004                     EECON1_EEIF_POSITION equ	4
+   342     0001                     EECON1_EEIF_SIZE equ	1
+   343     0001                     EECON1_EEIF_LENGTH equ	1
+   344     0010                     EECON1_EEIF_MASK equ	16
+   345     0089                     EECON2          equ	137
+   346                           
+   347                           	psect	edata
+   348     0000                     stk_offset      set	0
+   349     0000                     auto_size       set	0
+   350                           
+   351                           ; stack_auto defines a symbol /name/_offset which equates to the
+   352                           ; stack offset of the auto object in question
+   353     0000                     
+   354                           ; stack_param defines a symbol /name/_offset which equates to the
+   355                           ; stack offset of the parameter object in question
+   356     0000                     
+   357                           ; alloc_stack adjusts the SP to allocate space for auto objects
+   358                           ; it also links in to the btemp symbol so that can be used
+   359     0000                     
+   360                           ; restore_stack adjusts the SP to remove all auto and parameter
+   361                           ; objects from the stack prior to returning from a function
+   362     0000                     
+   363                           ;global _main, start_initialization
+   364     002C                     varAHigh        equ	44	; pode ser tratado como regsitrador nas instru��es
+   365     002E                     varALow         equ	46
+   366                           
+   367                           	psect	static_vars
+   368     000C                     STATUS_TEMP:	
+   369                           ; OBS: Todos os botoes/inputs da porta A s�o pull-up
+   370                           
+   371     000C                     	ds	1
+   372     000D                     W_TEMP:
+   373     000D                     	ds	1
+   374     000E                     contador_4hz:
+   375     000E                     	ds	1
+   376                           
+   377                           	psect	intCode
+   378     0004                     	org	4
+   379     0004                     _interruptVector:
+   380                           
+   381                           ; ((INTCON) and 07Fh), 7 = 0 -> impede novas interrupts
+   382     0004  008D               	movwf	W_TEMP
+   383     0005  0E03               	swapf	3,w
+   384     0006  008C               	movwf	STATUS_TEMP
+   385     0007  1283               	banksel	11
+   386     0008  1D0B               	btfss	11,2	; ((INTCON) and 07Fh), 2: TMR0 que interrompeu
+   387     0009  2BF7               	goto	_sair_int
+   388     000A                     _recarregaTMR0:	
+   389                           ; Recarrega o TMR0 com 250 (256 - 6)
+   390                           
+   391     000A  110B               	bcf	11,2
+   392     000B  1283               	banksel	1
+   393     000C  3006               	movlw	6	; move o var para port
+   394     000D  0081               	movwf	1
+   395                           
+   396                           ; Decrementa contador_4hz (O "Prescaler" de software)
+   397     000E  0B8E               	decfsz	contador_4hz,f
+   398     000F  2BF7               	goto	_sair_int	; Se n?o chegou a 0, sai e espera o pr?ximo estouro (de 2ms)
+   399     0010                     _ifint_ok:
+   400                           
+   401                           ; 4 Hz
+   402     0010  1283               	banksel	5
+   403     0011  3001               	movlw	1	; move o var para port
+   404     0012  0685               	xorwf	5,f
+   405     0013  307D               	movlw	125	; move o var para port
+   406     0014  008E               	movwf	contador_4hz
+   407     0015  0E0C               	swapf	STATUS_TEMP,w
+   408     0016  0083               	movwf	3
+   409     0017  0E8D               	swapf	W_TEMP,f
+   410     0018  0E0D               	swapf	W_TEMP,w
+   411     0019  0009               	retfie	; return e ((INTCON) and 07Fh), 7 = 1 (habilita de novo)
+   412                           
+   413                           	psect	verificacao_portas
+   414     03D8                     _portas_settings_asm:	
+   415                           ;start_initialization: ; Usar direto no .c
+   416                           ;_main:
+   417                           ; call _portas_settings_asm
+   418                           ; goto _verificar_sensor_asm
+   419                           
+   420     03D8  1283               	banksel	5	; bsf STATUS, 5
+   421     03D9  0185               	clrf	5
+   422     03DA  0186               	clrf	6
+   423     03DB  1683               	banksel	133	; bcf STATUS, 5
+   424     03DC  0185               	clrf	133	; PORTA � output por padrao
+   425     03DD  1485               	bsf	133,1	; ((PORTA) and 07Fh), 1 � input
+   426     03DE  0186               	clrf	134	; PORTB inteira � output
+   427     03DF  1283               	banksel	5
+   428     03E0  307D               	movlw	125	; move o var para port
+   429     03E1  008E               	movwf	contador_4hz
+   430     03E2  3081               	movlw	129	; move o var para port
+   431     03E3  00AE               	movwf	46
+   432     03E4  3072               	movlw	114	; move o var para port
+   433     03E5  00AC               	movwf	44
+   434     03E6  3400               	retlw	0
+   435     03E7                     _verificar_sensor_asm:
+   436     03E7  1283               	banksel	5
+   437     03E8  1C85               	btfss	5,1	; Se o bit ((PORTA) and 07Fh), 1 == 1 pula a pr�xima instrucao
+   438     03E9  2BED               	goto	_else_if1
+   439     03EA                     _if1_PA1_HIGH:
+   440                           
+   441                           ; Se o ((PORTA) and 07Fh), 1 == 1
+   442     03EA  082C               	movf	44,w	; move o var (tratado como reg) para reg
+   443     03EB  0086               	movwf	6
+   444     03EC  2BEF               	goto	_end
+   445     03ED                     _else_if1:
+   446                           
+   447                           ; Se o ((PORTA) and 07Fh), 1 == 0
+   448     03ED  082E               	movf	46,w	; move o var (tratado como reg) para reg
+   449     03EE  0086               	movwf	6
+   450     03EF                     _end:
+   451     03EF  3400               	retlw	0
+   452     03F0                     _interrupt_settings_asm:	
+   453                           ;goto _verificar_sensor_asm
+   454                           
+   455     03F0  1683               	banksel	129
+   456     03F1  3081               	movlw	129	; ((OPTION_REG) and 07Fh), 5=0, ((OPTION_REG) and 07Fh), 3=0, Prescaler=1:4 (001)
+   457     03F2  0081               	movwf	129
+   458     03F3  1283               	banksel	11
+   459     03F4  168B               	bsf	11,5	; ((INTCON) and 07Fh), 5 = 1 -> timer 0 ligado
+   460     03F5  178B               	bsf	11,7	; ((INTCON) and 07Fh), 7 = 1 -> habilita interrupts
+   461     03F6  0008               	return
+   462     03F7                     _sair_int:
+   463     03F7  110B               	bcf	11,2	; ((INTCON) and 07Fh), 2 <- 0
+   464     03F8  0E0C               	swapf	STATUS_TEMP,w
+   465     03F9  0083               	movwf	3
+   466     03FA  0E8D               	swapf	W_TEMP,f
+   467     03FB  0E0D               	swapf	W_TEMP,w
+   468     03FC  0009               	retfie
+   469                           
+   470                           	psect	config
+   471                           
+   472                           ;Config register CONFIG @ 0x2007
+   473                           ;	Oscillator Selection bits
+   474                           ;	FOSC = XT, XT oscillator
+   475                           ;	Watchdog Timer
+   476                           ;	WDTE = OFF, WDT disabled
+   477                           ;	Power-up Timer Enable bit
+   478                           ;	PWRTE = OFF, Power-up Timer is disabled
+   479                           ;	Code Protection bit
+   480                           ;	CP = OFF, Code protection disabled
+   481     2007                     	org	8199
+   482     2007  3FF9               	dw	16377
+
+
+Microchip Technology PIC Macro Assembler V4.00 build 20260614213421 
+Symbol Table                                                                                               Sun Oct 11 19:23:00 2026
+
+                      TMR0 0001                        _end 03EF                       PORTA 0005                       PORTB 0006  
+                     TRISA 0085                       TRISB 0086                contador_4hz 000E                      INTCON 000B  
+                    STATUS 0003                      W_TEMP 000D                     varALow 002E                  OPTION_REG 0081  
+      _portas_settings_asm 03D8              _recarregaTMR0 000A                    varAHigh 002C     _interrupt_settings_asm 03F0  
+               STATUS_TEMP 000C               _if1_PA1_HIGH 03EA                   _else_if1 03ED                   _ifint_ok 0010  
+     _verificar_sensor_asm 03E7                   _sair_int 03F7            _interruptVector 0004  

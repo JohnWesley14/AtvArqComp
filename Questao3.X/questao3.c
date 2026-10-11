@@ -1,7 +1,7 @@
 /*
  * File:   questao3.c
  * Author: bande
- *
+ * FILA DE PRIORIDADES
  * Created on 7 de Outubro de 2026, 22:01
  */
 
@@ -9,53 +9,53 @@
 #include <xc.h>
 #include "config_pic.h"
 
-
-//#define MY_INTERRUPT_C
-
-#ifdef MY_INTERRUPT_C
-    u8 contador_4hz = 125;
-    u8 divisor_tempo = 8;
-    void __interrupt() interruptC(void);
-#endif
-
-volatile u8 time_flag = 0;
-
-extern void interrupt_settings_asm(void);
-extern void portas_settings_asm(void);
-void _verificar_prioridade_C(void);
-void _limpar_correia(void);
-
-int main(void) {
     
+// Botões em pull-up
+#define patioA !P(A, 1)
+#define patioB !P(A, 2)
+#define patioC !P(A, 3)
+#define patioD !P(A, 4)
+
+
+extern void portas_settings_asm(void);
+#ifdef ONLY_ASM_FUNCTIONS
+   extern void verificar_prioridade_asm(void);
+#elif !defined(ONLY_ASM_FUNCTIONS)
+    void _verificar_prioridade_C(void);
+    void _limpar_correia(void);
+#endif
+    
+int main(void) {
+
     portas_settings_asm();
-    interrupt_settings_asm();
     
     while (1){
-        //time_flag = 1; //teste
-        if(time_flag){
+
+        #ifdef ONLY_ASM_FUNCTIONS
+            verificar_prioridade_asm();
+        #elif !defined(ONLY_ASM_FUNCTIONS)
             _limpar_correia();
             _verificar_prioridade_C();
-            //_verificar_prioridade_S()
-            time_flag = 0;
-        }
+        #endif
         
     }
     
     return 0;
 }
 
+#ifndef ONLY_ASM_FUNCTIONS
 void _verificar_prioridade_C(void){
     
-    if (!P(A, 1)){ // Botões em pull-up
+    if (patioA){
         P(B, 0) = 1;
     }
-    else if (!P(A, 2)){
+    else if (patioB){
         P(B, 1) = 1;
     }
-    else if (!P(A, 3)){
+    else if (patioC){
         P(B, 2) = 1;
     }
-    else if (!P(A, 4)){
+    else if (patioD){
         P(B, 3) = 1;
     }
     
@@ -64,28 +64,5 @@ void _verificar_prioridade_C(void){
 void _limpar_correia(void){
     P(B, 0) = 0; P(B, 1) = 0;
     P(B, 2) = 0; P(B, 3) = 0;
-}
-
-#ifdef MY_INTERRUPT_C
-void __interrupt() interruptC(void) { 
-    // Verifica qual módulo disparou a interrupção
-    if (INTCONbits.T0IF) {
-        INTCONbits.T0IF = 0; // Limpa a flag (equivalente ao bcf INTCON, 2)
-        TMR0 = 6;            // Recarrega o hardware para estourar em 1 ms
-        
-        contador_4hz--;      // Prescaler de software
-        
-        if (contador_4hz == 0) {
-            PORTAbits.RA0 = ~PORTAbits.RA0; // Inverte o estado do pino (Toggle)
-            contador_4hz = 125;             // Reinicia a contagem dos 125 ms
-            // Sub-contador para o múltiplo desejado
-            divisor_tempo--;
-            if (divisor_tempo == 0) {
-                time_flag = 1;     // Libera a leitura dos botões no múltiplo
-                divisor_tempo = 8;    // Reinicia para o próximo intervalo
-            }
-        }
-        
-    }
 }
 #endif

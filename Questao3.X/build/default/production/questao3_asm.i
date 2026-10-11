@@ -6,7 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "questao3_asm.s" 2
 ; FILA DE PRIORIDADES
-PROCESSOR 16F84A
+;PROCESSOR 16F84A
+;PROCESSOR 16F628A
 # 1 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.inc" 1 3
 
 
@@ -454,7 +455,7 @@ stk_offset SET 0
 auto_size SET 0
 ENDM
 # 8 "D:\\Program Files\\Microchip\\xc8\\v4.00\\pic\\include/xc.inc" 2 3
-# 4 "questao3_asm.s" 2
+# 5 "questao3_asm.s" 2
 # 1 "./macros.inc" 1
 movvf MACRO var, reg
     movf var, 0 ; move o var (tratado como reg) para reg
@@ -488,75 +489,24 @@ _retornar_contexto MACRO
     swapf W_TEMP, 1
     swapf W_TEMP, 0
 endm
-# 5 "questao3_asm.s" 2
+# 6 "questao3_asm.s" 2
 
 config FOSC = XT, WDTE = OFF, PWRTE = OFF, CP = OFF
 ;global _main, start_initialization
-global _portas_settings_asm, _interrupt_settings_asm, _verifica_prioridade_asm
+global _portas_settings_asm, _verificar_prioridade_asm
 
 ; OBS: Todos os botoes/inputs da porta A são pull-up
-
-global _time_flag
-
-
-
-
-
-
-    _setar_variaveis_timer MACRO
- movlf 125, _contador_4hz
- movlf 8, _divisor_tempo
-    ENDM
 
 
 PSECT static_vars, class=RAM, space=1
 STATUS_TEMP: ds 1
 W_TEMP: ds 1
-; _time_flag: ds 1
-
-    _contador_4hz: ds 1
-    _divisor_tempo: ds 1
-
-
-
-PSECT intCode, class=CODE, delta=2, abs
-ORG 0x0004
-_interruptVector: ; ((INTCON) and 07Fh), 7 = 0 -> impede novas interrupts
-    _salvar_contexto
-    BANKSEL INTCON
-    btfss INTCON, 2 ; ((INTCON) and 07Fh), 2: TMR0 que interrompeu
-    goto _sair_int
-
-    ; Recarrega o TMR0 com 250 (256 - 6)
-    _recarregaTMR0:
- bcf INTCON, 2
- BANKSEL TMR0
- movlf 6, TMR0
-    ; Decrementa contador_4hz (O "Prescaler" de software)
- decfsz _contador_4hz, 1
- goto _sair_int ; Se não chegou a 0, sai e espera o próximo estouro (de 2ms)
-
-    _ifint_ok: ; 2 Hz
- banksel PORTA
- movlw 0b00000001
- xorwf PORTA, 1 ; altera só esse PA0
- movlf 125, _contador_4hz ; 0x0C <- 0x7D
- _if_time_flag_up:
-     banksel _divisor_tempo
-     decfsz _divisor_tempo, 1
-     goto _sair_int ; Se o múltiplo ainda não zerou, sai
-     movlf 8, _divisor_tempo ; Reinicia o divisor para o próximo ciclo
-     movlf 1, _time_flag
- _retornar_contexto
-    retfie ; return e ((INTCON) and 07Fh), 7 = 1 (habilita de novo)
-
 
 PSECT verificacao_portas, class=CODE, space=0, reloc=2, delta=2
-;start_initialization:
+;start_initialization: ; Usar direto no .c
 ;_main:
 ; call _portas_settings_asm
-; call _interrupt_settings_asm
-; goto _verifica_prioridade_asm
+; goto _verificar_prioridade_asm
 
 _portas_settings_asm:
     banksel PORTA ; bsf STATUS, 5
@@ -566,12 +516,9 @@ _portas_settings_asm:
     movlf 0b00011110, TRISA ; PORTA é input em A1, A2, A3 e A4
     clrf TRISB ; PORTB inteira é output por padrao
     banksel PORTA
-    ;movlf 0x00, _time_flag
-    _setar_variaveis_timer
     retlw 0x00
 
-_verifica_prioridade_asm:
-    _if_timeup:
+_verificar_prioridade_asm:
  clrf PORTB
  btfsc PORTA, 1
  goto _elif_P2
@@ -593,20 +540,5 @@ _verifica_prioridade_asm:
      goto _end
      bsf PORTB, 3
 _end:
-    goto _verifica_prioridade_asm
-
-
-_interrupt_settings_asm:
-    banksel OPTION_REG
-    movlw 0b10000001 ; ((OPTION_REG) and 07Fh), 5=0, ((OPTION_REG) and 07Fh), 3=0, Prescaler=1:4 (001)
-    movwf OPTION_REG
-
-    banksel INTCON
-    bsf INTCON, 5 ; ((INTCON) and 07Fh), 5 = 1 -> timer 0 ligado
-    bsf INTCON, 7 ; ((INTCON) and 07Fh), 7 = 1 -> habilita interrupts
-    return
-
-_sair_int:
-    bcf INTCON, 2 ; ((INTCON) and 07Fh), 2 <- 0
-    _retornar_contexto
-    retfie
+    ;goto _verificar_prioridade_asm
+    retlw 0x00

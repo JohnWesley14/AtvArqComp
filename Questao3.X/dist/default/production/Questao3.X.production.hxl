@@ -1,48 +1,32 @@
 ### HEXMate logfile and output summary ###
 
 ### Command-line arguments ###
- C:\Users\bande\AppData\Local\Temp\xcAs2wg.0\driver_tmp_3.o
+ C:\Users\bande\AppData\Local\Temp\xcAsne4.0\driver_tmp_3.o
  -Odist/default/production\Questao3.X.production.hex
  -logfile=dist/default/production\Questao3.X.production.hxl
  -addressing=2
 
 ### Memory Usage ###
  Input file ranges:
-  0h - 1h		(C:\Users\bande\AppData\Local\Temp\xcAs2wg.0\driver_tmp_3.o)
-  8h - 41h		(C:\Users\bande\AppData\Local\Temp\xcAs2wg.0\driver_tmp_3.o)
-  746h - 7F5h		(C:\Users\bande\AppData\Local\Temp\xcAs2wg.0\driver_tmp_3.o)
-  7F8h - 7FFh		(C:\Users\bande\AppData\Local\Temp\xcAs2wg.0\driver_tmp_3.o)
-  400Eh - 400Fh		(C:\Users\bande\AppData\Local\Temp\xcAs2wg.0\driver_tmp_3.o)
+  0h - 1h		(C:\Users\bande\AppData\Local\Temp\xcAsne4.0\driver_tmp_3.o)
+  7C0h - 7FFh		(C:\Users\bande\AppData\Local\Temp\xcAsne4.0\driver_tmp_3.o)
+  400Eh - 400Fh		(C:\Users\bande\AppData\Local\Temp\xcAsne4.0\driver_tmp_3.o)
  Unused ranges:
-  2h - 7h
-  42h - 745h
-  7F6h - 7F7h
+  2h - 7BFh
   800h - 400Dh
 
 ### Hex Memory Map ###
  Legend:
   -- = Unused memory
-  H1 = Input file             (C:\Users\bande\AppData\Local\Temp\xcAs2wg.0\driver_tmp_3.o)
+  H1 = Input file             (C:\Users\bande\AppData\Local\Temp\xcAsne4.0\driver_tmp_3.o)
 ----------------------------------------------------------
          | 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 ----------------------------------------------------------
-00000000 | H1 H1 -- -- -- -- -- -- H1 H1 H1 H1 H1 H1 H1 H1
-00000010 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000020 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000030 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000040 | H1 H1 -- -- -- -- -- -- -- -- -- -- -- -- -- --
+00000000 | H1 H1 -- -- -- -- -- -- -- -- -- -- -- -- -- --
 ----------------------------------------------------------
-00000740 | -- -- -- -- -- -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000750 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000760 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000770 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000780 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000790 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-000007A0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-000007B0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 000007C0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 000007D0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 000007E0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-000007F0 | H1 H1 H1 H1 H1 H1 -- -- H1 H1 H1 H1 H1 H1 H1 H1
+000007F0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 ----------------------------------------------------------
 00004000 | -- -- -- -- -- -- -- -- -- -- -- -- -- -- H1 H1
