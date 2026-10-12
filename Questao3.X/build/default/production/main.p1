@@ -72,91 +72,91 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h: 590: __asm("EECON2 equ 089h");
 [; <" EECON2 equ 089h ;# ">
 "4 main.c
-[; ;main.c: 4:     TRISB = 0b00000000;
+[; ;main.c: 4:     PORTA = 0x00;
 [p x FOSC  =  XT ]
 "5
-[; ;main.c: 5: 
+[; ;main.c: 5:     PORTB = 0x00;
 [p x WDTE  =  OFF ]
 "6
-[; ;main.c: 6:     PORTA = 0x00;
+[; ;main.c: 6: 
 [p x PWRTE  =  ON ]
 "7
-[; ;main.c: 7:     PORTB = 0x00;
+[; ;main.c: 7:     while(1) {
 [p x CP  =  OFF ]
 [v $root$_main `(v ~T0 @X0 0 e ]
 "9
-[; ;main.c: 9:     while(1) {
+[; ;main.c: 9:         if (PORTAbits.RA1 == 0) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"11
-[; ;main.c: 11:             PORTB = 0b00000001;
+"10
+[; ;main.c: 10:             PORTB = 0b00000001;
 [e = _TRISA -> -> 30 `i `uc ]
-"13
-[; ;main.c: 13:             PORTB = 0b00000010;
+"11
+[; ;main.c: 11:         } else if (PORTAbits.RA2 == 0) {
 [e = _TRISB -> -> 0 `i `uc ]
-"15
-[; ;main.c: 15:             PORTB = 0b00000100;
+"13
+[; ;main.c: 13:         } else if (PORTAbits.RA3 == 0) {
 [e = _PORTA -> -> 0 `i `uc ]
-"16
-[; ;main.c: 16:         } else if (PORTAbits.RA4 == 1) {
+"14
+[; ;main.c: 14:             PORTB = 0b00000100;
 [e = _PORTB -> -> 0 `i `uc ]
-"18
-[; ;main.c: 18:         } else {
+"16
+[; ;main.c: 16:             PORTB = 0b00001000;
 [e :U 29 ]
 {
-"19
-[; ;main.c: 19:             PORTB = 0x00;
-[e $ ! == -> . . _PORTAbits 0 1 `i -> 1 `i 31  ]
+"18
+[; ;main.c: 18:             PORTB = 0x00;
+[e $ ! == -> . . _PORTAbits 0 1 `i -> 0 `i 31  ]
 {
-"20
-[; ;main.c: 20:         }
+"19
+[; ;main.c: 19:         }
 [e = _PORTB -> -> 1 `i `uc ]
-"21
-[; ;main.c: 21:     }
+"20
+[; ;main.c: 20:     }
 }
 [e $U 32  ]
 [e :U 31 ]
-[e $ ! == -> . . _PORTAbits 0 2 `i -> 1 `i 33  ]
+[e $ ! == -> . . _PORTAbits 0 2 `i -> 0 `i 33  ]
 {
-"22
-[; ;main.c: 22: }
+"21
+[; ;main.c: 21: }
 [e = _PORTB -> -> 2 `i `uc ]
-"23
+"22
 }
 [e $U 34  ]
 [e :U 33 ]
-[e $ ! == -> . . _PORTAbits 0 3 `i -> 1 `i 35  ]
+[e $ ! == -> . . _PORTAbits 0 3 `i -> 0 `i 35  ]
 {
-"24
+"23
 [e = _PORTB -> -> 4 `i `uc ]
-"25
+"24
 }
 [e $U 36  ]
 [e :U 35 ]
-[e $ ! == -> . . _PORTAbits 0 4 `i -> 1 `i 37  ]
+[e $ ! == -> . . _PORTAbits 0 4 `i -> 0 `i 37  ]
 {
-"26
+"25
 [e = _PORTB -> -> 8 `i `uc ]
-"27
+"26
 }
 [e $U 38  ]
 [e :U 37 ]
 {
-"28
+"27
 [e = _PORTB -> -> 0 `i `uc ]
-"29
+"28
 }
 [e :U 38 ]
 [e :U 36 ]
 [e :U 34 ]
 [e :U 32 ]
-"30
+"29
 }
 [e :U 28 ]
 [e $U 29  ]
 [e :U 30 ]
-"31
+"30
 [e :UE 27 ]
 }

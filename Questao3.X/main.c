@@ -7,25 +7,24 @@
 #pragma config CP = OFF
 
 void main(void) {
-    // Configura RA1, RA2, RA3 e RA4 como entradas (bit 1 em '1')
-    TRISA = 0b00011110; 
-    // Configura toda a porta B como saída
-    TRISB = 0b00000000; 
+    TRISA = 0b00011110; // RA1 a RA4 como entradas
+    TRISB = 0b00000000; // PORTB inteira como saÃ­da
 
     PORTA = 0x00;
     PORTB = 0x00;
 
     while(1) {
-        if (PORTAbits.RA1 == 1) {
-            PORTB = 0b00000001; // Prioridade 1: Pátio A liga RB0
-        } else if (PORTAbits.RA2 == 1) {
-            PORTB = 0b00000010; // Prioridade 2: Pátio B liga RB1
-        } else if (PORTAbits.RA3 == 1) {
-            PORTB = 0b00000100; // Prioridade 3: Pátio C liga RB2
-        } else if (PORTAbits.RA4 == 1) {
-            PORTB = 0b00001000; // Prioridade 4: Pátio D liga RB3
+        
+        if (PORTAbits.RA1 == 0) {
+            PORTB = 0b00000001; // Prioridade 1: PÃ¡tio A (RB0)
+        } else if (PORTAbits.RA2 == 0) {
+            PORTB = 0b00000010; // Prioridade 2: PÃ¡tio B (RB1)
+        } else if (PORTAbits.RA3 == 0) {
+            PORTB = 0b00000100; // Prioridade 3: PÃ¡tio C (RB2)
+        } else if (PORTAbits.RA4 == 0) {
+            PORTB = 0b00001000; // Prioridade 4: PÃ¡tio D (RB3)
         } else {
-            PORTB = 0x00;       // Desliga todas as saídas
+            PORTB = 0x00;       
         }
     }
 }

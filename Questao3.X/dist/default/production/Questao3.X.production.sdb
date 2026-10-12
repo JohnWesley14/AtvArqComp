@@ -11,7 +11,7 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"9 C:\Users\johnw\MPLABXProjects\Questao3.X\main.c
+"9 C:\Users\johnw\MPLABXProjects\AtvArqComp\Questao3.X\main.c
 [v _main main `(v  1 e 1 0 ]
 "150 C:/Program Files/Microchip/MPLABX/v6.35/packs/Microchip/PIC16Fxxx_DFP/1.8.167/xc8\pic\include\proc/pic16f84a.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
@@ -30,8 +30,8 @@
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "482
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
-"9 C:\Users\johnw\MPLABXProjects\Questao3.X\main.c
+"9 C:\Users\johnw\MPLABXProjects\AtvArqComp\Questao3.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"31
+"30
 } 0

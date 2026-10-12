@@ -111,7 +111,7 @@ cinit 7FC 7FF CODE 7FC 0
 maintext 7B0 7FB CODE 7B0 0
 %locals
 dist/default/production\Questao3.X.production.o
-C:\Users\johnw\AppData\Local\Temp\xcAssvg.0\driver_tmp_1.s
+C:\Users\johnw\AppData\Local\Temp\xcAs19s4.0\driver_tmp_1.s
 178 3FE 0 CODE 0
 181 3FE 0 CODE 0
 187 3FE 0 CODE 0
@@ -119,17 +119,17 @@ C:\Users\johnw\AppData\Local\Temp\xcAssvg.0\driver_tmp_1.s
 190 3FF 0 CODE 0
 main.c
 9 3D8 0 CODE 0
-11 3D8 0 CODE 0
-13 3DB 0 CODE 0
-15 3DC 0 CODE 0
-16 3DE 0 CODE 0
-19 3DF 0 CODE 0
-20 3E3 0 CODE 0
-21 3E5 0 CODE 0
-22 3EA 0 CODE 0
-23 3EC 0 CODE 0
-24 3F1 0 CODE 0
-25 3F3 0 CODE 0
-26 3F8 0 CODE 0
-27 3FA 0 CODE 0
-28 3FB 0 CODE 0
+10 3D8 0 CODE 0
+11 3DB 0 CODE 0
+13 3DC 0 CODE 0
+14 3DE 0 CODE 0
+18 3DF 0 CODE 0
+19 3E3 0 CODE 0
+20 3E5 0 CODE 0
+21 3EA 0 CODE 0
+22 3EC 0 CODE 0
+23 3F1 0 CODE 0
+24 3F3 0 CODE 0
+25 3F8 0 CODE 0
+26 3FA 0 CODE 0
+27 3FB 0 CODE 0

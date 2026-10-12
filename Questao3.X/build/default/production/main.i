@@ -646,22 +646,21 @@ extern __bank0 __bit __timeout;
 #pragma config CP = OFF
 
 void main(void) {
-
     TRISA = 0b00011110;
-
     TRISB = 0b00000000;
 
     PORTA = 0x00;
     PORTB = 0x00;
 
     while(1) {
-        if (PORTAbits.RA1 == 1) {
+
+        if (PORTAbits.RA1 == 0) {
             PORTB = 0b00000001;
-        } else if (PORTAbits.RA2 == 1) {
+        } else if (PORTAbits.RA2 == 0) {
             PORTB = 0b00000010;
-        } else if (PORTAbits.RA3 == 1) {
+        } else if (PORTAbits.RA3 == 0) {
             PORTB = 0b00000100;
-        } else if (PORTAbits.RA4 == 1) {
+        } else if (PORTAbits.RA4 == 0) {
             PORTB = 0b00001000;
         } else {
             PORTB = 0x00;

@@ -642,54 +642,52 @@ extern __bank0 __bit __timeout;
 
 
 
-
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
-#pragma config PWRTE = ON
+#pragma config PWRTE = OFF
 #pragma config CP = OFF
+
+volatile unsigned char interrupt_count = 0;
+
+
+void __attribute__((picinterrupt(("")))) tmr0Int(void) {
+    if (INTCONbits.T0IF) {
+        INTCONbits.T0IF = 0;
+        TMR0 = 12;
+
+        interrupt_count++;
+        if (interrupt_count == 2) {
+            interrupt_count = 0;
+            PORTAbits.RA0 = !PORTAbits.RA0;
+        }
+    }
+}
 
 void main(void) {
 
-
-
     TRISA = 0b00000010;
-
-
     TRISB = 0b00000000;
-
 
     PORTA = 0x00;
     PORTB = 0x00;
 
 
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS0 = 1;
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS2 = 1;
+
+
+    INTCONbits.T0IE = 1;
+    INTCONbits.GIE = 1;
+
+
     while(1) {
-
-
-
         if (PORTAbits.RA1 == 1) {
             PORTB = 0x72;
         } else {
             PORTB = 0x81;
         }
-
-
-
-
-
-
-
-        PORTAbits.RA0 = 1;
-        _delay((unsigned long)((125)*(4000000/4000.0)));
-
-
-
-        if (PORTAbits.RA1 == 1) {
-            PORTB = 0x72;
-        } else {
-            PORTB = 0x81;
-        }
-
-        PORTAbits.RA0 = 0;
-        _delay((unsigned long)((125)*(4000000/4000.0)));
     }
 }

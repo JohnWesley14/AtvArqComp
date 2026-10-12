@@ -1,56 +1,53 @@
 #include <xc.h>
 
-// Configuração do clock exigido pela questão: 4 MHz
-#define _XTAL_FREQ 4000000
+#define _XTAL_FREQ 4000000 // Frequencia do cristal (4 MHz)
 
-// Configurações do PIC (Configuration Bits) necessárias para funcionar no simulador/hardware
-#pragma config FOSC = XT  // Oscilador a Cristal (para 4 MHz)
-#pragma config WDTE = OFF // Watchdog Timer desativado
-#pragma config PWRTE = ON // Power-up Timer ativado
-#pragma config CP = OFF   // Proteção de código desativada
+
+#pragma config FOSC = XT   // Oscilador a cristal
+#pragma config WDTE = OFF  // Watchdog Timer desativado
+#pragma config PWRTE = OFF // Power-up Timer desativado
+#pragma config CP = OFF    // Protecao de codigo desativada
+
+volatile unsigned char interrupt_count = 0; // Contador de estouros do Timer0
+
+// Rotina de Interrupcao em C (executa em segundo plano a cada ~62.5 ms)
+void __interrupt() tmr0Int(void) {
+    if (INTCONbits.T0IF) {
+        INTCONbits.T0IF = 0; // Limpa a flag de interrupÃ§Ã£o
+        TMR0 = 12;           // Recarrega Timer0 para ~62.5 ms
+        
+        interrupt_count++;
+        if (interrupt_count == 2) { // 2 x 62.5 ms = 125 ms (4 Hz)
+            interrupt_count = 0;
+            PORTAbits.RA0 = !PORTAbits.RA0; // Inverte o pino RA0
+        }
+    }
+}
 
 void main(void) {
-    // 1. CONFIGURAÇÃO DE ENTRADAS E SAÍDAS (Registrador TRIS)
-    // O pino RA1 será a entrada do sensor A e o pino RA0 será a saída do sinal[cite: 1]
-    // 1 = Entrada (Input), 0 = Saída (Output)
-    TRISA = 0b00000010; // RA1 é entrada (bit 1 em '1'), RA0 e os demais são saídas (em '0')
-    
-    // Toda a porta B deve ser saída para enviar os valores hexadecimais[cite: 1]
-    TRISB = 0b00000000; 
+    // Configuracao de Portas (1 = Entrada, 0 = saida)
+    TRISA = 0b00000010; // RA1 entrada (sensor), RA0 saida (clock)
+    TRISB = 0b00000000; // PORTB inteira como saÃ­da (LEDs)
 
-    // Inicialização: garante que os pinos comecem em zero
     PORTA = 0x00;
     PORTB = 0x00;
 
-    // 2. LOOP INFINITO (Verificação contínua)
-    while(1) {
-        
-        // --- PARTE A: Verificação do Sensor A[cite: 1] ---
-        // Verifica o pino RA1
-        if (PORTAbits.RA1 == 1) {
-            PORTB = 0x72; // Se for 1, envia 0x72 pela porta B[cite: 1]
-        } else {
-            PORTB = 0x81; // Caso contrário, envia 0x81 pela porta B[cite: 1]
-        }
+    // ConfiguraÃ§Ã£o do Timer0 (Prescaler 1:256)
+    OPTION_REGbits.T0CS = 0; // Clock interno
+    OPTION_REGbits.PSA = 0;  // Prescaler associado ao Timer0
+    OPTION_REGbits.PS0 = 1;  // Prescaler configurado para 1:256
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS2 = 1;
 
-        // --- PARTE B: Sinal Quadrado de 4 Hz no pino RA0[cite: 1] ---
-        // A frequência é de 4 Hz, o que significa 4 ciclos completos por segundo.
-        // Um ciclo completo dura 1/4 = 0,25 segundos = 250 milissegundos.
-        // O sinal quadrado passa metade do tempo em nível alto (1) e metade em baixo (0).
-        // Portanto: 125 ms ligado e 125 ms desligado.
-        
-        PORTAbits.RA0 = 1; // Coloca o sinal em nível alto
-        __delay_ms(125);   // Espera 125 milissegundos
-        
-        // (Opcional) Lemos o sensor de novo no meio do ciclo para garantir uma 
-        // resposta mais rápida caso o botão seja solto, mantendo a verificação contínua[cite: 1]
+   
+    INTCONbits.T0IE = 1; // Habilita interrupÃ§Ã£o do Timer0
+    INTCONbits.GIE = 1;  // Habilita interrupÃ§Ãµes globais
+
+    while(1) {
         if (PORTAbits.RA1 == 1) {
             PORTB = 0x72;
         } else {
             PORTB = 0x81;
         }
-
-        PORTAbits.RA0 = 0; // Coloca o sinal em nível baixo
-        __delay_ms(125);   // Espera 125 milissegundos
     }
 }
